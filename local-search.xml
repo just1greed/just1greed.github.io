@@ -17,4 +17,17 @@
   
   
   
+  
+  
+  <entry>
+    <title>about</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<p>Hello everyone, here’s <strong>greed</strong> 🤗.</p><p>welcome to my blog and thanks for your views 😀 .</p><p>My records include but are not limited to the following: </p><ul><li>CTF writeup(web)</li><li>Cyber Range(like Vulnhub)</li><li>Study notes</li><li>small knowledge points encountered</li><li>…</li></ul><p>Thanks to the technical support provided by the following websites:</p><ul><li><a href="https://hexo.io/zh-cn/">Hexo</a></li><li><a href="https://github.com/fluid-dev/hexo-theme-fluid">fluid-dev&#x2F;hexo-theme-fluid: :ocean:</a>  theme</li><li><a href="http://changyan.kuaizhan.com/">畅言云评</a>  comment</li><li><a href="https://hitokoto.cn/">一言</a>  slogin</li></ul><!-- That's all, thanks again. -->]]></content>
+    
+  </entry>
+  
+  
+  
 </search>
